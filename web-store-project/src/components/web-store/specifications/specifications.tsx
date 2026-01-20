@@ -1,6 +1,7 @@
-function partSpecifications({ text }: { text: string }) {
+import "./specifications.css"
+function PartSpecifications () {
     return (
-        <section className="part-specifications"> 
+        <section className="Part-specifications"> 
             <div>
                 <h2>Part Specifications</h2>
             </div>
@@ -33,7 +34,7 @@ function partSpecifications({ text }: { text: string }) {
                 </table>
             </div>
         </section>
-    )
-};
+    );
+}
 
-export default partSpecifications;
+export default PartSpecifications;
