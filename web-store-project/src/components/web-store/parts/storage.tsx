@@ -1,12 +1,12 @@
-import cases from "../../../json/case.json"
-import coolers from "../../../json/coolers.json"
-import cpu from "../../../json/cpu.json"
-import storage from "../../../json/storage.json"
-import ram from "../../../json/ram.json"
-import os from "../../../json/os.json"
-import psu from "../../../json/psu.json"
-import gpu from "../../../json/gpu.json"
-import motherboard from "../../../json/motherboard.json"
+import cases from "../../../../json/case.json"
+import coolers from "../../../../json/coolers.json"
+import cpu from "../../../../json/cpu.json"
+import storage from "../../../../json/storage.json"
+import ram from "../../../../json/ram.json"
+import os from "../../../../json/os.json"
+import psu from "../../../../json/psu.json"
+import gpu from "../../../../json/gpu.json"
+import motherboard from "../../../../json/motherboard.json"
 
 function PartSelector({ text }: { text: string }) {
     const categories = {
