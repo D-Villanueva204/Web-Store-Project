@@ -1,3 +1,5 @@
+import CartSection from "./cart-section"
+
 function HeaderSection({ text }: { text: string[] }) {
     const currentDate = new Date().toLocaleDateString();
 
@@ -16,6 +18,7 @@ function HeaderSection({ text }: { text: string[] }) {
                 <input type="search" id="search-bar"/>
                 <button>Search</button>
             </div>
+                <CartSection />
             <div>
                 <p>
                     {text}
