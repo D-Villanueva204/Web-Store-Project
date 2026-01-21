@@ -1,4 +1,4 @@
-import cases from '../../../../../json/case.json' with { type: "json" };
+import cases from '../json/case.json' with { type: "json" };
 
 function CaseSelector(name: string) {
 

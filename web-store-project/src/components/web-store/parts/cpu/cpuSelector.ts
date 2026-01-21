@@ -1,4 +1,4 @@
-import cpus from '../../../../../json/cpu.json' with { type: "json" };
+import cpus from '../json/cpu.json' with { type: "json" };
 
 function CoolerSelector(name: string) {
 

@@ -1,4 +1,4 @@
-import ram from '../../../../json/ram.json'
+import ram from './json/ram.json'
 
 function RamSelector() {
 

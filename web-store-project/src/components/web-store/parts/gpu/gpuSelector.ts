@@ -1,4 +1,4 @@
-import gpus from '../../../../../json/gpu.json' with { type: "json" };
+import gpus from '../json/gpu.json' with { type: "json" };
 
 function GPUSelector(name: string) {
 

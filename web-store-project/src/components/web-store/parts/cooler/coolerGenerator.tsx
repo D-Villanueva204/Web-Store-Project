@@ -1,4 +1,4 @@
-import coolers from '../../../../../json/cooler.json'
+import coolers from '../json/cooler.json'
 
 function CoolerGenerator() {
 

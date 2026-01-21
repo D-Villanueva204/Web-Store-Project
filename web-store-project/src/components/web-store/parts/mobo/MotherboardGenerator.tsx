@@ -1,4 +1,4 @@
-import mobo from '../../../../../json/mobo.json'
+import mobo from '../json/mobo.json'
 
 function MotherboardGenerator() {
 

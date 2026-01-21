@@ -1,4 +1,4 @@
-import coolers from '../../../../../json/cooler.json' with { type: "json" };
+import coolers from '../json/cooler.json' with { type: "json" };
 
 function CoolerSelector(name: string) {
 

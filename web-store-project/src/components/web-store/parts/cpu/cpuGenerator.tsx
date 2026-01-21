@@ -1,4 +1,4 @@
-import cpus from '../../../../../json/cpu.json'
+import cpus from '../json/cpu.json'
 
 function CPUSelector() {
 

@@ -1,4 +1,4 @@
-import gpus from '../../../../../json/gpu.json'
+import gpus from '../json/gpu.json'
 
 function GPUGenerator() {
 

@@ -1,4 +1,4 @@
-import mobos from '../../../../../json/mobo.json' with { type: "json" };
+import mobos from '../json/mobo.json' with { type: "json" };
 
 function MotherboardSelector(name: string) {
 

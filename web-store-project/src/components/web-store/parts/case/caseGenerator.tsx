@@ -1,4 +1,4 @@
-import cases from '../../../../../json/case.json'
+import cases from '../json/case.json'
 
 function CaseGenerator() {
 

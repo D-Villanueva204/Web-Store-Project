@@ -1,4 +1,4 @@
-import os from '../../../../json/os.json'
+import os from './json/os.json'
 
 function OSSelector() {
 

@@ -1,4 +1,4 @@
-import psu from '../../../../json/psu.json'
+import psu from './json/psu.json'
 
 function PSUSelector() {
 
