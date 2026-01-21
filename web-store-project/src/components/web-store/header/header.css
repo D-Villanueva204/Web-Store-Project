@@ -1,0 +1,61 @@
+.header-section {
+  background-color: #212227;
+  color: #c4cdcf;
+}
+
+.header-section h1 {
+  font-family: Arial, sans-serif;
+  font-size: 1.75rem;
+  color: #c4cdcf;
+  text-align: center;
+}
+
+#navigation-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+}
+
+.logo-container {
+  background-color: #aab9cf;
+}
+
+#search-bar {
+  background-color: #31555b;
+  color: #c4cdcf;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #31555b;
+  color: #c4cdcf;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+}
+
+.menuButtons {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.menuButtons td {
+  color: #c4cdcf;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+}
+
+
+.menuButtons tr:hover {
+  background-color: #31555b;
+  color: #aab9cf;
+}
+
+#selection-menu table {
+  margin-left: auto;
+  margin-right: auto;
+}
