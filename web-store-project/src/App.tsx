@@ -4,6 +4,7 @@ import PartSpecifications from './components/web-store/specifications/specificat
 import './App.css'
 import { Routes, Route } from "react-router-dom"
 import CartPage from "./pages/cart-page"
+import CartSection from './components/web-store/cart-section';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         />
         <Route path="/cart" element={<CartPage />} />
       </Routes>
+      <CartSection/>
       <PartSpecifications />
     </>
   )
