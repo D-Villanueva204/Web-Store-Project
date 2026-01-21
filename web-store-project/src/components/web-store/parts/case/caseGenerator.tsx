@@ -1,6 +1,6 @@
-import cases from '../../../../json/case.json'
+import cases from '../../../../../json/case.json'
 
-function CaseSelector({ text }: { text: string }) {
+function CaseGenerator() {
 
     const randomIndex = Math.floor(Math.random() * cases.length);
     const part = cases[randomIndex];
@@ -34,4 +34,4 @@ function CaseSelector({ text }: { text: string }) {
     )
 }
 
-export default CaseSelector;
+export default CaseGenerator;

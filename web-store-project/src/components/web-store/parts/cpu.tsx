@@ -1,6 +1,6 @@
 import cpus from '../../../../json/cpu.json'
 
-function CPUSelector({ text }: { text: string }) {
+function CPUSelector() {
 
     const randomIndex = Math.floor(Math.random() * cpus.length);
     const part = cpus[randomIndex];

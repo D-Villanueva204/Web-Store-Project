@@ -1,6 +1,6 @@
 import psu from '../../../../json/psu.json'
 
-function PSUSelector({ text }: { text: string }) {
+function PSUSelector() {
 
     const randomIndex = Math.floor(Math.random() * psu.length);
     const part = psu[randomIndex];

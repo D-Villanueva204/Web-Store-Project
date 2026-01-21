@@ -1,6 +1,6 @@
 import ram from '../../../../json/ram.json'
 
-function RamSelector({ text }: { text: string }) {
+function RamSelector() {
 
     const randomIndex = Math.floor(Math.random() * ram.length);
     const part = ram[randomIndex];

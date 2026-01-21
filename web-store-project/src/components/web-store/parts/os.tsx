@@ -1,6 +1,6 @@
 import os from '../../../../json/os.json'
 
-function OSSelector({ text }: { text: string }) {
+function OSSelector() {
 
     const randomIndex = Math.floor(Math.random() * os.length);
     const part = os[randomIndex];

@@ -1,6 +1,6 @@
 import gpus from '../../../../json/gpu.json'
 
-function GPUSelector({ text }: { text: string }) {
+function GPUSelector() {
 
     const randomIndex = Math.floor(Math.random() * gpus.length);
     const part = gpus[randomIndex];

@@ -1,7 +1,7 @@
 import './App.css'
 import HeaderSection from './components/web-store/header';
 // import PartSelector from './components/web-store/parts/cpu';
-import CaseSelector from './components/web-store/parts/case';
+import CaseSelector from './components/web-store/parts/case/caseGenerator';
 import CPUSelector from './components/web-store/parts/cpu';
 import CoolerSelector from './components/web-store/parts/coolers';
 import GPUSelector from './components/web-store/parts/gpu';

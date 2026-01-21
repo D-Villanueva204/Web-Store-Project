@@ -1,6 +1,6 @@
 import mobo from '../../../../json/motherboard.json'
 
-function MOBOSelector({ text }: { text: string }) {
+function MOBOSelector() {
 
     const randomIndex = Math.floor(Math.random() * mobo.length);
     const part = mobo[randomIndex];

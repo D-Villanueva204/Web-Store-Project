@@ -1,6 +1,6 @@
 import coolers from '../../../../json/coolers.json'
 
-function CoolerSelector({ text }: { text: string }) {
+function CoolerSelector() {
 
     const randomIndex = Math.floor(Math.random() * coolers.length);
     const part = coolers[randomIndex];
