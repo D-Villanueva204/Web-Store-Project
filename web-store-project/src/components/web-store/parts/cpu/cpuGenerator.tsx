@@ -1,4 +1,4 @@
-import cpus from '../../../../json/cpu.json'
+import cpus from '../../../../../json/cpu.json'
 
 function CPUSelector() {
 
@@ -24,9 +24,6 @@ function CPUSelector() {
             </div>
                         <div>
                 Core Count: {part.core_count}
-            </div>
-                        <div>
-                Core Clock: {part.core_clock}
             </div>
         </section>
     )

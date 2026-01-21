@@ -2,7 +2,7 @@ import cases from '../../../../../json/case.json' with { type: "json" };
 
 function CaseSelector(name: string) {
 
-    let pcCase: Case = "";
+    let pcCase: Case = null;
     for (const retrievedCase of cases) {
         if (retrievedCase.name == name) {
             pcCase = retrievedCase;

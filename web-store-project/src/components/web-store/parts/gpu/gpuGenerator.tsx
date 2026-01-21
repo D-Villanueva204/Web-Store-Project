@@ -1,6 +1,6 @@
-import gpus from '../../../../json/gpu.json'
+import gpus from '../../../../../json/gpu.json'
 
-function GPUSelector() {
+function GPUGenerator() {
 
     const randomIndex = Math.floor(Math.random() * gpus.length);
     const part = gpus[randomIndex];
@@ -8,6 +8,8 @@ function GPUSelector() {
     if (part.price) {
         price = `$${part.price}`
     }
+
+    console.log(part);
 
     return (
         <section className="gpu-section">
@@ -21,4 +23,4 @@ function GPUSelector() {
     )
 }
 
-export default GPUSelector;
+export default GPUGenerator;

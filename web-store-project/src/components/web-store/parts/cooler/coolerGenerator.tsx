@@ -1,6 +1,6 @@
-import coolers from '../../../../json/coolers.json'
+import coolers from '../../../../../json/cooler.json'
 
-function CoolerSelector() {
+function CoolerGenerator() {
 
     const randomIndex = Math.floor(Math.random() * coolers.length);
     const part = coolers[randomIndex];
@@ -22,4 +22,4 @@ function CoolerSelector() {
     )
 }
 
-export default CoolerSelector;
+export default CoolerGenerator;

@@ -1,27 +1,26 @@
 import './App.css'
 import HeaderSection from './components/web-store/header';
-// import PartSelector from './components/web-store/parts/cpu';
-import CaseSelector from './components/web-store/parts/case/caseGenerator';
-import CPUSelector from './components/web-store/parts/cpu';
-import CoolerSelector from './components/web-store/parts/coolers';
-import GPUSelector from './components/web-store/parts/gpu';
-import MOBOSelector from './components/web-store/parts/motherboard';
-import OSSelector from './components/web-store/parts/os';
-import PSUSelector from './components/web-store/parts/psu';
-import RamSelector from './components/web-store/parts/ram';
+import CaseGenerator from './components/web-store/parts/case/caseGenerator';
+import CPUGenerator from './components/web-store/parts/cpu/cpuGenerator';
+import CoolerGenerator from './components/web-store/parts/cooler/coolerGenerator';
+import GPUGenerator from './components/web-store/parts/gpu/gpuGenerator';
+import MotherboardGenerator from './components/web-store/parts/mobo/MotherboardGenerator';
+import OSGenerator from './components/web-store/parts/os';
+import PSUGenerator from './components/web-store/parts/psu';
+import RamGenerator from './components/web-store/parts/ram';
 
 function App() {
   return (
     <>
       <HeaderSection text={["Currently we do not have any data."]} />
-      <CaseSelector text={"ram"}></CaseSelector>
-      <CPUSelector text={"ram"}></CPUSelector>
-      <CoolerSelector></CoolerSelector>
-      <GPUSelector></GPUSelector>
-      <MOBOSelector></MOBOSelector>
-      <OSSelector></OSSelector>
-      <PSUSelector></PSUSelector>
-      <RamSelector></RamSelector>
+      <CaseGenerator></CaseGenerator>
+      <CPUGenerator></CPUGenerator>
+      <CoolerGenerator></CoolerGenerator>
+      <GPUGenerator></GPUGenerator>
+      <MotherboardGenerator></MotherboardGenerator>
+      <OSGenerator></OSGenerator>
+      <PSUGenerator></PSUGenerator>
+      <RamGenerator></RamGenerator>
     </>
   )
 }

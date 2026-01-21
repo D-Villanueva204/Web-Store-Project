@@ -1,6 +1,6 @@
-import mobo from '../../../../json/motherboard.json'
+import mobo from '../../../../../json/mobo.json'
 
-function MOBOSelector() {
+function MotherboardGenerator() {
 
     const randomIndex = Math.floor(Math.random() * mobo.length);
     const part = mobo[randomIndex];
@@ -27,4 +27,4 @@ function MOBOSelector() {
     )
 }
 
-export default MOBOSelector;
+export default MotherboardGenerator;
