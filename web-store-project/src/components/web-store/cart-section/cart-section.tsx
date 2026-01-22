@@ -1,4 +1,4 @@
-import cartIcon from "../../assets/cart.svg"
+import cartIcon from "../../../assets/cart.svg"
 import { useNavigate } from "react-router-dom"
 
 function CartSection() {

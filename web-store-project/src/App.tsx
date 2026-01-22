@@ -4,7 +4,7 @@ import PartSpecifications from './components/web-store/specifications/specificat
 import './App.css'
 import { Routes, Route } from "react-router-dom"
 import CartPage from "./pages/cart-page"
-import CartSection from './components/web-store/cart-section';
+import CartSection from './components/web-store/cart-section/cart-section';
 
 function App() {
   return (

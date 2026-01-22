@@ -3,11 +3,17 @@ import { useNavigate } from "react-router-dom"
 function CartPage() {
   const navigate = useNavigate()
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Shopping Cart</h1>
+    <div className="cart-page">
+      <header>
+        <h1>
+          Shopping Cart
+        </h1>
+      </header>
       <p>Your cart is currently empty.</p>
 
-      <button onClick={() => navigate("/")}>
+      <button
+         
+        onClick={() => navigate("/")}>
         Back to Home
       </button>
     </div>
