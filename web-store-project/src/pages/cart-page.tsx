@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom"
+import "../components/web-store/cart-section/cart-section.css"
 
 function CartPage() {
   const navigate = useNavigate()
