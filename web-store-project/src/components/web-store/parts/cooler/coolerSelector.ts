@@ -12,9 +12,10 @@ function CoolerSelector(name: string) {
     return cooler;
 }
 
-interface Cooler {
+export interface Cooler {
     name: string;
     price: number;
+    stock: number;
 }
 
 

@@ -12,11 +12,12 @@ function GPUSelector(name: string) {
     return gpu;
 }
 
-interface GPU {
+export interface GPU {
     name: string;
     chipset: string;
     vram: number;
     price: number;
+    stock: number;
 }
 
 export default GPUSelector;

@@ -4,8 +4,9 @@ function CaseSelector(name: string) {
 
     let pcCase: Case = null;
     for (const retrievedCase of cases) {
-        if (retrievedCase.name == name) {
+        if (retrievedCase.name === name) {
             pcCase = retrievedCase;
+            break;
         }
     };
 
@@ -16,12 +17,13 @@ function CaseSelector(name: string) {
     return pcCase;
 }
 
-interface Case {
+export interface Case {
     name: string;
     price: number;
     type: string;
     color: string;
     side_panel: string;
+    stock: number;
 }
 
 

@@ -1,8 +1,8 @@
 import cpus from '../json/cpu.json' with { type: "json" };
 
-function CoolerSelector(name: string) {
+function CPUSelector(name: string) {
 
-    let cpu: cpu = null;
+    let cpu: CPU = null;
     for (const retrievedCpu of cpus) {
         if (retrievedCpu.name == name) {
             cpu = retrievedCpu;
@@ -12,13 +12,14 @@ function CoolerSelector(name: string) {
     return cpu;
 }
 
-interface cpu {
+export interface CPU {
     name: string;
     price: number;
     microarchitecture: string;
     core_count: number;
     core_block: number;
+    stock: number;
 }
 
 
-export default CoolerSelector;
+export default CPUSelector;
