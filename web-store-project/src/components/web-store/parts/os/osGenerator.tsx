@@ -1,6 +1,6 @@
-import os from './json/os.json'
+import os from '../json/os.json'
 
-function OSSelector() {
+function OSGenerator() {
 
     const randomIndex = Math.floor(Math.random() * os.length);
     const part = os[randomIndex];
@@ -21,4 +21,4 @@ function OSSelector() {
     )
 }
 
-export default OSSelector;
+export default OSGenerator;
