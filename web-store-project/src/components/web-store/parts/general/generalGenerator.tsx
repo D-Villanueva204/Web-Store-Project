@@ -1,16 +1,21 @@
-import gpus from '../json/gpu.json'
-import coolers from '../json/cooler.json'
-import cpus from '../json/cpu.json'
-import mobos from '../json/mobo.json'
-import psus from '../json/psu.json'
-import mems from '../json/ram.json'
-import hds from '../json/storage.json'
+import PartTypes from "./PartTypes";
 
-function GeneralSelector() {
-    const partTypes = [gpus, coolers, cpus, mobos, psus, mems, hds];
+function GeneralGenerator() {
+    const partTypes = [
+        PartTypes.GPU, 
+        PartTypes.COOLER, 
+        PartTypes.CPU, 
+        PartTypes.MOBO, 
+        PartTypes.PSU, 
+        PartTypes.RAM, 
+        PartTypes.STORAGE
+    ];
     const randomPartType = partTypes[Math.floor(Math.random() * partTypes.length)];
+    const chosenPartType = Object.keys(PartTypes).find(key => PartTypes[key] === randomPartType);
+
     const randomIndex = Math.floor(Math.random() * randomPartType.length);
     const part = randomPartType[randomIndex];
+    
 
     return (
         <section className="part-section">
@@ -20,8 +25,9 @@ function GeneralSelector() {
             <div>
                 Price: ${part.price}
             </div>
+            <div> Type: {chosenPartType}</div>
         </section>
     )
 }
 
-export default GeneralSelector;
+export default GeneralGenerator;
