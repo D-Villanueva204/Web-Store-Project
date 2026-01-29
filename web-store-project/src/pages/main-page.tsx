@@ -12,7 +12,7 @@ function MainPage() {
 
     return (
         <div>
-            <HeaderSection selection={["Parts", "Sales", "About Us", "Compatibility Checker"]} />
+            <HeaderSection selection={["Parts", "Sales", "About Us", "Cart"]} />
             <div>
                 <h2> Latest Item On Sale: </h2>
                 <GeneralSelector name={"ARCTIC Freezer A35 RGB"} partType={PartTypes.COOLER} />

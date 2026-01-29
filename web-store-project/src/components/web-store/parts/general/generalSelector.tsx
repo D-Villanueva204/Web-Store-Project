@@ -7,23 +7,20 @@ function GeneralSelector({ name, partType }: { name: string; partType: typeof Pa
     for (const part of partType) {
         if (part.name === name) {
             retrievedPart = part;
+            partName = retrievedPart.name;
+            price = retrievedPart.price;
             break;
         }
     };
 
-    if (retrievedPart){
-        partName = retrievedPart.name;
-        price = retrievedPart.price;
-    }
-
     return (
         <section className="part-section">
-            <div>
+            <h3>
                 {partName}
-            </div>
-            <div>
+            </h3>
+            <p>
                 Price: ${price}
-            </div>
+            </p>
         </section>
     )
 }
