@@ -1,7 +1,7 @@
 import * as fs from 'fs';
-import { Motherboard } from "./src/components/web-store/parts/mobo/MotherboardSelector"
+import { Storage } from "./src/components/web-store/parts/storage"
 
-const filePath = "./src/components/web-store/parts/json/mobo.json";
+const filePath = "./src/components/web-store/parts/json/storage.json";
 
 fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
@@ -10,7 +10,7 @@ fs.readFile(filePath, 'utf8', (err, data) => {
     }
     try {
 
-        const jsonObject: Motherboard[] = JSON.parse(data);
+        const jsonObject: Storage[] = JSON.parse(data);
 
         jsonObject.forEach(c => {
             if (c.price == null) {
@@ -37,7 +37,7 @@ fs.readFile(filePath, 'utf8', (err, data) => {
 });
 
 function randomPrice(minDollars: number, maxDollars: number): number {
-  const dollars = Math.floor(Math.random() * (maxDollars - minDollars + 1)) + minDollars;
-  const cents = Math.floor(Math.random() * 100);
-  return Number((dollars + cents / 100).toFixed(2));
+    const dollars = Math.floor(Math.random() * (maxDollars - minDollars + 1)) + minDollars;
+    const cents = Math.floor(Math.random() * 100);
+    return Number((dollars + cents / 100).toFixed(2));
 }
