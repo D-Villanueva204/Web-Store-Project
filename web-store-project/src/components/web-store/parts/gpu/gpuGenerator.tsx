@@ -1,15 +1,8 @@
 import gpus from '../json/gpu.json'
 
 function GPUGenerator() {
-
     const randomIndex = Math.floor(Math.random() * gpus.length);
     const part = gpus[randomIndex];
-    let price = "Out of Stock";
-    if (part.price) {
-        price = `$${part.price}`
-    }
-
-    console.log(part);
 
     return (
         <section className="gpu-section">
@@ -17,7 +10,7 @@ function GPUGenerator() {
                 {part.name} {part.chipset}
             </div>
             <div>
-                Price: {price}
+                Price: ${part.price}
             </div>
         </section>
     )
