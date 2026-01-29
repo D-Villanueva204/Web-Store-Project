@@ -1,5 +1,6 @@
 import HeaderSection from "../components/web-store/header/header";
-import GeneralGenerator from "../components/web-store/parts/general/generalGenerator";
+import GeneralTypeGenerator from "../components/web-store/parts/general/generalTypeGenerator";
+import GeneralPartGenerator from "../components/web-store/parts/general/generalPartGenerator";
 import GeneralSelector from "../components/web-store/parts/general/generalSelector";
 import PartTypes from "../components/web-store/parts/general/PartTypes";
 
@@ -13,11 +14,12 @@ function MainPage() {
                 <h2> Latest Item On Sale: </h2>
             </div>
             <div>
-                <GeneralGenerator/>
+                <GeneralTypeGenerator partType={PartTypes.COOLER}/>
             </div>
             <div>
                 <GeneralSelector name={"ARCTIC Freezer A35 RGB"} partType={PartTypes.COOLER}/>
             </div>
+            <GeneralPartGenerator/>
         </div>
     )
 }
