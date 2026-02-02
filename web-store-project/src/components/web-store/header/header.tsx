@@ -1,6 +1,6 @@
 import "./header.css"
 
-function HeaderSection({ selection }: { selection: string[] }) {
+function HeaderSection() {
     const currentDate = new Date().toLocaleDateString();
 
     return (
@@ -13,7 +13,7 @@ function HeaderSection({ selection }: { selection: string[] }) {
                 <input type="text" id="search-bar" placeholder="Search" />
                 <button>Search</button>
             </div>
-            <div id="selection-menu">
+            {/* <div id="selection-menu">
                 <table>
                     <tbody className="menuButtons">
                         {selection.map(t => <tr>
@@ -21,7 +21,7 @@ function HeaderSection({ selection }: { selection: string[] }) {
                         </tr>)}
                     </tbody>
                 </table>
-            </div>
+            </div> */}
         </section>
     )
 };
