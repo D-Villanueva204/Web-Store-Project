@@ -7,7 +7,7 @@ function GeneralTypeGenerator({ partType, addItemToCart }: { partType: typeof Pa
         let price = "0.00";
         let stock = 0.00;
         const randomIndex = Math.floor(Math.random() * partType.data.length);
-        const retrievedPart = partType.data[randomIndex];
+        const retrievedPart: Part = partType.data[randomIndex];
         if (retrievedPart) {
             partName = retrievedPart.name;
             price = retrievedPart.price;
