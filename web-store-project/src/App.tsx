@@ -16,9 +16,14 @@ function App() {
     setCart([...items, item]);
   };
 
+  const clearCart = () => {
+    setCart([]);
+  }
+
+
   return (
     <>
-      <Sidebar items={items} />
+      <Sidebar items={items} clearCart={clearCart}/>
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<MainPage addItemToCart={addItemToCart} />} />

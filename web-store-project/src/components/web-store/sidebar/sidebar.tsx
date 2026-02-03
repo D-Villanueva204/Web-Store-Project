@@ -1,9 +1,10 @@
 import type { Part } from "../parts/general/PartTypes";
 
-function Sidebar({ items }: { items: Part[] }) {
+function Sidebar({ items, clearCart }: { items: Part[], clearCart: () => void}) {
     return (
         <section className="sidebar-section">
             <h3> Cart </h3>
+            <button type="button" onClick={clearCart}> Clear Cart </button>
             <table>
                 <tbody>
                     {items.map((item, index) =>
