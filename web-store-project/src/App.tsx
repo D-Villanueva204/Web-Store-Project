@@ -22,7 +22,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className="pages">
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route index element={<MainPage addItemToCart={addItemToCart} />} />
