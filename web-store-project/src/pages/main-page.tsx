@@ -1,4 +1,3 @@
-import HeaderSection from "../components/web-store/header/header";
 import GeneralTypeGenerator from "../components/web-store/parts/general/generalTypeGenerator";
 import GeneralSelector from "../components/web-store/parts/general/generalSelector";
 import PartTypes from "../components/web-store/parts/general/PartTypes";
@@ -12,7 +11,6 @@ function MainPage() {
 
     return (
         <div>
-            <HeaderSection selection={["Parts", "Sales", "About Us", "Cart"]} />
             <div>
                 <h2> Latest Item On Sale: </h2>
                 <GeneralSelector name={"ARCTIC Freezer A35 RGB"} partType={PartTypes.COOLER} />
