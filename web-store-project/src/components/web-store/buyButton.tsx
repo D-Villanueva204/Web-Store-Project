@@ -2,12 +2,10 @@ function BuyButton({ addItemToCart, productName }: { addItemToCart: (item: strin
     function BuyItem(e: React.FormEvent) {
         addItemToCart(productName);
     }
-    
+
     return (
         <div>
-            <form onSubmit={BuyItem}>
-                <button type="button">Buy Now</button>
-            </form>
+            <button type="button" onClick={BuyItem}>Buy Now</button>
         </div>)
 };
 

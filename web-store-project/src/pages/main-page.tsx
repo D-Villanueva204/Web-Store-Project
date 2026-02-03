@@ -13,7 +13,7 @@ function MainPage({addItemToCart}: {addItemToCart: (item: string) => void}) {
         <div>
             <div>
                 <h2> Latest Item On Sale: </h2>
-                <GeneralSelector name={"ARCTIC Freezer A35 RGB"} partType={PartTypes.COOLER} />
+                <GeneralSelector name={"ARCTIC Freezer A35 RGB"} partType={PartTypes.COOLER}/>
             </div>
             <div>
                 <h2>
@@ -29,7 +29,7 @@ function MainPage({addItemToCart}: {addItemToCart: (item: string) => void}) {
                         </option>
                     ))}
                 </select>
-                <GeneralTypeGenerator partType={PartTypes[selectedPartType]}/>
+                <GeneralTypeGenerator partType={PartTypes[selectedPartType]} addItemToCart={addItemToCart}/>
             </div>
         </div>
     )

@@ -1,22 +1,29 @@
 import BuyButton from "../../buyButton";
 import PartTypes from "./PartTypes";
 
-function GeneralTypeGenerator({ partType }: { partType: typeof PartTypes[keyof typeof PartTypes]; }) {
+function GeneralTypeGenerator({ partType, addItemToCart }: { partType: typeof PartTypes[keyof typeof PartTypes], addItemToCart: (item: string) => void }) {
     if (partType) {
+        let partName = "Not Found";
+        let price = "0.00";
+        let stock = 0.00;
         const randomIndex = Math.floor(Math.random() * partType.length);
-        const part = partType[randomIndex];
+        const retrievedPart = partType[randomIndex];
+        if (retrievedPart) {
+            partName = retrievedPart.name;
+            price = retrievedPart.price;
+            stock = retrievedPart.stock;
+        }
         return (
             <section className="random-part-section">
                 <h3>
-                    {part.name}
+                    {partName}
                 </h3>
                 <p>
-                    Price: ${part.price}
+                    Price: ${price}
                 </p>
-                <p>In stock: {part.stock}</p>
-                <BuyButton productName={part.name}/>
+                <p>In stock: {stock}</p>
+                <BuyButton productName={partName} addItemToCart={addItemToCart} />
             </section>
-
         )
     }
 };

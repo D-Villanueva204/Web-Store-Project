@@ -1,7 +1,7 @@
 import PartTypes from "./PartTypes";
 import BuyButton from "../../buyButton";
 
-function GeneralSelector({ name, partType }: { name: string; partType: typeof PartTypes[keyof typeof PartTypes]; }) {
+function GeneralSelector({ name, partType, addItemToCart }: { name: string; partType: typeof PartTypes[keyof typeof PartTypes], addItemToCart: (item: string) => void }) {
     let retrievedPart = null;
     let partName = "Not Found";
     let price = "0.00";
@@ -25,7 +25,7 @@ function GeneralSelector({ name, partType }: { name: string; partType: typeof Pa
                 Price: ${price}
             </p>
             <p>Stock: {stock}</p>
-            <BuyButton productName={partName}/>
+            <BuyButton productName={partName} addItemToCart={addItemToCart}/>
         </section>
     )
 }

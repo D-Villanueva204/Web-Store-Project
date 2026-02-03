@@ -10,15 +10,15 @@ function App() {
 
   const [items, setCart] = useState("");
 
-   const addItemToCart = (item: string) => {
-        setCart([...items, item]);
-    };
+  const addItemToCart = (item: string) => {
+    setCart([...items, item]);
+  };
 
   return (
     <>
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route index element={<MainPage />} />
+          <Route index element={<MainPage addItemToCart={addItemToCart} />} />
         </Route>
         <Route path='/cart' element={<Layout />}>
           <Route index element={<CartPage />} />
