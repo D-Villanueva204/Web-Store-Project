@@ -12,7 +12,7 @@ function App() {
 
   const [items, setCart] = useState<Part[]>([]);
 
-  const addItemToCart = (item: typeof Part) => {
+  const addItemToCart = (item: Part) => {
     setCart([...items, item]);
   };
 
