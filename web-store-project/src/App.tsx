@@ -3,7 +3,7 @@ import './App.css'
 import MainPage from './pages/main-page';
 import { Layout } from './components/web-store/layout/Layout';
 import CartPage from './pages/cart-page';
-// import ProductPage from './pages/product-page';
+import ProductPage from './pages/product-page';
 import { useState } from 'react';
 import Sidebar from "./components/web-store/sidebar/sidebar";
 import type { Part } from "./components/web-store/parts/general/PartTypes";
@@ -31,9 +31,9 @@ function App() {
         <Route path='/cart' element={<Layout />}>
           <Route index element={<CartPage />} />
         </Route>
-        {/* <Route path='/product' element={<Layout />}>
+        <Route path='/product' element={<Layout />}>
           <Route index element={<ProductPage addItemToCart={addItemToCart} />} />
-        </Route> */}
+        </Route>
       </Routes>
     </>
   )

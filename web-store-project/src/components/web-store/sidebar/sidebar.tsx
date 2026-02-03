@@ -1,5 +1,5 @@
 import type { Part } from "../parts/general/PartTypes";
-import "./sidebar.css"
+// import "./sidebar.css"
 
 function Sidebar({ items, clearCart }: { items: Part[], clearCart: () => void}) {
     return (
