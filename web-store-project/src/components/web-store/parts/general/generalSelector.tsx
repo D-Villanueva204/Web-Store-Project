@@ -4,11 +4,13 @@ function GeneralSelector({ name, partType }: { name: string; partType: typeof Pa
     let retrievedPart = null;
     let partName = "Not Found";
     let price = "0.00";
+    let stock = 0.00;
     for (const part of partType) {
         if (part.name === name) {
             retrievedPart = part;
             partName = retrievedPart.name;
             price = retrievedPart.price;
+            stock = retrievedPart.stock;
             break;
         }
     };
@@ -21,6 +23,7 @@ function GeneralSelector({ name, partType }: { name: string; partType: typeof Pa
             <p>
                 Price: ${price}
             </p>
+            <p>Stock: {stock}</p>
         </section>
     )
 }

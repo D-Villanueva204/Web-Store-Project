@@ -12,6 +12,7 @@ function GeneralTypeGenerator({ partType }: { partType: typeof PartTypes[keyof t
             <p>
                 Price: ${part.price}
             </p>
+             <p>In stock: {part.stock}</p>
         </section>
     )
 };
