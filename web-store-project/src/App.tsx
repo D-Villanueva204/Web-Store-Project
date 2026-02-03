@@ -4,8 +4,16 @@ import MainPage from './pages/main-page';
 import { Layout } from './components/web-store/layout/Layout';
 import CartPage from './pages/cart-page';
 import ProductPage from './pages/product-page';
+import { useState } from 'react';
 
 function App() {
+
+  const [items, setCart] = useState("");
+
+   const addItemToCart = (item: string) => {
+        setCart([...items, item]);
+    };
+
   return (
     <>
       <Routes>

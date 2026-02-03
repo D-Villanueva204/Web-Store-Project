@@ -8,7 +8,6 @@ function ProductPage() {
     const categories = ["CASE", "COOLER", "CPU", "GPU", "MOBO", "PSU", "RAM", "STORAGE", "OS"];
     const defaultRating = localStorage.getItem("starRating");
 
-
     return (
         <div>
             <h2>Browse Parts</h2>
@@ -23,16 +22,16 @@ function ProductPage() {
             </select>
 
             <div>
-                <GeneralTypeGenerator partType={PartTypes[selectedCategory]}/>
-                <GeneralTypeGenerator partType={PartTypes[selectedCategory]}/>
-                <GeneralTypeGenerator partType={PartTypes[selectedCategory]}/>
-                <GeneralTypeGenerator partType={PartTypes[selectedCategory]}/>
-                <GeneralTypeGenerator partType={PartTypes[selectedCategory]}/>
-                <GeneralTypeGenerator partType={PartTypes[selectedCategory]}/>
-                <GeneralTypeGenerator partType={PartTypes[selectedCategory]}/>
-                <GeneralTypeGenerator partType={PartTypes[selectedCategory]}/>
-                <GeneralTypeGenerator partType={PartTypes[selectedCategory]}/>
-                <GeneralTypeGenerator partType={PartTypes[selectedCategory]}/>
+                <GeneralTypeGenerator partType={PartTypes[selectedCategory]} />
+                <GeneralTypeGenerator partType={PartTypes[selectedCategory]} />
+                <GeneralTypeGenerator partType={PartTypes[selectedCategory]} />
+                <GeneralTypeGenerator partType={PartTypes[selectedCategory]} />
+                <GeneralTypeGenerator partType={PartTypes[selectedCategory]} />
+                <GeneralTypeGenerator partType={PartTypes[selectedCategory]} />
+                <GeneralTypeGenerator partType={PartTypes[selectedCategory]} />
+                <GeneralTypeGenerator partType={PartTypes[selectedCategory]} />
+                <GeneralTypeGenerator partType={PartTypes[selectedCategory]} />
+                <GeneralTypeGenerator partType={PartTypes[selectedCategory]} />
             </div>
             <div>
                 <StarRating iconSize={50} defaultRating={defaultRating} />

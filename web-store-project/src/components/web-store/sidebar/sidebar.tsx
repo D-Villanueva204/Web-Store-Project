@@ -1,12 +1,16 @@
-import PartTypes from "../components/web-store/parts/general/PartTypes";
+// import { useState } from 'react';
 
-function Sidebar({ items }: { items: string[] }) {
+// function Sidebar({items, setItem}: {items: string[], setItem: (item: string) => void}) {
 
-    return (
-        <section className="sidebar-section">
-        
-        </section>
-    )
-};
+//     const []
 
-export default Sidebar;
+//     return (
+//         <section className="sidebar-section">
+//             <div>
+                
+//             </div>
+//         </section>
+//     )
+// };
+
+// export default Sidebar;

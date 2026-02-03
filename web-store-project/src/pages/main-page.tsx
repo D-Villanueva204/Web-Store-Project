@@ -4,7 +4,7 @@ import PartTypes from "../components/web-store/parts/general/PartTypes";
 import { useState } from "react";
 
 
-function MainPage() {
+function MainPage({addItemToCart}: {addItemToCart: (item: string) => void}) {
 
     const [selectedPartType, setSelectedPartType] = useState("COOLER");
     const partTypeOptions = ["GPU", "CPU", "COOLER", "MOBO", "PSU", "RAM", "STORAGE"];

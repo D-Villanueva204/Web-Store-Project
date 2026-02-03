@@ -25,7 +25,7 @@ function GeneralSelector({ name, partType }: { name: string; partType: typeof Pa
                 Price: ${price}
             </p>
             <p>Stock: {stock}</p>
-            <BuyButton/>
+            <BuyButton productName={partName}/>
         </section>
     )
 }
