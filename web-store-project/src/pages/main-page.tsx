@@ -2,7 +2,7 @@ import GeneralTypeGenerator from "../components/web-store/parts/general/generalT
 import GeneralSelector from "../components/web-store/parts/general/generalSelector";
 import PartTypes from "../components/web-store/parts/general/PartTypes";
 import { useState } from "react";
-import type { Part } from "./components/web-store/parts/general/PartTypes";
+import type { Part } from "../components/web-store/parts/general/PartTypes";
 
 function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
 

@@ -3,7 +3,7 @@ import StarRating from "../components/web-store/stars/StarRating";
 import GeneralTypeGenerator from "../components/web-store/parts/general/generalTypeGenerator";
 import PartTypes from "../components/web-store/parts/general/PartTypes";
  
-function ProductPage({ addItemToCart }: { addItemToCart: (item: string) => void }) {
+function ProductPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
     const [selectedCategory, setSelectedCategory] = useState<keyof typeof PartTypes>("");
     const categories = ["CASE", "COOLER", "CPU", "GPU", "MOBO", "PSU", "RAM", "STORAGE", "OS"];
     const defaultRating = localStorage.getItem("starRating");
