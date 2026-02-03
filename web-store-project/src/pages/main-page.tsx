@@ -3,7 +3,6 @@ import GeneralSelector from "../components/web-store/parts/general/generalSelect
 import PartTypes from "../components/web-store/parts/general/PartTypes";
 import { useState } from "react";
 
-
 function MainPage({addItemToCart}: {addItemToCart: (item: string) => void}) {
 
     const [selectedPartType, setSelectedPartType] = useState("COOLER");
@@ -13,7 +12,7 @@ function MainPage({addItemToCart}: {addItemToCart: (item: string) => void}) {
         <div>
             <div>
                 <h2> Latest Item On Sale: </h2>
-                <GeneralSelector name={"ARCTIC Freezer A35 RGB"} partType={PartTypes.COOLER}/>
+                <GeneralSelector name={"ARCTIC Freezer A35 RGB"} partType={PartTypes.COOLER} addItemToCart={addItemToCart}/>
             </div>
             <div>
                 <h2>

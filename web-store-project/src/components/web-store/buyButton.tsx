@@ -1,5 +1,5 @@
 function BuyButton({ addItemToCart, productName }: { addItemToCart: (item: string) => void, productName: string }) {
-    function BuyItem(e: React.FormEvent) {
+    function BuyItem() {
         addItemToCart(productName);
     }
 

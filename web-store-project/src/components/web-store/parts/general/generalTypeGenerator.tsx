@@ -12,6 +12,7 @@ function GeneralTypeGenerator({ partType, addItemToCart }: { partType: typeof Pa
             partName = retrievedPart.name;
             price = retrievedPart.price;
             stock = retrievedPart.stock;
+            
         }
         return (
             <section className="random-part-section">

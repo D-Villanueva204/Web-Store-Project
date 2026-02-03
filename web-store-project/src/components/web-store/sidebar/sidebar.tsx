@@ -1,16 +1,13 @@
-// import { useState } from 'react';
+function Sidebar({ items }: { items: string[] }) {
+        return (
+            <section className="sidebar-section">
+                <div>
+                    {items.map(item => (
+                        <p> {item}</p>
+                    ))}
+                </div>
+            </section>
+        )
+};
 
-// function Sidebar({items, setItem}: {items: string[], setItem: (item: string) => void}) {
-
-//     const []
-
-//     return (
-//         <section className="sidebar-section">
-//             <div>
-                
-//             </div>
-//         </section>
-//     )
-// };
-
-// export default Sidebar;
+export default Sidebar;

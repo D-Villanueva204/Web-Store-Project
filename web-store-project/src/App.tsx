@@ -5,10 +5,11 @@ import { Layout } from './components/web-store/layout/Layout';
 import CartPage from './pages/cart-page';
 import ProductPage from './pages/product-page';
 import { useState } from 'react';
+import Sidebar from "/src/components/web-store/sidebar/sidebar.tsx"
 
 function App() {
 
-  const [items, setCart] = useState("");
+  const [items, setCart] = useState<string[]>([]);
 
   const addItemToCart = (item: string) => {
     setCart([...items, item]);
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <>
+            <Sidebar items={items}/>
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<MainPage addItemToCart={addItemToCart} />} />
@@ -24,7 +26,7 @@ function App() {
           <Route index element={<CartPage />} />
         </Route>
         <Route path='/product' element={<Layout />}>
-          <Route index element={<ProductPage />} />
+          <Route index element={<ProductPage addItemToCart={addItemToCart} />} />
         </Route>
       </Routes>
     </>
