@@ -17,7 +17,7 @@ function App() {
 
   return (
     <>
-            <Sidebar items={items}/>
+      <Sidebar items={items} />
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<MainPage addItemToCart={addItemToCart} />} />
