@@ -18,7 +18,6 @@ const PartTypes = {
     STORAGE: hds,
     CASE: cases,
     OS: os,
-
 };
 
 export default PartTypes;
