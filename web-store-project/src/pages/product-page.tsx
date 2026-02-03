@@ -1,17 +1,17 @@
 import { useState } from "react";
 import StarRating from "../components/web-store/stars/StarRating";
 import GeneralTypeGenerator from "../components/web-store/parts/general/generalTypeGenerator";
-import PartTypes from "../components/web-store/parts/general/PartTypes";
- 
+import PartTypes, { type Part } from "../components/web-store/parts/general/PartTypes";
+
 function ProductPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
     const [selectedCategory, setSelectedCategory] = useState<keyof typeof PartTypes>("");
     const categories = ["CASE", "COOLER", "CPU", "GPU", "MOBO", "PSU", "RAM", "STORAGE", "OS"];
     const defaultRating = localStorage.getItem("starRating");
- 
+
     return (
         <div>
             <h2>Browse Parts</h2>
- 
+
             <select onChange={(e) => setSelectedCategory(e.target.value as keyof typeof PartTypes)}>
                 <option value="">Select a category</option>
                 {categories.map((category) => (
@@ -20,7 +20,7 @@ function ProductPage({ addItemToCart }: { addItemToCart: (item: Part) => void })
                     </option>
                 ))}
             </select>
- 
+
             <div>
                 <GeneralTypeGenerator partType={PartTypes[selectedCategory]} addItemToCart={addItemToCart} />
                 <GeneralTypeGenerator partType={PartTypes[selectedCategory]} addItemToCart={addItemToCart} />
@@ -32,5 +32,5 @@ function ProductPage({ addItemToCart }: { addItemToCart: (item: Part) => void })
         </div>
     )
 }
- 
+
 export default ProductPage;
