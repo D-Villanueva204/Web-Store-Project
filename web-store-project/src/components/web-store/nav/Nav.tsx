@@ -7,7 +7,7 @@ export function Nav() {
             <div className="page-links">
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/cart">Cart</NavLink>
-                <NavLink to="/product">Product</NavLink>
+                {/* <NavLink to="/product">Product</NavLink> */}
             </div>
         </nav>
     )

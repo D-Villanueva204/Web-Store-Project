@@ -1,7 +1,7 @@
 import BuyButton from "../../buyButton";
 import PartTypes from "./PartTypes";
 
-function GeneralTypeGenerator({ partType, addItemToCart }: { partType: typeof PartTypes[keyof typeof PartTypes], addItemToCart: (item: string) => void }) {
+function GeneralTypeGenerator({ partType, addItemToCart }: { partType: typeof PartTypes[keyof typeof PartTypes], addItemToCart: (item: Part) => void }) {
     if (partType) {
         let partName = "Not Found";
         let price = "0.00";
@@ -23,7 +23,7 @@ function GeneralTypeGenerator({ partType, addItemToCart }: { partType: typeof Pa
                     Price: ${price}
                 </p>
                 <p>In stock: {stock}</p>
-                <BuyButton productName={partName} addItemToCart={addItemToCart} />
+                <BuyButton addItemToCart={addItemToCart} price={price} productName={partName} />
             </section>
         )
     }

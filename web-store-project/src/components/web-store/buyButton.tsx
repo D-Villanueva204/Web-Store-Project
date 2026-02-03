@@ -1,11 +1,19 @@
-function BuyButton({ addItemToCart, productName }: { addItemToCart: (item: string) => void, productName: string }) {
+import type {Part} from "./parts/general/PartTypes";
+
+function BuyButton({ addItemToCart, productName, price }: { addItemToCart: (item: Part) => void, productName: string, price: number }) {
+    const newPart: Part = {
+        name: productName,
+        price: price,
+        stock: 0
+    };
+    
     function BuyItem() {
-        addItemToCart(productName);
+        addItemToCart(newPart);
     }
 
     return (
         <div>
-            <button type="button" onClick={BuyItem}>Buy Now</button>
+            <button type="button" onClick={BuyItem}>Add to Cart</button>
         </div>)
 };
 

@@ -25,7 +25,7 @@ function GeneralSelector({ name, partType, addItemToCart }: { name: string; part
                 Price: ${price}
             </p>
             <p>Stock: {stock}</p>
-            <BuyButton productName={partName} addItemToCart={addItemToCart}/>
+                <BuyButton addItemToCart={addItemToCart} price={price} productName={partName} />
         </section>
     )
 }
