@@ -13,15 +13,6 @@ function HeaderSection() {
                 <input type="text" id="search-bar" placeholder="Search" />
                 <button>Search</button>
             </div>
-            {/* <div id="selection-menu">
-                <table>
-                    <tbody className="menuButtons">
-                        {selection.map(t => <tr>
-                            <td> {t}</td>
-                        </tr>)}
-                    </tbody>
-                </table>
-            </div> */}
         </section>
     )
 };
