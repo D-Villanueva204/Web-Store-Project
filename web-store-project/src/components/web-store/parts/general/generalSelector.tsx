@@ -1,4 +1,5 @@
 import BuyButton from "../../buyButton";
+import AddFavouriteButton from "../../favourite-button/favourite-button";
 
 function GeneralSelector({ name, partType, addItemToCart }: { name: string; partType: typeof PartTypes[typeof PartTypes], addItemToCart: (item: string) => void }) {
     let retrievedPart = null;
@@ -23,7 +24,7 @@ function GeneralSelector({ name, partType, addItemToCart }: { name: string; part
             <p>
                 Price: ${price}
             </p>
-            <p>Stock: {stock}</p>
+            <p>Stock: {stock} </p>
                 <BuyButton addItemToCart={addItemToCart} price={price} productName={partName} />
         </section>
     )
