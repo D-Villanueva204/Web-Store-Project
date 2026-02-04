@@ -1,14 +1,13 @@
-import PartTypes from "./PartTypes";
 import BuyButton from "../../buyButton";
 import AddFavouriteButton from "../../favourite-button/favourite-button";
 
-function GeneralSelector({ name, partType, addItemToCart }: { name: string; partType: typeof PartTypes[keyof typeof PartTypes], addItemToCart: (item: string) => void }) {
+function GeneralSelector({ name, partType, addItemToCart }: { name: string; partType: typeof PartTypes[typeof PartTypes], addItemToCart: (item: string) => void }) {
     let retrievedPart = null;
     let partName = "Not Found";
     let price = "0.00";
     let stock = 0.00;
     for (const part of partType.data) {
-        if (part.name === name) {
+        if (part.name.toLowerCase().trim() === name.toLowerCase().trim()) {
             retrievedPart = part;
             partName = retrievedPart.name;
             price = retrievedPart.price;

@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom';
-import './App.css'
 import MainPage from './pages/main-page';
 import { Layout } from './components/web-store/layout/Layout';
 import CartPage from './pages/cart-page';
@@ -23,11 +22,15 @@ function App() {
   };
 
   const addItemToCart = (item: Part) => {
-    setCart([...items, item]);
+    if (item && item.name != "Not Found") {
+      setCart([...items, item]);
+      setTotal(total + Number(item.price));
+    }
   };
 
   const clearCart = () => {
     setCart([]);
+    setTotal(0.00);
   }
 
 

@@ -10,7 +10,7 @@ function ProductPage({ addItemToCart, addFavourite }: { addItemToCart: (item: st
     return (
         <div>
             <h2>Browse Parts</h2>
- 
+
             <select onChange={(e) => setSelectedCategory(e.target.value as keyof typeof PartTypes)}>
                 <option value="">Select a category</option>
                 {categories.map((category) => (
@@ -19,7 +19,7 @@ function ProductPage({ addItemToCart, addFavourite }: { addItemToCart: (item: st
                     </option>
                 ))}
             </select>
- 
+
             <div>
                 <GeneralTypeGenerator partType={PartTypes[selectedCategory]} addItemToCart={addItemToCart} addFavourite={addFavourite} favourite={true}/>
                 <GeneralTypeGenerator partType={PartTypes[selectedCategory]} addItemToCart={addItemToCart} addFavourite={addFavourite} favourite={true}/>
@@ -31,5 +31,5 @@ function ProductPage({ addItemToCart, addFavourite }: { addItemToCart: (item: st
         </div>
     )
 }
- 
+
 export default ProductPage;
