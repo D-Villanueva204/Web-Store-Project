@@ -13,7 +13,7 @@ Specifications of the product: Czederick
 Vite Setup/Management: Dominique
 
 ## Sprint 2
-Feature Page: Dominique, Czedrick, Joshua
+Feature Page: Dominique (Main Page), Czedrick (Favourites and Product), Joshua (Cart)
 Shared state across pages: Dominique
 Multi-Page Navigation: Czedrick
 Elemental Addition/Removal: Dominique, Czedrick
