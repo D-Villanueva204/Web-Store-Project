@@ -7,6 +7,17 @@ function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
     const [selectedPartType, setSelectedPartType] = useState("CPU");
     const [searchTerm, setSearchTerm] = useState("AMD Ryzen 7 7800X3D");
     const partTypeOptions = ["CASE", "COOLER", "CPU", "GPU", "MOBO", "PSU", "RAM", "STORAGE", "OS"];
+    const [errorMessage, setErrorMessage] = useState("");
+
+    function addToCart(item: Part) {
+        if (item.name != "Not Found") {
+            setErrorMessage("");
+            addItemToCart(item);
+        }
+        else {
+            setErrorMessage("Only valid items can be added to cart");
+        }
+    }
 
     function searchForPart(e: React.FormEvent) {
         e.preventDefault();
@@ -44,8 +55,11 @@ function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
                 <GeneralSelector
                     name={searchTerm}
                     partType={PartTypes[selectedPartType]}
-                    addItemToCart={addItemToCart}
+                    addItemToCart={addToCart}
                 />
+                <h3>
+                    {errorMessage}
+                </h3>
             </div>
         </div>
     )

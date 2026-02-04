@@ -8,6 +8,7 @@ export function Nav() {
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/cart">Cart</NavLink>
                 <NavLink to="/product">Product</NavLink>
+                <NavLink to="/favourites">Favourites</NavLink>
             </div>
         </nav>
     )
