@@ -17,15 +17,6 @@ function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps
         <p>Total Items: {items.length}</p>
       </header>
       
-      <div className="cart-actions">
-        <button 
-          onClick={clearCart}
-          className="clear-cart-btn"
-          disabled={items.length === 0}
-        >
-          Clear All Items
-        </button>
-      </div>
       
       <div className="cart-table">
         <table>
@@ -70,6 +61,15 @@ function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps
             </tr>
           </tfoot>
         </table>
+      <div className="cart-actions">
+        <button 
+          onClick={clearCart}
+          className="clear-cart-btn"
+          disabled={items.length === 0}
+        >
+          Buy
+        </button>
+      </div>
       </div>
     </div>
   )
