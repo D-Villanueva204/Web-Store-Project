@@ -7,10 +7,20 @@ import ProductPage from './pages/product-page';
 import { useState } from 'react';
 import Sidebar from "./components/web-store/sidebar/sidebar";
 import type { Part } from "./components/web-store/parts/general/PartTypes";
+import FavouritesPage from './pages/favourites-page';
 
 function App() {
 
   const [items, setCart] = useState<Part[]>([]);
+  const [favourites, setFavourites] = useState<string[]>([]);
+
+  const addFavourite = (item: string) => {
+      setFavourites([...favourites, item]);
+  };
+
+  const removeFavourite = (index: number) => {
+      setFavourites(favourites.filter((_, i) => i !== index));
+  };
 
   const addItemToCart = (item: Part) => {
     setCart([...items, item]);
@@ -32,7 +42,10 @@ function App() {
           <Route index element={<CartPage />} />
         </Route>
         <Route path='/product' element={<Layout />}>
-          <Route index element={<ProductPage addItemToCart={addItemToCart} />} />
+          <Route index element={<ProductPage addItemToCart={addItemToCart} addFavourite={addFavourite} />} />
+        </Route>
+        <Route path='/favourites' element={<Layout />}>
+          <Route index element={<FavouritesPage favourites={favourites} removeFavourite={removeFavourite} />} />
         </Route>
       </Routes>
     </>
