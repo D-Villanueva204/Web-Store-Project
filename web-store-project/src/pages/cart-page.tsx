@@ -1,18 +1,21 @@
 import { useNavigate } from "react-router-dom"
 import "../components/web-store/cart-section/cart-section.css"
-import { pcProducts } from "../components/web-store/product_data/product_data"
 
-function CartPage() {
+
+interface CartPageProps {
+  cartItems: { name: string; price: string }[]
+  removeItem: (index: number) => void
+}
+
+function CartPage({ cartItems, removeItem }: CartPageProps) {
   const navigate = useNavigate()
-  const cartItems = pcProducts.map(product => ({
-    name: product.name,
-    price: product.price
-  }))
+
   return (
     <div className="cart-page">
       <header>
         <h1>
           Shopping Cart
+          <p>Total Items: {cartItems.length}</p>
         </h1>
       </header>
         <div className="cart-table">
@@ -21,6 +24,7 @@ function CartPage() {
             <tr>
               <th>Name</th>
               <th>Price</th>
+              <th>Remove</th>
             </tr>
           </thead>
           <tbody>
@@ -28,6 +32,14 @@ function CartPage() {
               <tr key={index}>
                 <td>{item.name}</td>
                 <td>{item.price}</td>
+                <td>
+                  <button 
+                    className="remove-btn" 
+                    onClick={() => removeItem(index)}
+                  >
+                    X
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
