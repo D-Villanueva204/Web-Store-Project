@@ -34,7 +34,6 @@ function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps
               <th>#</th>
               <th>Name</th>
               <th>Price</th>
-              <th>Stock</th>
               <th>Remove</th>
             </tr>
           </thead>
@@ -51,14 +50,13 @@ function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps
                   <td>{index + 1}</td>
                   <td>{item.name}</td>
                   <td>${Number(item.price).toFixed(2)}</td>
-                  <td>{item.stock}</td>
                   <td>
                     <button 
                       className="remove-btn" 
                       onClick={() => removeItemFromCart(index)}
                       aria-label={`Remove ${item.name}`}
                     >
-                      ✕
+                      X
                     </button>
                   </td>
                 </tr>
