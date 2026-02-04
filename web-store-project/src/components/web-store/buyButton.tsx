@@ -1,4 +1,4 @@
-import type {Part} from "./parts/general/PartTypes";
+import type { Part } from "./parts/general/PartTypes";
 
 function BuyButton({ addItemToCart, productName, price }: { addItemToCart: (item: Part) => void, productName: string, price: number }) {
     const newPart: Part = {
@@ -6,7 +6,7 @@ function BuyButton({ addItemToCart, productName, price }: { addItemToCart: (item
         price: price,
         stock: 0
     };
-    
+
     function BuyItem() {
         addItemToCart(newPart);
     }
