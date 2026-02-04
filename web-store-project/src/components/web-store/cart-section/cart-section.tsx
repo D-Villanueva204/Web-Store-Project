@@ -1,15 +1,13 @@
-import cartIcon from "../../../assets/cart.svg"
-import { useNavigate } from "react-router-dom"
+import cartIcon from "./cart.svg"
+import { NavLink } from "react-router-dom"
+import "./cart-section.css"
 
 function CartSection() {
-
-  const navigate = useNavigate()
-  
   return (
     <section className="cart-section">
-      <button className="cart-button" onClick={() => navigate("/cart")}>
+      <NavLink to="/cart" className="cart-button">
         <img src={cartIcon} alt="Cart" />
-      </button>
+      </NavLink>
     </section>
   )
 }
