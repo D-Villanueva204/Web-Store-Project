@@ -6,7 +6,7 @@ function GeneralSelector({ name, partType, addItemToCart }: { name: string; part
     let price = "0.00";
     let stock = 0.00;
     for (const part of partType.data) {
-        if (part.name === name) {
+        if (part.name.toLowerCase().trim() === name.toLowerCase().trim()) {
             retrievedPart = part;
             partName = retrievedPart.name;
             price = retrievedPart.price;
