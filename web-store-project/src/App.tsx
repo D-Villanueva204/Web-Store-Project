@@ -31,7 +31,7 @@ function App() {
 
   const clearCart = () => {
     setCart([]);
-    setTotal(0.00);
+    setTotal(0.00);  
   }
 
   const removeItemFromCart = (indexToRemove: number) => {
