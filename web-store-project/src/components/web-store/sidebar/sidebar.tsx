@@ -2,6 +2,11 @@ import type { Part } from "../parts/general/PartTypes";
 import "./sidebar.css"
 
 function Sidebar({ items, clearCart, total }: { items: Part[], clearCart: () => void, total: number }) {
+    let totalAmt: string = "0.00";
+    if (total) {
+        totalAmt = total.toFixed(2);
+    }
+
     return (
         <section className="sidebar-section">
             <h3> Cart </h3>
@@ -15,7 +20,7 @@ function Sidebar({ items, clearCart, total }: { items: Part[], clearCart: () => 
                         </tr>
                     )}
                     <tr>
-                        <td> Total: ${total.toFixed(2)}</td>
+                        <td> Total: ${totalAmt}</td>
                     </tr>
                 </tbody>
             </table>

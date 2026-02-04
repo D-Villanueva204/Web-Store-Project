@@ -13,8 +13,10 @@ function App() {
   const [total, setTotal] = useState<number>(0.00);
 
   const addItemToCart = (item: Part) => {
-    setCart([...items, item]);
-    setTotal(total + item.price);
+    if (item && item.name != "Not Found") {
+      setCart([...items, item]);
+      setTotal(total + Number(item.price));
+    }
   };
 
   const clearCart = () => {
@@ -39,7 +41,7 @@ function App() {
         </Routes>
       </div>
       <div>
-        <Sidebar items={items} clearCart={clearCart} total={total}/>
+        <Sidebar items={items} clearCart={clearCart} total={total} />
       </div>
     </>
   )
