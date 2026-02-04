@@ -7,13 +7,13 @@ import "./GeneralTypeGenerator.css"
 function GeneralTypeGenerator({ partType, addItemToCart, addFavourite, favourite }: { partType: typeof PartTypes[keyof typeof PartTypes], addItemToCart: (item: Part) => void, addFavourite: (item: Part) => void, favourite: boolean }) {
     if (partType) {
         let partName = "Not Found";
-        let price = "0.00";
+        let price = 0.00;
         let stock = 0;
         const randomIndex = Math.floor(Math.random() * partType.data.length);
         const retrievedPart: Part = partType.data[randomIndex];
         if (retrievedPart) {
             partName = retrievedPart.name;
-            price = Number(retrievedPart.price);
+            price = retrievedPart.price;
             stock = retrievedPart.stock;
             
         }
