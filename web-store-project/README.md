@@ -20,4 +20,5 @@ Elemental Addition/Removal: Dominique, Czedrick
 Header Items are connected with Routes: Czedrick
 Form Component: Dominique, Czedrick
 Browse products by label such as GPU, CPU, RAM, etc: Dominique
+Sidebar: Dominique
 Parts: Dominique
