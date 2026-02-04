@@ -3,7 +3,7 @@
   color: #c4cdcf;
 }
 
-.header-section h1 {
+.header-section h1, h2 {
   font-family: Arial, sans-serif;
   font-size: 1.75rem;
   color: #c4cdcf;
@@ -21,6 +21,8 @@
 
 .logo-container {
   background-color: #aab9cf;
+  width: 5rem; 
+  height: 5rem;
 }
 
 #search-bar {

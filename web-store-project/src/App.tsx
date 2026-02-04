@@ -1,34 +1,47 @@
-import './App.css'
-import { useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom';
 import MainPage from './pages/main-page';
+import { Layout } from './components/web-store/layout/Layout';
 import CartPage from './pages/cart-page';
-import { pcProducts } from './components/web-store/product_data/product_data'
+import ProductPage from './pages/product-page';
+import { useState } from 'react';
+import Sidebar from "./components/web-store/sidebar/sidebar";
+import type { Part } from "./components/web-store/parts/general/PartTypes";
 
 function App() {
-  const [cartItems, setCartItems] = useState(
-    pcProducts.map(product => ({
-      name: product.name,
-      price: product.price
-    }))
-  )
-  const removeItem = (indexToRemove: number) => {
-    setCartItems(cartItems.filter((_, index) => index !== indexToRemove))
+
+  const [items, setCart] = useState<Part[]>([]);
+  const [total, setTotal] = useState<number>(0.00);
+
+  const addItemToCart = (item: Part) => {
+    setCart([...items, item]);
+    setTotal(total + item.price);
+  };
+
+  const clearCart = () => {
+    setCart([]);
+    setTotal(0.00);
   }
 
+
   return (
-    <Routes>
-      <Route path="/" element={<MainPage cartItems={cartItems} />} />
-      <Route 
-        path="/cart" 
-        element={
-          <CartPage 
-            cartItems={cartItems}
-            removeItem={removeItem}
-          />
-        } 
-      />
-    </Routes>
+    <>
+      <div className="pages">
+        <Routes>
+          <Route path='/' element={<Layout />}>
+            <Route index element={<MainPage addItemToCart={addItemToCart} />} />
+          </Route>
+          <Route path='/cart' element={<Layout />}>
+            <Route index element={<CartPage />} />
+          </Route>
+          <Route path='/product' element={<Layout />}>
+            <Route index element={<ProductPage addItemToCart={addItemToCart} />} />
+          </Route>
+        </Routes>
+      </div>
+      <div>
+        <Sidebar items={items} clearCart={clearCart} total={total}/>
+      </div>
+    </>
   )
 }
 export default App

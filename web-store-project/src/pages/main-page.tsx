@@ -1,44 +1,51 @@
-import HeaderSection from "../components/web-store/header/header";
-import GeneralTypeGenerator from "../components/web-store/parts/general/generalTypeGenerator";
 import GeneralSelector from "../components/web-store/parts/general/generalSelector";
 import PartTypes from "../components/web-store/parts/general/PartTypes";
 import { useState } from "react";
-interface MainPageProps {
-  cartItems: { name: string; price: string }[]
-}
+import type { Part } from "../components/web-store/parts/general/PartTypes";
 
-function MainPage({ cartItems }: MainPageProps) {
+function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
+    const [selectedPartType, setSelectedPartType] = useState("CPU");
+    const [searchTerm, setSearchTerm] = useState("AMD Ryzen 7 7800X3D");
+    const partTypeOptions = ["CASE", "COOLER", "CPU", "GPU", "MOBO", "PSU", "RAM", "STORAGE", "OS"];
 
-    const [selectedPartType, setSelectedPartType] = useState("COOLER");
-    const partTypeOptions = ["GPU", "CPU", "COOLER", "MOBO", "PSU", "RAM", "STORAGE"];
+    function searchForPart(e: React.FormEvent) {
+        e.preventDefault();
+    }
 
     return (
         <div>
-            <HeaderSection selection={["Parts", "Sales", "About Us", "Cart"]} />
-
-            <div className="cart-count">
-                <p>Items in cart: {cartItems.length}</p>
-            </div>
-            
             <div>
                 <h2> Latest Item On Sale: </h2>
-                <GeneralSelector name={"ARCTIC Freezer A35 RGB"} partType={PartTypes.COOLER} />
+                <GeneralSelector name={"ARCTIC Freezer A35 RGB"} partType={PartTypes.COOLER} addItemToCart={addItemToCart} />
             </div>
             <div>
                 <h2>
                     Wanna look for a specific part? Take a quick look!
                 </h2>
-                <select
-                    value={selectedPartType}
-                    onChange={e => setSelectedPartType(e.target.value)}
-                >
-                    {partTypeOptions.map(type => (
-                        <option key={type} value={type}>
-                            {type}
-                        </option>
-                    ))}
-                </select>
-                <GeneralTypeGenerator partType={PartTypes[selectedPartType]}/>
+                <form onSubmit={searchForPart}>
+                    <select
+                        value={selectedPartType}
+                        onChange={(e) => setSelectedPartType(e.target.value)}
+                    >
+                        {partTypeOptions.map(type => (
+                            <option key={type} value={type}>
+                                {type}
+                            </option>
+                        ))}
+                    </select>
+                    <input
+                        type="text"
+                        id="search-bar"
+                        placeholder="Search"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </form>
+                <GeneralSelector
+                    name={searchTerm}
+                    partType={PartTypes[selectedPartType]}
+                    addItemToCart={addItemToCart}
+                />
             </div>
         </div>
     )
