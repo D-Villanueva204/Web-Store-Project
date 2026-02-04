@@ -22,7 +22,7 @@ const PartTypes = {
 
 export interface PartType {
     name: string,
-    data: json
+    data: JSON
 }
 
 export interface Part {

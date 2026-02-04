@@ -11,6 +11,7 @@ import FavouritesPage from './pages/favourites-page';
 function App() {
 
   const [items, setCart] = useState<Part[]>([]);
+  const [total, setTotal] = useState<number>(0.00);
   const [favourites, setFavourites] = useState<Part[]>([]);
 
   const addFavourite = (item: Part) => {
@@ -36,7 +37,7 @@ function App() {
 
   return (
     <>
-      <Sidebar items={items} clearCart={clearCart}/>
+      <Sidebar items={items} clearCart={clearCart} total={total}/>
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<MainPage addItemToCart={addItemToCart} />} />
