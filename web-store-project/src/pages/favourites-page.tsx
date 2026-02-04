@@ -1,5 +1,5 @@
 interface FavouritesPageProps {
-    favourites: string[];
+    favourites: Part[];
     removeFavourite: (index: number) => void;
 }
 
@@ -13,7 +13,7 @@ function FavouritesPage({ favourites, removeFavourite }: FavouritesPageProps) {
             <ul>
                 {favourites.map((item, index) => (
                     <li key={index}>
-                        {favourites}
+                        {item.name} - ${item.price}
                         <button onClick={() => removeFavourite(index)}>Remove</button>
                     </li>
                 ))}

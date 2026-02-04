@@ -12,9 +12,9 @@ import FavouritesPage from './pages/favourites-page';
 function App() {
 
   const [items, setCart] = useState<Part[]>([]);
-  const [favourites, setFavourites] = useState<string[]>([]);
+  const [favourites, setFavourites] = useState<Part[]>([]);
 
-  const addFavourite = (item: string) => {
+  const addFavourite = (item: Part) => {
       setFavourites([...favourites, item]);
   };
 

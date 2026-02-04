@@ -2,7 +2,7 @@ import PartTypes from "./PartTypes";
 import BuyButton from "../../buyButton";
 import AddFavouriteButton from "../../favourite-button/favourite-button";
 
-function GeneralSelector({ name, partType, addItemToCart, addFavourite }: { name: string; partType: typeof PartTypes[keyof typeof PartTypes], addItemToCart: (item: string) => void, addFavourite: (item: string) => void }) {
+function GeneralSelector({ name, partType, addItemToCart }: { name: string; partType: typeof PartTypes[keyof typeof PartTypes], addItemToCart: (item: string) => void }) {
     let retrievedPart = null;
     let partName = "Not Found";
     let price = "0.00";
@@ -27,7 +27,6 @@ function GeneralSelector({ name, partType, addItemToCart, addFavourite }: { name
             </p>
             <p>Stock: {stock} </p>
                 <BuyButton addItemToCart={addItemToCart} price={price} productName={partName} />
-                <AddFavouriteButton addFavourite={addFavourite} price={price} productName={partName} />
         </section>
     )
 }
