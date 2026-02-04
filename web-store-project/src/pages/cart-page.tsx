@@ -41,7 +41,7 @@ function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps
           <tbody>
             {items.length === 0 ? (
               <tr>
-                <td colSpan={5} className="empty-message">
+                <td className="empty-message">
                   Your cart is empty. Start shopping!
                 </td>
               </tr>
