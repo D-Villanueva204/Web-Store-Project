@@ -31,9 +31,14 @@ function App() {
 
   const clearCart = () => {
     setCart([]);
-    setTotal(0.00);
+    setTotal(0.00);  
   }
 
+  const removeItemFromCart = (indexToRemove: number) => {
+    const itemToRemove = items[indexToRemove];
+    setCart(items.filter((_, index) => index !== indexToRemove));
+    setTotal(total - Number(itemToRemove.price));
+  }
 
   return (
     <>
@@ -43,7 +48,7 @@ function App() {
             <Route index element={<MainPage addItemToCart={addItemToCart} />} />
           </Route>
           <Route path='/cart' element={<Layout />}>
-            <Route index element={<CartPage />} />
+            <Route index element={<CartPage items={items} total={total} removeItemFromCart={removeItemFromCart} clearCart={clearCart} />} />
           </Route>
           <Route path='/product' element={<Layout />}>
             <Route index element={<ProductPage addItemToCart={addItemToCart} addFavourite={addFavourite} />} />
@@ -58,5 +63,4 @@ function App() {
     </>
   )
 }
-
 export default App
