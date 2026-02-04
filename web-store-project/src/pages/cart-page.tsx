@@ -1,55 +1,78 @@
-import { useNavigate } from "react-router-dom"
 import "../components/web-store/cart-section/cart-section.css"
-
+import type { Part } from "../components/web-store/parts/general/PartTypes"
 
 interface CartPageProps {
-  cartItems: { name: string; price: string }[]
-  removeItem: (index: number) => void
+  items: Part[]
+  total: number
+  removeItemFromCart: (index: number) => void
+  clearCart: () => void
 }
 
-function CartPage({ cartItems, removeItem }: CartPageProps) {
-  const navigate = useNavigate()
-
+function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps) {
+  
   return (
     <div className="cart-page">
       <header>
-        <h1>
-          Shopping Cart
-          <p>Total Items: {cartItems.length}</p>
-        </h1>
+        <h1>Shopping Cart</h1>
+        <p>Total Items: {items.length}</p>
       </header>
-        <div className="cart-table">
+      
+      <div className="cart-actions">
+        <button 
+          onClick={clearCart}
+          className="clear-cart-btn"
+          disabled={items.length === 0}
+        >
+          Clear All Items
+        </button>
+      </div>
+      
+      <div className="cart-table">
         <table>
           <thead> 
             <tr>
+              <th>#</th>
               <th>Name</th>
               <th>Price</th>
+              <th>Stock</th>
               <th>Remove</th>
             </tr>
           </thead>
           <tbody>
-            {cartItems.map((item, index) => (
-              <tr key={index}>
-                <td>{item.name}</td>
-                <td>{item.price}</td>
-                <td>
-                  <button 
-                    className="remove-btn" 
-                    onClick={() => removeItem(index)}
-                  >
-                    X
-                  </button>
+            {items.length === 0 ? (
+              <tr>
+                <td colSpan={5} className="empty-message">
+                  Your cart is empty. Start shopping!
                 </td>
               </tr>
-            ))}
+            ) : (
+              items.map((item, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{item.name}</td>
+                  <td>${Number(item.price).toFixed(2)}</td>
+                  <td>{item.stock}</td>
+                  <td>
+                    <button 
+                      className="remove-btn" 
+                      onClick={() => removeItemFromCart(index)}
+                      aria-label={`Remove ${item.name}`}
+                    >
+                      ✕
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
+          <tfoot>
+            <tr className="total-row">
+              <td colSpan={4}><strong>Total:</strong></td>
+              <td><strong>${total.toFixed(2)}</strong></td>
+            </tr>
+          </tfoot>
         </table>
       </div>
-      <button
-         
-        onClick={() => navigate("/")}>
-        Back to Home
-      </button>
     </div>
   )
 }
