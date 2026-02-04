@@ -1,0 +1,537 @@
+[
+  {
+    "name": "Microsoft Windows 11 Home OEM - DVD 64-bit",
+    "price": 109.99,
+    "mode": 64,
+    "max_memory": 128,
+     
+    "stock": 97
+  },
+  {
+    "name": "Microsoft Windows 11 Pro OEM - DVD 64-bit",
+    "price": 146.18,
+    "mode": 64,
+    "max_memory": 2048,
+     
+    "stock": 16
+  },
+  {
+    "name": "Microsoft Windows 11 Home Retail - USB 64-bit",
+    "price": 134.99,
+    "mode": 64,
+    "max_memory": 128,
+     
+    "stock": 67
+  },
+  {
+    "name": "Microsoft Windows 11 Pro Retail - Download 64-bit",
+    "price": 189.99,
+    "mode": 64,
+    "max_memory": 2048,
+     
+    "stock": 8
+  },
+  {
+    "name": "Microsoft Windows 11 Home Retail - Download 64-bit",
+    "price": 138.99,
+    "mode": 64,
+    "max_memory": 128,
+     
+    "stock": 41
+  },
+  {
+    "name": "Microsoft Windows 11 Pro Retail - USB 64-bit",
+    "price": 198.99,
+    "mode": 64,
+    "max_memory": 2048,
+     
+    "stock": 53
+  },
+  {
+    "name": "Microsoft Windows 10 Home OEM - DVD 64-bit",
+    "price": 81.74,
+    "mode": 64,
+    "max_memory": 128,
+     
+    "stock": 18
+  },
+  {
+    "name": "Microsoft Windows 10 Pro Retail - USB 32/64-bit",
+    "price": 86.75,
+    "mode": [
+      32,
+      64
+    ],
+    "max_memory": 2048,
+     
+    "stock": 41
+  },
+  {
+    "name": "Microsoft Windows 10 Home Retail - USB 32/64-bit",
+    "price": 229.99,
+    "mode": [
+      32,
+      64
+    ],
+    "max_memory": 128,
+     
+    "stock": 84
+  },
+  {
+    "name": "Microsoft Windows 10 Pro OEM - DVD 64-bit",
+    "price": 149.99,
+    "mode": 64,
+    "max_memory": 2048,
+     
+    "stock": 54
+  },
+  {
+    "name": "Microsoft Windows 10 Pro Retail - USB 32/64-bit",
+    "price": 204.36,
+    "mode": [
+      32,
+      64
+    ],
+    "max_memory": 2048,
+     
+    "stock": 84
+  },
+  {
+    "name": "Microsoft Windows 10 Home Retail - Download 32/64-bit",
+    "price": 121.79,
+    "mode": [
+      32,
+      64
+    ],
+    "max_memory": 128,
+     
+    "stock": 85
+  },
+  {
+    "name": "Microsoft Windows 10 Home Retail - USB 32/64-bit",
+    "price": 229,
+    "mode": [
+      32,
+      64
+    ],
+    "max_memory": 128,
+     
+    "stock": 48
+  },
+  {
+    "name": "Microsoft Windows 10 Pro Retail - Download 32/64-bit",
+    "price": 202.11,
+    "mode": [
+      32,
+      64
+    ],
+    "max_memory": 2048,
+     
+    "stock": 23
+  },
+  {
+    "name": "Microsoft Windows 10 Home OEM - DVD 64-bit",
+    "price": 98.51,
+    "mode": 64,
+    "max_memory": 128,
+     
+    "stock": 24
+  },
+  {
+    "name": "Microsoft Windows 7 Home Premium Full 32/64-bit",
+    "price": 212.28,
+    "mode": [
+      32,
+      64
+    ],
+    "max_memory": 16,
+     
+    "stock": 20
+  },
+  {
+    "name": "Microsoft Windows 10 Home OEM - DVD 32-bit",
+    "price": 143.46,
+    "mode": 32,
+    "max_memory": 4,
+     
+    "stock": 57
+  },
+  {
+    "name": "Microsoft Windows 10 Pro OEM - DVD 32-bit",
+    "price": 24.22,
+    "mode": 32,
+    "max_memory": 4,
+     
+    "stock": 90
+  },
+  {
+    "name": "Microsoft Windows 7 Professional Full 32/64-bit",
+    "price": 254.16,
+    "mode": [
+      32,
+      64
+    ],
+    "max_memory": 192,
+     
+    "stock": 95
+  },
+  {
+    "name": "Microsoft Windows 10 Pro Retail - USB 32/64-bit",
+    "price": 146.62,
+    "mode": [
+      32,
+      64
+    ],
+    "max_memory": 2048,
+     
+    "stock": 87
+  },
+  {
+    "name": "Microsoft Windows 10 Pro French CDN - Retail - DVD 64-bit",
+    "price": 249.69,
+    "mode": 64,
+    "max_memory": 2048,
+     
+    "stock": 88
+  },
+  {
+    "name": "Microsoft Windows 10 Home French - USB 32/64-bit",
+    "price": 111.5,
+    "mode": [
+      32,
+      64
+    ],
+    "max_memory": 128,
+     
+    "stock": 12
+  },
+  {
+    "name": "Microsoft Windows 10 Home French OEM - DVD 64-bit",
+    "price": 223.38,
+    "mode": 64,
+    "max_memory": 128,
+     
+    "stock": 23
+  },
+  {
+    "name": "Microsoft Windows 8.1 32/64-bit",
+    "price": 192.37,
+    "mode": [
+      32,
+      64
+    ],
+    "max_memory": 128,
+     
+    "stock": 55
+  },
+  {
+    "name": "Microsoft Windows 7 Ultimate SP1 OEM 64-bit",
+    "price": 105.09,
+    "mode": 64,
+    "max_memory": 192,
+     
+    "stock": 23
+  },
+  {
+    "name": "Microsoft Windows 8.1 Pro OEM 64-bit",
+    "price": 91.41,
+    "mode": 64,
+    "max_memory": 512,
+     
+    "stock": 43
+  },
+  {
+    "name": "Microsoft Windows 7 Home Premium SP1 32-bit",
+    "price": 21.8,
+    "mode": 32,
+    "max_memory": 4,
+     
+    "stock": 21
+  },
+  {
+    "name": "Microsoft Windows 7 Ultimate Full 32/64-bit",
+    "price": 243.8,
+    "mode": [
+      32,
+      64
+    ],
+    "max_memory": 192,
+     
+    "stock": 63
+  },
+  {
+    "name": "Microsoft Windows 7 Professional SP1 OEM 64-bit",
+    "price": 87.68,
+    "mode": 64,
+    "max_memory": 192,
+     
+    "stock": 46
+  },
+  {
+    "name": "Microsoft Windows 8 Pro OEM 32-bit",
+    "price": 88.53,
+    "mode": 32,
+    "max_memory": 4,
+     
+    "stock": 18
+  },
+  {
+    "name": "Microsoft Windows 7 Home Premium SP1 64-bit",
+    "price": 201.06,
+    "mode": 64,
+    "max_memory": 16,
+     
+    "stock": 54
+  },
+  {
+    "name": "Microsoft Windows 7 Home Premium SP1 OEM 64-bit",
+    "price": 201.83,
+    "mode": 64,
+    "max_memory": 16,
+     
+    "stock": 79
+  },
+  {
+    "name": "Microsoft Windows 7 Home Premium SP1 OEM 3-Pack 32-bit",
+    "price": 88.3,
+    "mode": 32,
+    "max_memory": 4,
+     
+    "stock": 28
+  },
+  {
+    "name": "Microsoft Windows 7 Ultimate SP1 OEM 32-bit",
+    "price": 164.61,
+    "mode": 32,
+    "max_memory": 4,
+     
+    "stock": 6
+  },
+  {
+    "name": "Microsoft Windows 7 Professional SP1 OEM 32-bit",
+    "price": 92.14,
+    "mode": 32,
+    "max_memory": 4,
+     
+    "stock": 67
+  },
+  {
+    "name": "Microsoft Windows 7 Pro SP1 DE 64-bit",
+    "price": 56.74,
+    "mode": 64,
+    "max_memory": 192,
+     
+    "stock": 51
+  },
+  {
+    "name": "Microsoft Windows 7 Ultimate SP1 3-Pack 32-bit",
+    "price": 113.04,
+    "mode": 32,
+    "max_memory": 4,
+     
+    "stock": 98
+  },
+  {
+    "name": "Microsoft Windows 8.1 OEM 64-bit",
+    "price": 132.41,
+    "mode": 64,
+    "max_memory": 128,
+     
+    "stock": 59
+  },
+  {
+    "name": "Microsoft Windows 8 OEM 64-bit",
+    "price": 154.27,
+    "mode": 64,
+    "max_memory": 128,
+     
+    "stock": 73
+  },
+  {
+    "name": "Microsoft Windows 7 Home Premium SP1 OEM 3-Pack 64-bit",
+    "price": 47.66,
+    "mode": 64,
+    "max_memory": 16,
+     
+    "stock": 85
+  },
+  {
+    "name": "Microsoft Windows 7 Professional SP1 30-Pack 32-bit",
+    "price": 187.81,
+    "mode": 32,
+    "max_memory": 4,
+     
+    "stock": 11
+  },
+  {
+    "name": "Microsoft Windows 7 Ultimate 64-bit",
+    "price": 169.47,
+    "mode": 64,
+    "max_memory": 192,
+     
+    "stock": 36
+  },
+  {
+    "name": "Microsoft Windows 7 Ultimate SP1 OEM 3-Pack 64-bit",
+    "price": 121.72,
+    "mode": 64,
+    "max_memory": 192,
+     
+    "stock": 31
+  },
+  {
+    "name": "Microsoft Windows 7 Professional SP1 OEM 3-Pack 32-bit",
+    "price": 109.16,
+    "mode": 32,
+    "max_memory": 4,
+     
+    "stock": 72
+  },
+  {
+    "name": "Microsoft Windows 7 Pro SP1 DE OEM 64-bit",
+    "price": 215.28,
+    "mode": 64,
+    "max_memory": 192,
+     
+    "stock": 94
+  },
+  {
+    "name": "Microsoft Windows 7 Professional SP1 OEM 3-Pack 64-bit",
+    "price": 23.44,
+    "mode": 64,
+    "max_memory": 192,
+     
+    "stock": 7
+  },
+  {
+    "name": "Microsoft Windows 8.1 OEM 32-bit",
+    "price": 104.49,
+    "mode": 32,
+    "max_memory": 4,
+     
+    "stock": 43
+  },
+  {
+    "name": "Microsoft Windows 8 Pro OEM 64-bit",
+    "price": 108.38,
+    "mode": 64,
+    "max_memory": 512,
+     
+    "stock": 38
+  },
+  {
+    "name": "Microsoft Windows 8.1 Pro DE OEM 64-bit",
+    "price": 188.07,
+    "mode": 64,
+    "max_memory": 512,
+     
+    "stock": 9
+  },
+  {
+    "name": "Microsoft Windows 8 Pro OEM 64-bit",
+    "price": 88.85,
+    "mode": 64,
+    "max_memory": 512,
+     
+    "stock": 95
+  },
+  {
+    "name": "Microsoft Windows 8.1 Pro OEM 32-bit",
+    "price": 158.16,
+    "mode": 32,
+    "max_memory": 4,
+     
+    "stock": 19
+  },
+  {
+    "name": "Microsoft Windows 8.1 Pro OEM 32-bit",
+    "price": 24.64,
+    "mode": 32,
+    "max_memory": 4,
+     
+    "stock": 26
+  },
+  {
+    "name": "Microsoft Windows 8.1 DE OEM 64-bit",
+    "price": 127.56,
+    "mode": 64,
+    "max_memory": 128,
+     
+    "stock": 99
+  },
+  {
+    "name": "Microsoft Windows 8 OEM 32-bit",
+    "price": 49.83,
+    "mode": 32,
+    "max_memory": 4,
+     
+    "stock": 54
+  },
+  {
+    "name": "Microsoft Windows 8 OEM 64-bit",
+    "price": 147.65,
+    "mode": 64,
+    "max_memory": 128,
+     
+    "stock": 56
+  },
+  {
+    "name": "Microsoft Windows 8.1 Pro OEM 64-bit",
+    "price": 217.99,
+    "mode": 64,
+    "max_memory": 512,
+     
+    "stock": 50
+  },
+  {
+    "name": "Microsoft Windows 8.1 OEM 64-bit",
+    "price": 208.84,
+    "mode": 64,
+    "max_memory": 128,
+     
+    "stock": 69
+  },
+  {
+    "name": "Microsoft Windows 8 Pro DE OEM 64-bit",
+    "price": 9.16,
+    "mode": 64,
+    "max_memory": 512,
+     
+    "stock": 49
+  },
+  {
+    "name": "Microsoft Windows 8 OEM 32-bit",
+    "price": 140.16,
+    "mode": 32,
+    "max_memory": 4,
+     
+    "stock": 84
+  },
+  {
+    "name": "Microsoft Windows 8 Pro OEM 32-bit",
+    "price": 112.79,
+    "mode": 32,
+    "max_memory": 4,
+     
+    "stock": 29
+  },
+  {
+    "name": "Microsoft Windows 8.1 Pro 32/64-bit",
+    "price": 141.42,
+    "mode": [
+      32,
+      64
+    ],
+    "max_memory": 512,
+     
+    "stock": 45
+  },
+  {
+    "name": "Microsoft Windows 8.1 OEM 32-bit",
+    "price": 69.76,
+    "mode": 32,
+    "max_memory": 4,
+     
+    "stock": 91
+  }
+]

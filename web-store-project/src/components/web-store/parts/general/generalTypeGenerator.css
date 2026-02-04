@@ -1,0 +1,48 @@
+.random-part-section {
+    background-color: #f5f5f5;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.random-part-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.random-part-section h3 {
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 8px;
+}
+
+.random-part-section p {
+    color: #666;
+    font-size: 1.1em;
+    margin: 8px 0;
+}
+
+.random-part-section button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.random-part-section button:hover {
+    background-color: #0056b3;
+}
+
+.random-part-section button:active {
+    transform: scale(0.98);
+}

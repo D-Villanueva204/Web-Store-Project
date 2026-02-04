@@ -1,0 +1,56 @@
+import React from "react";
+import { useState } from "react";
+import "./StarRating.css";
+
+
+
+const DEFAULT_COUNT = 5;
+const DEFAULT_ICON = "★"; 
+const DEFAULT_UNSELECTED_COLOR = "grey"
+const DEFAULT_COLOR = "yellow"
+
+export function StarRating({count, defaultRating, icon, color, iconSize}) {
+    // Actual Star Rating State
+    const [rating, setRating] = useState(defaultRating);
+    // Temporary Star Rating State for Hover Effect
+    const [temporaryRating, setTemporaryRating] = useState(0);
+
+    let stars = Array(count || DEFAULT_COUNT).fill(icon); 
+
+    const handleCLick = (rating) => {
+        setRating(rating);
+        localStorage.setItem("starRating", rating);
+    }
+
+    return (
+        <div className="starRating">
+            {stars.map((item, index) => {
+                const isActiveColor = (rating || temporaryRating) && 
+                (index < rating || index < temporaryRating);
+
+                let elementColor = ""
+
+                if (isActiveColor) {
+                    elementColor = color || DEFAULT_COLOR;
+                } else {
+                    elementColor = DEFAULT_UNSELECTED_COLOR;
+                }
+
+                return (
+                    <div className="star" key={index} style={{fontSize: iconSize ? `${iconSize}px` : "14px", 
+                    color: elementColor,
+                    filter: `${isActiveColor ? "grayscale(0%)" : "grayscale(100%)"}`
+                    }}
+                    onMouseEnter={() => setTemporaryRating(index + 1)}
+                    onMouseLeave={() => setTemporaryRating(0)}
+                    onClick={() => handleCLick(index + 1)}
+                    >
+                        {icon || DEFAULT_ICON}
+                    </div>
+                );
+            })}
+        </div>
+    );
+}
+
+export default StarRating;
