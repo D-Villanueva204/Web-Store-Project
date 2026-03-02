@@ -8,7 +8,7 @@ import psus from '../parts/json/psu.json'
 import rams from '../parts/json/ram.json'
 import storages from '../parts/json/storage.json'
 
-import type { Part, Case, Cooler, CPU, GPU, MOBO, OS, PSU, RAM, Storage } from "./PartTypes";
+import { PartType, type Case, type Cooler, type CPU, type GPU, type MOBO, type OS, type PSU, type RAM, type Storage } from "./PartTypes";
 
 const caseData: Case[] = [];
 const coolerData: Cooler[] = [];
@@ -27,12 +27,49 @@ initializeData();
 export function fetchAllParts() {
     return partData;
 }
+export function addNewCase(newCase: Case): Case {
+    caseData.push(newCase);
+    return newCase;
+}
+export function addNewCooler(newCooler: Cooler): Cooler {
+    coolerData.push(newCooler);
+    return newCooler;
+}
+export function addNewCPU(newCPU: CPU): CPU {
+    cpuData.push(newCPU);
+    return newCPU;
+}
+export function addNewGPU(newGPU: GPU): GPU {
+    gpuData.push(newGPU);
+    return newGPU;
+}
+export function addNewMOBO(newMOBO: MOBO): MOBO {
+    moboData.push(newMOBO);
+    return newMOBO;
+}
+export function addNewOS(newOS: OS): OS {
+    osData.push(newOS);
+    return newOS;
+}
+export function addNewPSU(newPSU: PSU): PSU {
+    psuData.push(newPSU);
+    return newPSU;
+}
+export function addNewRAM(newRAM: RAM): RAM {
+    ramData.push(newRAM);
+    return newRAM;
+}
+export function addNewStorage(newStorage: Storage): Storage {
+    storageData.push(newStorage);
+    return newStorage;
+}
 
 function initializeData() {
     for (const part of cases) {
         const pcCase: Case = {
             name: part.name,
             price: part.price,
+            partType: PartType.CASE,
             stock: part.stock,
             type: part.type,
             color: part.color,
@@ -47,6 +84,7 @@ function initializeData() {
         const pcCooler: Cooler = {
             name: cooler.name,
             price: cooler.price,
+            partType: PartType.COOLER,
             stock: cooler.stock,
             rpm: cooler.rpm,
             noise_level: cooler.noise_level,
@@ -59,6 +97,7 @@ function initializeData() {
         const pcCpu: CPU = {
             name: cpu.name,
             price: cpu.price,
+            partType: PartType.CPU,
             stock: cpu.stock,
             core_count: cpu.core_count,
             core_clock: cpu.core_clock,
@@ -73,6 +112,7 @@ function initializeData() {
         const pcGpu: GPU = {
             name: gpu.name,
             price: gpu.price,
+            partType: PartType.GPU,
             stock: gpu.stock,
             chipset: gpu.chipset,
             memory: gpu.memory,
@@ -87,6 +127,7 @@ function initializeData() {
         const pcMobo: MOBO = {
             name: mobo.name,
             price: mobo.price,
+            partType: PartType.MOBO,
             stock: mobo.stock,
             socket: mobo.socket,
             form_factor: mobo.form_factor,
@@ -100,6 +141,7 @@ function initializeData() {
         const pcOs: OS = {
             name: os.name,
             price: os.price,
+            partType: PartType.OS,
             stock: os.stock,
             mode: os.mode,
             max_memory: os.max_memory
@@ -110,6 +152,7 @@ function initializeData() {
         const pcPsu: PSU = {
             name: psu.name,
             price: psu.price,
+            partType: PartType.PSU,
             stock: psu.stock,
             type: psu.type,
             efficiency: psu.efficiency,
@@ -123,6 +166,7 @@ function initializeData() {
         const pcRam: RAM = {
             name: ram.name,
             price: ram.price,
+            partType: PartType.RAM,
             stock: ram.stock,
             speed: ram.speed,
             modules: ram.modules,
@@ -136,6 +180,7 @@ function initializeData() {
         const pcStorage: Storage = {
             name: storage.name,
             price: storage.price,
+            partType: PartType.STORAGE,
             stock: storage.stock,
             capacity: storage.capacity,
             price_per_gb: storage.price_per_gb,

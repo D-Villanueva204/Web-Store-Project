@@ -14,6 +14,7 @@ export const PartType = {
 export interface Part {
     name: string,
     price: number,
+    partType: string,
     stock: number
 }
 
@@ -55,7 +56,7 @@ export interface GPU extends Part {
     chipset: string,
     memory: number,
     core_clock: number,
-    boost_clock: number,
+    boost_clock: number | null,
     color: string,
     length: number,
 }
