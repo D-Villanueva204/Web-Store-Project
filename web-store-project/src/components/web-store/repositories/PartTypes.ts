@@ -1,14 +1,16 @@
-export enum PartType {
-    CASE = "Case",
-    COOLER = "Cooler",
-    CPU = "CPU",
-    GPU = "GPU",
-    MOBO = "MOBO",
-    OS = "OS",
-    PSU = "PSU",
-    RAM = "RAM",
-    STORAGE = "Storage"
-}
+export const PartType = {
+    CASE: "Case",
+    COOLER: "Cooler",
+    CPU: "CPU",
+    GPU: "GPU",
+    MOBO: "MOBO",
+    OS: "OS",
+    PSU: "PSU",
+    RAM: "RAM",
+    STORAGE: "Storage"
+};
+
+
 export interface Part {
     name: string,
     price: number,
