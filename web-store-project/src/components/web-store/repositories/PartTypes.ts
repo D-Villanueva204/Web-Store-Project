@@ -1,30 +1,3 @@
-import gpus from '../parts/json/gpu.json'
-import coolers from '../parts/json/cooler.json'
-import cpus from '../parts/json/cpu.json'
-import mobos from '../parts/json/mobo.json'
-import psus from '../parts/json/psu.json'
-import rams from '../parts/json/ram.json'
-import hds from '../parts/json/storage.json';
-import cases from '../parts/json/case.json'
-import os from '../parts/json/os.json'
-
-const PartTypes = {
-    GPU: { name: "GPU", data: gpus },
-    CPU: { name: "CPU", data: cpus },
-    COOLER: { name: "COOLER", data: coolers },
-    MOBO: { name: "MOBO", data: mobos },
-    PSU: { name: "PSU", data: psus },
-    RAM: { name: "RAM", data: rams },
-    STORAGE: { name: "STORAGE", data: hds },
-    CASE: { name: "CASE", data: cases },
-    OS: { name: "OS", data: os },
-};
-
-export interface PartType {
-    name: string,
-    data: JSON
-}
-
 export interface Part {
     name: string,
     price: number,
@@ -103,5 +76,3 @@ export interface RAM extends Part {
     first_word_latency: number,
     cas_latency: number,
 }
-
-export default PartTypes;
