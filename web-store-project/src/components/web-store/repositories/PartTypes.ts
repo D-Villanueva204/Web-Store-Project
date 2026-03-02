@@ -1,13 +1,13 @@
 export const PartType = {
-    CASE: "Case",
-    COOLER: "Cooler",
-    CPU: "CPU",
-    GPU: "GPU",
-    MOBO: "MOBO",
-    OS: "OS",
-    PSU: "PSU",
-    RAM: "RAM",
-    STORAGE: "Storage"
+    CASE: "case",
+    COOLER: "cooler",
+    CPU: "cpu",
+    GPU: "gpu",
+    MOBO: "mobo",
+    OS: "os",
+    PSU: "psu",
+    RAM: "ram",
+    STORAGE: "storage"
 };
 
 

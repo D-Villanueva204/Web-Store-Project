@@ -24,7 +24,7 @@ const ramData: RAM[] = [];
 const storageData: Storage[] = [];
 
 // The main "data"
-const partData: Part[][] = [caseData, coolerData, cpuData, gpuData, moboData, osData, psuData, ramData, storageData];
+const partData = { caseData, coolerData, cpuData, gpuData, moboData, osData, psuData, ramData, storageData }
 
 // The function to run to initalize all the data.
 initializeData();
@@ -77,10 +77,50 @@ export function addNewStorage(newStorage: Storage): Storage {
     return newStorage;
 }
 
+export function getTypeByID(part: Part): Part[] | null {
+    const id: string = part.id.split("-")[0];
+    switch (id) {
+        case PartType.CASE:
+            return caseData;
+        case PartType.COOLER:
+            return coolerData;
+        case PartType.CPU:
+            return cpuData;
+        case PartType.GPU:
+            return gpuData;
+        case PartType.MOBO:
+            return moboData;
+        case PartType.OS:
+            return osData;
+        case PartType.PSU:
+            return psuData;
+        case PartType.RAM:
+            return ramData;
+        case PartType.STORAGE:
+            return storageData;
+        default:
+            return null;
+    }
+};
+
+export function updateStock(part: Part, adding: boolean, amount: number): boolean {
+    const amountChanged = (adding) ? amount : (amount * -1);
+    const data: Part[] | null = getTypeByID(part);
+    if (data) {
+        for (const retrievedPart of data) {
+            if (retrievedPart.id == part.id) {
+                retrievedPart.stock += amountChanged;
+                return true;
+            }
+        }
+    }
+    return false;
+};
+
 function initializeData() {
     let count = 0;
     for (const part of cases) {
-        count = count++;
+        count++;
         const pcCase: Case = {
             id: `${(PartType.CASE).toLowerCase()}-${count}`,
             name: part.name,
@@ -98,7 +138,7 @@ function initializeData() {
     }
     count = 0;
     for (const cooler of coolers) {
-        count = count++;
+        count++;
         const pcCooler: Cooler = {
             id: `${(PartType.COOLER).toLowerCase()}-${count}`,
             name: cooler.name,
@@ -114,7 +154,7 @@ function initializeData() {
     }
     count = 0;
     for (const cpu of cpus) {
-        count = count++;
+        count++;
         const pcCpu: CPU = {
             id: `${(PartType.CPU).toLowerCase()}-${count}`,
             name: cpu.name,
@@ -132,7 +172,7 @@ function initializeData() {
     }
     count = 0;
     for (const gpu of gpus) {
-        count = count++;
+        count++;
         const pcGpu: GPU = {
             id: `${(PartType.GPU).toLowerCase()}-${count}`,
             name: gpu.name,
@@ -150,7 +190,7 @@ function initializeData() {
     }
     count = 0;
     for (const mobo of mobos) {
-        count = count++;
+        count++;
         const pcMobo: MOBO = {
             id: `${(PartType.MOBO).toLowerCase()}-${count}`,
             name: mobo.name,
@@ -167,7 +207,7 @@ function initializeData() {
     }
     count = 0;
     for (const os of oss) {
-        count = count++;
+        count++;
         const pcOs: OS = {
             id: `${(PartType.OS).toLowerCase()}-${count}`,
             name: os.name,
@@ -181,7 +221,7 @@ function initializeData() {
     }
     count = 0;
     for (const psu of psus) {
-        count = count++;
+        count++;
         const pcPsu: PSU = {
             id: `${(PartType.PSU).toLowerCase()}-${count}`,
             name: psu.name,
@@ -198,7 +238,7 @@ function initializeData() {
     }
     count = 0;
     for (const ram of rams) {
-        count = count++;
+        count++;
         const pcRam: RAM = {
             id: `${(PartType.RAM).toLowerCase()}-${count}`,
             name: ram.name,
@@ -215,7 +255,7 @@ function initializeData() {
     }
     count = 0;
     for (const storage of storages) {
-        count = count++;
+        count++;
         const pcStorage: Storage = {
             id: `${(PartType.STORAGE).toLowerCase()}-${count}`,
             name: storage.name,
