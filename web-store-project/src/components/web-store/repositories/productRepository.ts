@@ -1,3 +1,4 @@
+// Imports
 import cases from '../parts/json/case.json'
 import coolers from '../parts/json/cooler.json'
 import cpus from '../parts/json/cpu.json'
@@ -8,8 +9,10 @@ import psus from '../parts/json/psu.json'
 import rams from '../parts/json/ram.json'
 import storages from '../parts/json/storage.json'
 
-import { PartType, type Case, type Cooler, type CPU, type GPU, type MOBO, type OS, type PSU, type RAM, type Storage } from "./PartTypes";
+// Import for PartTypes
+import { type Part, PartType, type Case, type Cooler, type CPU, type GPU, type MOBO, type OS, type PSU, type RAM, type Storage } from "./PartTypes";
 
+// All the different part data, in types.
 const caseData: Case[] = [];
 const coolerData: Cooler[] = [];
 const cpuData: CPU[] = [];
@@ -20,13 +23,23 @@ const psuData: PSU[] = [];
 const ramData: RAM[] = [];
 const storageData: Storage[] = [];
 
-const partData = { caseData, coolerData, cpuData, gpuData, moboData, osData, psuData, ramData, storageData }
+// The main "data"
+const partData: Part[][] = [caseData, coolerData, cpuData, gpuData, moboData, osData, psuData, ramData, storageData];
 
+// The function to run to initalize all the data.
 initializeData();
 
+/**
+ * Retrieves all parts. Any further parsing will be in service.
+ * 
+ * @returns all partData.
+ */
 export function fetchAllParts() {
     return partData;
 }
+
+// Functions to add per partType.
+
 export function addNewCase(newCase: Case): Case {
     caseData.push(newCase);
     return newCase;
@@ -65,8 +78,11 @@ export function addNewStorage(newStorage: Storage): Storage {
 }
 
 function initializeData() {
+    let count = 0;
     for (const part of cases) {
+        count = count++;
         const pcCase: Case = {
+            id: `${(PartType.CASE).toLowerCase()}-${count}`,
             name: part.name,
             price: part.price,
             partType: PartType.CASE,
@@ -80,8 +96,11 @@ function initializeData() {
         }
         caseData.push(pcCase);
     }
+    count = 0;
     for (const cooler of coolers) {
+        count = count++;
         const pcCooler: Cooler = {
+            id: `${(PartType.COOLER).toLowerCase()}-${count}`,
             name: cooler.name,
             price: cooler.price,
             partType: PartType.COOLER,
@@ -93,8 +112,11 @@ function initializeData() {
         }
         coolerData.push(pcCooler);
     }
+    count = 0;
     for (const cpu of cpus) {
+        count = count++;
         const pcCpu: CPU = {
+            id: `${(PartType.CPU).toLowerCase()}-${count}`,
             name: cpu.name,
             price: cpu.price,
             partType: PartType.CPU,
@@ -108,8 +130,11 @@ function initializeData() {
         }
         cpuData.push(pcCpu);
     }
+    count = 0;
     for (const gpu of gpus) {
+        count = count++;
         const pcGpu: GPU = {
+            id: `${(PartType.GPU).toLowerCase()}-${count}`,
             name: gpu.name,
             price: gpu.price,
             partType: PartType.GPU,
@@ -123,8 +148,11 @@ function initializeData() {
         }
         gpuData.push(pcGpu);
     }
+    count = 0;
     for (const mobo of mobos) {
+        count = count++;
         const pcMobo: MOBO = {
+            id: `${(PartType.MOBO).toLowerCase()}-${count}`,
             name: mobo.name,
             price: mobo.price,
             partType: PartType.MOBO,
@@ -137,8 +165,11 @@ function initializeData() {
         }
         moboData.push(pcMobo);
     }
+    count = 0;
     for (const os of oss) {
+        count = count++;
         const pcOs: OS = {
+            id: `${(PartType.OS).toLowerCase()}-${count}`,
             name: os.name,
             price: os.price,
             partType: PartType.OS,
@@ -148,8 +179,11 @@ function initializeData() {
         }
         osData.push(pcOs);
     }
+    count = 0;
     for (const psu of psus) {
+        count = count++;
         const pcPsu: PSU = {
+            id: `${(PartType.PSU).toLowerCase()}-${count}`,
             name: psu.name,
             price: psu.price,
             partType: PartType.PSU,
@@ -162,8 +196,11 @@ function initializeData() {
         }
         psuData.push(pcPsu);
     }
+    count = 0;
     for (const ram of rams) {
+        count = count++;
         const pcRam: RAM = {
+            id: `${(PartType.RAM).toLowerCase()}-${count}`,
             name: ram.name,
             price: ram.price,
             partType: PartType.RAM,
@@ -176,8 +213,11 @@ function initializeData() {
         }
         ramData.push(pcRam);
     }
+    count = 0;
     for (const storage of storages) {
+        count = count++;
         const pcStorage: Storage = {
+            id: `${(PartType.STORAGE).toLowerCase()}-${count}`,
             name: storage.name,
             price: storage.price,
             partType: PartType.STORAGE,

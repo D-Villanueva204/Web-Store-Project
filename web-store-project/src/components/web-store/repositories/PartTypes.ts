@@ -12,6 +12,7 @@ export const PartType = {
 
 
 export interface Part {
+    id: string,
     name: string,
     price: number,
     partType: string,
