@@ -1,12 +1,12 @@
-import cases from '../json/case.json'
-import coolers from '../json/cooler.json'
-import cpus from '../json/cpu.json'
-import gpus from '../json/gpu.json'
-import mobos from '../json/mobo.json'
-import oss from '../json/os.json'
-import psus from '../json/psu.json'
-import rams from '../json/ram.json'
-import storages from '../json/storage.json'
+import cases from '../parts/json/case.json'
+import coolers from '../parts/json/cooler.json'
+import cpus from '../parts/json/cpu.json'
+import gpus from '../parts/json/gpu.json'
+import mobos from '../parts/json/mobo.json'
+import oss from '../parts/json/os.json'
+import psus from '../parts/json/psu.json'
+import rams from '../parts/json/ram.json'
+import storages from '../parts/json/storage.json'
 
 import type { Part, Case, Cooler, CPU, GPU, MOBO, OS, PSU, RAM, Storage } from "./PartTypes";
 
@@ -24,48 +24,126 @@ const partData = { caseData, coolerData, cpuData, gpuData, moboData, osData, psu
 
 initializeData();
 
-export function fetchAllExecutives(): Part[] {
-    return executiveData;
-}
-
-export function fetchExistingPartTypes(): string[] {
-    return existingPartTypes;
-}
-
-export function createExecutive(executive: Part): Part {
-    executiveData.push(executive);
-    if (!existingPartTypes.includes(executive.Part)) {
-        existingPartTypes.push(executive.Part);
-    }
-    return executive;
+export function fetchAllParts() {
+    return partData;
 }
 
 function initializeData() {
-    for (const pcCase of cases) {
+    for (const part of cases) {
+        const pcCase: Case = {
+            name: part.name,
+            price: part.price,
+            stock: part.stock,
+            type: part.type,
+            color: part.color,
+            psu: part.psu,
+            side_panel: part.side_panel,
+            external_volume: part.external_volume,
+            internal_35_bays: part.internal_35_bays
+        }
         caseData.push(pcCase);
     }
     for (const cooler of coolers) {
-        coolerData.push(cooler);
+        const pcCooler: Cooler = {
+            name: cooler.name,
+            price: cooler.price,
+            stock: cooler.stock,
+            rpm: cooler.rpm,
+            noise_level: cooler.noise_level,
+            color: cooler.color,
+            size: cooler.size
+        }
+        coolerData.push(pcCooler);
     }
     for (const cpu of cpus) {
-        cpuData.push(cpu);
+        const pcCpu: CPU = {
+            name: cpu.name,
+            price: cpu.price,
+            stock: cpu.stock,
+            core_count: cpu.core_count,
+            core_clock: cpu.core_clock,
+            boost_clock: cpu.boost_clock,
+            microarchitecture: cpu.microarchitecture,
+            tdp: cpu.tdp,
+            graphics: cpu.graphics
+        }
+        cpuData.push(pcCpu);
     }
     for (const gpu of gpus) {
-        gpuData.push(gpu);
+        const pcGpu: GPU = {
+            name: gpu.name,
+            price: gpu.price,
+            stock: gpu.stock,
+            chipset: gpu.chipset,
+            memory: gpu.memory,
+            core_clock: gpu.core_clock,
+            boost_clock: gpu.boost_clock,
+            color: gpu.color,
+            length: gpu.length
+        }
+        gpuData.push(pcGpu);
     }
     for (const mobo of mobos) {
-        moboData.push(mobo);
+        const pcMobo: MOBO = {
+            name: mobo.name,
+            price: mobo.price,
+            stock: mobo.stock,
+            socket: mobo.socket,
+            form_factor: mobo.form_factor,
+            max_memory: mobo.max_memory,
+            memory_slots: mobo.memory_slots,
+            color: mobo.color
+        }
+        moboData.push(pcMobo);
     }
     for (const os of oss) {
-        osData.push(os);
+        const pcOs: OS = {
+            name: os.name,
+            price: os.price,
+            stock: os.stock,
+            mode: os.mode,
+            max_memory: os.max_memory
+        }
+        osData.push(pcOs);
     }
     for (const psu of psus) {
-        psuData.push(psu);
+        const pcPsu: PSU = {
+            name: psu.name,
+            price: psu.price,
+            stock: psu.stock,
+            type: psu.type,
+            efficiency: psu.efficiency,
+            wattage: psu.wattage,
+            modular: psu.modular,
+            color: psu.color
+        }
+        psuData.push(pcPsu);
     }
     for (const ram of rams) {
-        ramData.push(ram);
+        const pcRam: RAM = {
+            name: ram.name,
+            price: ram.price,
+            stock: ram.stock,
+            speed: ram.speed,
+            modules: ram.modules,
+            color: ram.color,
+            first_word_latency: ram.first_word_latency,
+            cas_latency: ram.cas_latency
+        }
+        ramData.push(pcRam);
     }
     for (const storage of storages) {
-        storageData.push(storage);
+        const pcStorage: Storage = {
+            name: storage.name,
+            price: storage.price,
+            stock: storage.stock,
+            capacity: storage.capacity,
+            price_per_gb: storage.price_per_gb,
+            type: storage.type,
+            cache: storage.cache,
+            form_factor: storage.form_factor,
+            interface: storage.interface
+        }
+        storageData.push(pcStorage);
     }
 }
