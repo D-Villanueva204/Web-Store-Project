@@ -1,12 +1,12 @@
-import gpus from '../json/gpu.json'
-import coolers from '../json/cooler.json'
-import cpus from '../json/cpu.json'
-import mobos from '../json/mobo.json'
-import psus from '../json/psu.json'
-import rams from '../json/ram.json'
-import hds from '../json/storage.json';
-import cases from '../json/case.json'
-import os from '../json/os.json'
+import gpus from '../parts/json/gpu.json'
+import coolers from '../parts/json/cooler.json'
+import cpus from '../parts/json/cpu.json'
+import mobos from '../parts/json/mobo.json'
+import psus from '../parts/json/psu.json'
+import rams from '../parts/json/ram.json'
+import hds from '../parts/json/storage.json';
+import cases from '../parts/json/case.json'
+import os from '../parts/json/os.json'
 
 const PartTypes = {
     GPU: { name: "GPU", data: gpus },

@@ -5,7 +5,7 @@ import CartPage from './pages/cart-page';
 import ProductPage from './pages/product-page';
 import { useState } from 'react';
 import Sidebar from "./components/web-store/sidebar/sidebar";
-import type { Part } from "./components/web-store/parts/general/PartTypes";
+import type { Part } from "./components/web-store/repositories/PartTypes";
 import FavouritesPage from './pages/favourites-page';
 
 function App() {

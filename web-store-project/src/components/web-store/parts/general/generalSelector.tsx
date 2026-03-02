@@ -1,6 +1,6 @@
-import type {Part} from "./PartTypes";
+import type {Part} from "../../repositories/PartTypes";
 import BuyButton from "../../buyButton";
-import PartTypes from './PartTypes';
+import PartTypes from '../../repositories/PartTypes';
 
 function GeneralSelector({ name, partType, addItemToCart }: { name: string; partType: typeof PartTypes[keyof typeof PartTypes], addItemToCart: (item: Part) => void }) {
     let retrievedPart = null;

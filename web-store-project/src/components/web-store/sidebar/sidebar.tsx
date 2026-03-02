@@ -1,4 +1,4 @@
-import type { Part } from "../parts/general/PartTypes";
+import type { Part } from "../repositories/PartTypes";
 import "./sidebar.css"
 
 function Sidebar({ items, clearCart, total }: { items: Part[], clearCart: () => void, total: number }) {

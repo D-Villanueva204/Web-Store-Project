@@ -1,4 +1,4 @@
-import type {Part} from "../parts/general/PartTypes";
+import type {Part} from "../repositories/PartTypes";
 
 function AddFavouriteButton({ addFavourite, productName, price }: { addFavourite: (item: Part) => void, productName: string, price: number }) {
     const handleAddFavourite = () => {

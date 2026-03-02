@@ -1,7 +1,7 @@
 import BuyButton from "../../buyButton";
-import PartTypes from "./PartTypes";
+import PartTypes from "../../repositories/PartTypes";
 import AddFavouriteButton from "../../favourite-button/favourite-button";
-import type {Part} from "./PartTypes";
+import type {Part} from "../../repositories/PartTypes";
 import "./generalTypeGenerator.css"
 
 function GeneralTypeGenerator({ partType, addItemToCart, addFavourite, favourite }: { partType: typeof PartTypes[keyof typeof PartTypes], addItemToCart: (item: Part) => void, addFavourite: (item: Part) => void, favourite: boolean }) {

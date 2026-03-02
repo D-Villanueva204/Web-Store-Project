@@ -1,5 +1,5 @@
 import "../components/web-store/cart-section/cart-section.css"
-import type { Part } from "../components/web-store/parts/general/PartTypes"
+import type { Part } from "../components/web-store/repositories/PartTypes"
 
 interface CartPageProps {
   items: Part[]

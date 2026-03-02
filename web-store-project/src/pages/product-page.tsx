@@ -1,7 +1,7 @@
 import { useState } from "react";
 import GeneralTypeGenerator from "../components/web-store/parts/general/generalTypeGenerator";
-import type { Part } from "../components/web-store/parts/general/PartTypes";
-import PartTypes from "../components/web-store/parts/general/PartTypes";
+import type { Part } from "../components/web-store/repositories/PartTypes";
+import PartTypes from "../components/web-store/repositories/PartTypes";
 
 function ProductPage({ addItemToCart, addFavourite }: { addItemToCart: (item: Part) => void, addFavourite: (item: Part) => void }) {
     const [selectedCategory, setSelectedCategory] = useState<keyof typeof PartTypes>("CPU");
