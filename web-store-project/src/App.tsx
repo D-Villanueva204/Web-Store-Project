@@ -7,11 +7,9 @@ import { useState } from 'react';
 import Sidebar from "./components/web-store/sidebar/sidebar";
 import type { Part } from "./components/web-store/repositories/PartTypes";
 import FavouritesPage from './pages/favourites-page';
-import type { CartItem } from './components/web-store/sidebar/CartItem';
 
 function App() {
 
-  const [items, setCart] = useState<CartItem[]>([]);
   const [favourites, setFavourites] = useState<Part[]>([]);
 
   const addFavourite = (item: Part) => {
@@ -22,23 +20,6 @@ function App() {
     setFavourites(favourites.filter((_, i) => i !== index));
   };
 
-  const addItemToCart = (item: Part) => {
-    if (item && item.name != "Not Found") {
-      setCart([...items, item]);
-      setTotal(total + Number(item.price));
-    }
-  };
-
-  const clearCart = () => {
-    setCart([]);
-    setTotal(0.00);  
-  }
-
-  const removeItemFromCart = (indexToRemove: number) => {
-    const itemToRemove = items[indexToRemove];
-    setCart(items.filter((_, index) => index !== indexToRemove));
-    setTotal(total - Number(itemToRemove.price));
-  }
 
   return (
     <>

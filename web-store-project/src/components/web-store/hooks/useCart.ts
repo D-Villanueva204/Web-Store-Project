@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { fetchAllItems } from "../repositories/sidebarRepository";
+import { fetchAllItems, clearCart } from "../repositories/sidebarRepository";
 import { addItem, removeItem } from "../services/sidebarService";
 import type { CartItem } from "../sidebar/CartItem";
 import type { Part } from "../repositories/PartTypes";
@@ -24,6 +24,11 @@ export function useCart() {
         refreshCart();
     };
 
-    return { items, total, addItemsToCart, removeItemFromCart };
+    const clearAllItems = () => {
+        clearCart();
+        setTotal(0.00);
+    };
+
+    return { items, total, addItemsToCart, removeItemFromCart, clearAllItems };
 
 }

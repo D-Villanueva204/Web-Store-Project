@@ -1,4 +1,5 @@
 import { useCart } from "../hooks/useCart";
+import { clearCart } from "../repositories/sidebarRepository";
 import "./sidebar.css"
 
 function Sidebar() {
@@ -7,7 +8,7 @@ function Sidebar() {
     return (
         <section className="sidebar-section">
             <h3> Cart </h3>
-            {/* <button type="button" onClick={clearCart}> Clear Cart </button> */}
+            <button type="button" onClick={clearCart}> Clear Cart </button>
             <table className="cart-items">
                 <tbody>
                     {items.map((item, index) =>

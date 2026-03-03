@@ -40,3 +40,8 @@ export function removeCartItem(cartItem: CartItem): boolean {
 
     return false;
 }
+
+export function clearCart(): boolean {
+    cartItemData = [];
+    return true;
+}
