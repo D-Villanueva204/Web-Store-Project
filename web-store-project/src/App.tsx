@@ -29,9 +29,9 @@ function App() {
           <Route path='/' element={<Layout />}>
             <Route index element={<MainPage addItemToCart={addItemsToCart}/>} />
           </Route>
-          {/* <Route path='/cart' element={<Layout />}>
+          <Route path='/cart' element={<Layout />}>
             <Route index element={<CartPage items={items} total={total} removeItemFromCart={removeItemFromCart} clearCart={clearCart} />} />
-          </Route> */}
+          </Route>
           <Route path='/product' element={<Layout />}>
             <Route index element={<ProductPage addItemToCart={addItemsToCart} addFavourite={addFavourite} />} />
           </Route>

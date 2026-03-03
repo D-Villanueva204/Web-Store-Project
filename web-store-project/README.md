@@ -24,4 +24,4 @@ Sidebar: Dominique
 Parts: Dominique
 
 ## Sprint 3:
-Sidebar Component, Product Repository, Sidebar Repository, Sidebar Service, useCart: Dominique
+Sidebar Component, Product Repository, Sidebar Repository, Sidebar Service, useCart, GeneralSelector refactor, GeneralGenerator refactor: Dominique
