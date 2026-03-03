@@ -4,6 +4,11 @@ import { type Part, PartType } from "../repositories/PartTypes";
 import { fetchAllParts } from "../repositories/productRepository";
 
 export function addItem(part: Part): CartItem | null {
+
+    if (fetchAllItems().length >= 6) {
+        return null;
+    }
+
     if (checkIfPartExists(part.id)) {
         for (const cartItem of fetchAllItems()) {
             if (cartItem.id == part.id) {
@@ -30,7 +35,7 @@ export function removeItem(cartItem: CartItem): boolean {
 
     for (const item of allItems) {
         if (item.id == cartItem.id) {
-            removeCartItem(cartItem);
+            removeCartItem(item);
             return true;
         }
     }

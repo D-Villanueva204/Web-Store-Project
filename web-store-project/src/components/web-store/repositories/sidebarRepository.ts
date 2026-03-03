@@ -31,7 +31,7 @@ export function removeCartItem(cartItem: CartItem): boolean {
                 return true;
             }
             else {
-                updateCartItem(cartItem, (cartItem.quantity - 1));
+                updateCartItem(item, (item.quantity - 1));
                 return true;
 
             }
