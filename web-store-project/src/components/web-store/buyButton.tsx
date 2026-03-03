@@ -1,14 +1,10 @@
 import type { Part } from "./repositories/PartTypes";
+import { useCart } from "./hooks/useCart";
 
-function BuyButton({ addItemToCart, productName, price }: { addItemToCart: (item: Part) => void, productName: string, price: number }) {
-    const newPart: Part = {
-        name: productName,
-        price: price,
-        stock: 0
-    };
-
+function BuyButton({ part }: { part: Part }) {
+    const { addItemsToCart } = useCart();
     function BuyItem() {
-        addItemToCart(newPart);
+        addItemsToCart(part);
     }
 
     return (

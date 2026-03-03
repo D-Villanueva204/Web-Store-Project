@@ -22,3 +22,6 @@ Form Component: Dominique, Czedrick
 Browse products by label such as GPU, CPU, RAM, etc: Dominique
 Sidebar: Dominique
 Parts: Dominique
+
+## Sprint 3:
+Sidebar Component, Product Repository, Sidebar Repository, Sidebar Service, useCart: Dominique

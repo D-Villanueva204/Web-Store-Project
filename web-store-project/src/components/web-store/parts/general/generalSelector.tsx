@@ -1,4 +1,4 @@
-import type {Part} from "../../repositories/PartTypes";
+import type { Part } from "../../repositories/PartTypes";
 import BuyButton from "../../buyButton";
 import PartTypes from '../../repositories/PartTypes';
 
@@ -7,7 +7,7 @@ function GeneralSelector({ name, partType, addItemToCart }: { name: string; part
     let partName = "Not Found";
     let price = 0;
     let stock = 0;
-    
+
     for (const part of partType.data) {
         if (part.name.toLowerCase().trim() === name.toLowerCase().trim()) {
             retrievedPart = part;
@@ -17,7 +17,7 @@ function GeneralSelector({ name, partType, addItemToCart }: { name: string; part
             break;
         }
     };
-    
+
     return (
         <section className="part-section">
             <h3>
