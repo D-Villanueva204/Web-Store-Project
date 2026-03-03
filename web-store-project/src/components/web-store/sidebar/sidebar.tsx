@@ -1,16 +1,13 @@
-import type { Part } from "../repositories/PartTypes";
+import { useCart } from "../hooks/useCart";
 import "./sidebar.css"
 
-function Sidebar({ items, clearCart, total }: { items: Part[], clearCart: () => void, total: number }) {
-    let totalAmt: string = "0.00";
-    if (total) {
-        totalAmt = total.toFixed(2);
-    }
+function Sidebar() {
+    const { items, total } = useCart();
 
     return (
         <section className="sidebar-section">
             <h3> Cart </h3>
-            <button type="button" onClick={clearCart}> Clear Cart </button>
+            {/* <button type="button" onClick={clearCart}> Clear Cart </button> */}
             <table className="cart-items">
                 <tbody>
                     {items.map((item, index) =>
@@ -20,7 +17,7 @@ function Sidebar({ items, clearCart, total }: { items: Part[], clearCart: () => 
                         </tr>
                     )}
                     <tr>
-                        <td> Total: ${totalAmt}</td>
+                        <td> Total: ${total}</td>
                     </tr>
                 </tbody>
             </table>

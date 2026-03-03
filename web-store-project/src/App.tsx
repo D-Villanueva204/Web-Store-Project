@@ -7,11 +7,11 @@ import { useState } from 'react';
 import Sidebar from "./components/web-store/sidebar/sidebar";
 import type { Part } from "./components/web-store/repositories/PartTypes";
 import FavouritesPage from './pages/favourites-page';
+import type { CartItem } from './components/web-store/sidebar/CartItem';
 
 function App() {
 
-  const [items, setCart] = useState<Part[]>([]);
-  const [total, setTotal] = useState<number>(0.00);
+  const [items, setCart] = useState<CartItem[]>([]);
   const [favourites, setFavourites] = useState<Part[]>([]);
 
   const addFavourite = (item: Part) => {
