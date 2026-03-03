@@ -90,3 +90,5 @@ export interface RAM extends Part {
     first_word_latency: number,
     cas_latency: number,
 }
+
+export default PartType;
