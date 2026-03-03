@@ -1,9 +1,12 @@
+import { useCart } from "../components/web-store/hooks/useCart";
 import GeneralSelector from "../components/web-store/parts/general/generalSelector";
 import PartTypes from "../components/web-store/repositories/PartTypes";
 import { useState } from "react";
 import type { Part } from "../components/web-store/repositories/PartTypes";
 
-function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
+function MainPage() {
+    const { addItemsToCart } = useCart();
+
     const [selectedPartType, setSelectedPartType] = useState<keyof typeof PartTypes>("CPU");
     const [searchTerm, setSearchTerm] = useState("AMD Ryzen 7 7800X3D");
     const partTypeOptions: (keyof typeof PartTypes)[] = ["CASE", "COOLER", "CPU", "GPU", "MOBO", "PSU", "RAM", "STORAGE", "OS"];
@@ -12,7 +15,7 @@ function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
     function addToCart(item: Part) {
         if (item.name != "Not Found") {
             setErrorMessage("");
-            addItemToCart(item);
+            addItemsToCart(item);
         }
         else {
             setErrorMessage("Only valid items can be added to cart");

@@ -26,7 +26,7 @@ function App() {
       <div className="main-content">
         <Routes>
           <Route path='/' element={<Layout />}>
-            <Route index element={<MainPage addItemToCart={addItemToCart} />} />
+            <Route index element={<MainPage/>} />
           </Route>
           <Route path='/cart' element={<Layout />}>
             <Route index element={<CartPage items={items} total={total} removeItemFromCart={removeItemFromCart} clearCart={clearCart} />} />
@@ -39,7 +39,7 @@ function App() {
           </Route>
         </Routes>
       </div>
-      <Sidebar items={items} clearCart={clearCart} total={total} />
+      <Sidebar/>
 
     </>
   )
