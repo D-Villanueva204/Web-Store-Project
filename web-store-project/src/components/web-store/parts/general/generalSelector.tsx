@@ -18,9 +18,9 @@ function GeneralSelector({ name, partType, addItemToCart }: { name: string, part
     const retrievedPart = getByName(name, partType);
 
     if (retrievedPart) {
-       partName = getByName(name, partType)!.name;
-       price = getByName(name, partType)!.price;
-       stock = getByName(name, partType)!.stock;
+       partName = retrievedPart.name;
+       price = retrievedPart.price;
+       stock = retrievedPart.stock;
     }
 
     return (

@@ -6,7 +6,7 @@ import type { Part } from "../components/web-store/repositories/PartTypes";
 function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
     const [selectedPartType, setSelectedPartType] = useState<keyof typeof PartType>("CPU");
     const [searchTerm, setSearchTerm] = useState("AMD Ryzen 7 7800X3D");
-    const partTypeOptions: (keyof typeof PartType)[] = ["CASE", "COOLER", "CPU", "GPU", "MOBO", "PSU", "RAM", "STORAGE", "OS"];
+    const partTypeOptions: string[] = ["CASE", "COOLER", "CPU", "GPU", "MOBO", "PSU", "RAM", "STORAGE", "OS"];
     const [errorMessage, setErrorMessage] = useState("");
 
     function addToCart(item: Part) {

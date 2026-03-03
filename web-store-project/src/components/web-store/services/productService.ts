@@ -59,10 +59,11 @@ export function getByID(id: string): Part | null {
 };
 
 export function getByName(name: string, type: string): Part | null {
+    const productName = name.toLowerCase().trim();
     const partType = getByType(type);
     if (partType) {
         for (const retrievedPart of partType) {
-            if (retrievedPart.name === name) {
+            if (retrievedPart.name.toLowerCase().trim() === productName) {
                 return retrievedPart;
             }
         }

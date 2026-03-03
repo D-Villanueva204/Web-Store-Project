@@ -1,3 +1,11 @@
+/**
+ * Dominique Villanueva:
+ * 
+ * Previously, PartType would've linked to the data directly. In its current state,
+ * it is simply an enum used for creating id's or doing validation.
+ * 
+ */
+
 export const PartType = {
     CASE: "case",
     COOLER: "cooler",
@@ -10,7 +18,10 @@ export const PartType = {
     STORAGE: "storage"
 };
 
-
+/**
+ * A new id field has been created for indexing and for more easier retrieval in the future.
+ * For ease of comparison, Parts do now store their type.
+ */
 export interface Part {
     id: string,
     name: string,
@@ -18,6 +29,12 @@ export interface Part {
     partType: string,
     stock: number
 }
+
+/**
+ * Originally, a component would "clean" data for any null values, I've decided to simply let it be
+ * since checking for null is very useful for checking if an attribute exists.
+ * 
+ */
 
 export interface Case extends Part {
     type: string,

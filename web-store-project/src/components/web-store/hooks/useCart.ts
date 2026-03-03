@@ -1,8 +1,14 @@
 import { useState } from "react";
-import { clearCart } from "../repositories/sidebarRepository";
-import { addItem, getTotal, removeItem, fetchItems } from "../services/sidebarService";
+import { addItem, getTotal, removeItem, fetchItems, clearItems } from "../services/sidebarService";
 import type { CartItem } from "../sidebar/CartItem";
 import type { Part } from "../repositories/PartTypes";
+
+/**
+ * Dominique Villanueva:
+ * useCart is the hook used to tie together any cart state, and handles any 
+ * adding to cart, removing from cart, and keeping track of total.
+ * 
+ */
 
 export function useCart() {
     const [items, setItems] = useState<CartItem[]>(fetchItems());
@@ -27,7 +33,7 @@ export function useCart() {
     };
 
     const clearAllItems = () => {
-        clearCart();
+        clearItems();
         setTotal(0.00);
         refreshCart();
     };

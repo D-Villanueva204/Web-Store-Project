@@ -1,4 +1,4 @@
-import { addCartItem, removeCartItem, fetchAllItems, updateCartItem } from "../repositories/sidebarRepository";
+import { addCartItem, removeCartItem, fetchAllItems, updateCartItem, clearCart } from "../repositories/sidebarRepository";
 import type { CartItem } from "../sidebar/CartItem";
 import { type Part, PartType } from "../repositories/PartTypes";
 import { fetchAllParts } from "../repositories/productRepository";
@@ -37,6 +37,10 @@ export function addItem(part: Part): CartItem | null {
 
 export function fetchItems(): CartItem[] {
     return fetchAllItems();
+}
+
+export function clearItems() {
+    return clearCart();
 }
 
 export function removeItem(cartItem: CartItem): boolean {
