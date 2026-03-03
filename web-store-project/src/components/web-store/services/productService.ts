@@ -61,8 +61,7 @@ export function getByID(id: string): Part | null {
 export function addPart(part: Part): Part | null {
     const partType = getTypeByID(part);
     if (partType) {
-        const newID = partType.length + 1;
-        part.id = `${part.id.split("-")[0]}-${newID}`;
+        part.id = `${part.partType.toLowerCase()}-${partType.length + 1}`;
         switch (part.id.split("-")[0]) {
             case PartType.CASE:
                 return addNewCase(part as Case);
