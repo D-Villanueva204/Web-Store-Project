@@ -1,12 +1,12 @@
 import GeneralSelector from "../components/web-store/parts/general/generalSelector";
-import PartTypes from "../components/web-store/parts/general/PartTypes";
+import PartTypes from "../components/web-store/repositories/PartTypes";
 import { useState } from "react";
-import type { Part } from "../components/web-store/parts/general/PartTypes";
+import type { Part } from "../components/web-store/repositories/PartTypes";
 
 function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
-    const [selectedPartType, setSelectedPartType] = useState("CPU");
+    const [selectedPartType, setSelectedPartType] = useState<keyof typeof PartTypes>("CPU");
     const [searchTerm, setSearchTerm] = useState("AMD Ryzen 7 7800X3D");
-    const partTypeOptions = ["CASE", "COOLER", "CPU", "GPU", "MOBO", "PSU", "RAM", "STORAGE", "OS"];
+    const partTypeOptions: (keyof typeof PartTypes)[] = ["CASE", "COOLER", "CPU", "GPU", "MOBO", "PSU", "RAM", "STORAGE", "OS"];
     const [errorMessage, setErrorMessage] = useState("");
 
     function addToCart(item: Part) {
@@ -36,7 +36,7 @@ function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
                 <form onSubmit={searchForPart}>
                     <select
                         value={selectedPartType}
-                        onChange={(e) => setSelectedPartType(e.target.value)}
+                        onChange={(e) => setSelectedPartType(e.target.value as keyof typeof PartTypes)}
                     >
                         {partTypeOptions.map(type => (
                             <option key={type} value={type}>

@@ -1,13 +1,14 @@
 import BuyButton from "../../buyButton";
-import PartTypes from "./PartTypes";
+import PartTypes from "../../repositories/PartTypes";
 import AddFavouriteButton from "../../favourite-button/favourite-button";
-import "./GeneralTypeGenerator.css"
+import type {Part} from "../../repositories/PartTypes";
+import "./generalTypeGenerator.css"
 
 function GeneralTypeGenerator({ partType, addItemToCart, addFavourite, favourite }: { partType: typeof PartTypes[keyof typeof PartTypes], addItemToCart: (item: Part) => void, addFavourite: (item: Part) => void, favourite: boolean }) {
     if (partType) {
         let partName = "Not Found";
-        let price = "0.00";
-        let stock = 0.00;
+        let price = 0.00;
+        let stock = 0;
         const randomIndex = Math.floor(Math.random() * partType.data.length);
         const retrievedPart: Part = partType.data[randomIndex];
         if (retrievedPart) {
@@ -28,7 +29,7 @@ function GeneralTypeGenerator({ partType, addItemToCart, addFavourite, favourite
                 </p>
                 <p>In stock: {stock}</p>
                 <BuyButton addItemToCart={addItemToCart} price={price} productName={partName} />
-                <AddFavouriteButton addFavourite={addFavourite} price={price}productName={partName} />
+               <AddFavouriteButton addFavourite={addFavourite} price={price} productName={partName} />
             </section>
         )}
         if (!favourite) {

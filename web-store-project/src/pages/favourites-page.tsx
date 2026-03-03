@@ -1,3 +1,5 @@
+import type { Part } from "../components/web-store/repositories/PartTypes";
+
 interface FavouritesPageProps {
     favourites: Part[];
     removeFavourite: (index: number) => void;
@@ -9,7 +11,7 @@ function FavouritesPage({ favourites, removeFavourite }: FavouritesPageProps) {
             <h2>My Favourites</h2>
 
 
-        {favourites.length === 0  && <p>No favourite items added yet.</p>}
+            {favourites.length === 0 && <p>No favourite items added yet.</p>}
             <ul>
                 {favourites.map((item, index) => (
                     <li key={index}>

@@ -1,4 +1,4 @@
-import type { Part } from "./parts/general/PartTypes";
+import type { Part } from "./repositories/PartTypes";
 
 function BuyButton({ addItemToCart, productName, price }: { addItemToCart: (item: Part) => void, productName: string, price: number }) {
     const newPart: Part = {

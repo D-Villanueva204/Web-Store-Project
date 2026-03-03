@@ -5,7 +5,7 @@ import CartPage from './pages/cart-page';
 import ProductPage from './pages/product-page';
 import { useState } from 'react';
 import Sidebar from "./components/web-store/sidebar/sidebar";
-import type { Part } from "./components/web-store/parts/general/PartTypes";
+import type { Part } from "./components/web-store/repositories/PartTypes";
 import FavouritesPage from './pages/favourites-page';
 
 function App() {
@@ -15,11 +15,11 @@ function App() {
   const [favourites, setFavourites] = useState<Part[]>([]);
 
   const addFavourite = (item: Part) => {
-      setFavourites([...favourites, item]);
+    setFavourites([...favourites, item]);
   };
 
   const removeFavourite = (index: number) => {
-      setFavourites(favourites.filter((_, i) => i !== index));
+    setFavourites(favourites.filter((_, i) => i !== index));
   };
 
   const addItemToCart = (item: Part) => {
@@ -31,29 +31,36 @@ function App() {
 
   const clearCart = () => {
     setCart([]);
-    setTotal(0.00);
+    setTotal(0.00);  
   }
 
+  const removeItemFromCart = (indexToRemove: number) => {
+    const itemToRemove = items[indexToRemove];
+    setCart(items.filter((_, index) => index !== indexToRemove));
+    setTotal(total - Number(itemToRemove.price));
+  }
 
   return (
     <>
-      <Sidebar items={items} clearCart={clearCart} total={total}/>
-      <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route index element={<MainPage addItemToCart={addItemToCart} />} />
-        </Route>
-        <Route path='/cart' element={<Layout />}>
-          <Route index element={<CartPage />} />
-        </Route>
-        <Route path='/product' element={<Layout />}>
-          <Route index element={<ProductPage addItemToCart={addItemToCart} addFavourite={addFavourite} />} />
-        </Route>
-        <Route path='/favourites' element={<Layout />}>
-          <Route index element={<FavouritesPage favourites={favourites} removeFavourite={removeFavourite} />} />
-        </Route>
-      </Routes>
+      <div className="main-content">
+        <Routes>
+          <Route path='/' element={<Layout />}>
+            <Route index element={<MainPage addItemToCart={addItemToCart} />} />
+          </Route>
+          <Route path='/cart' element={<Layout />}>
+            <Route index element={<CartPage items={items} total={total} removeItemFromCart={removeItemFromCart} clearCart={clearCart} />} />
+          </Route>
+          <Route path='/product' element={<Layout />}>
+            <Route index element={<ProductPage addItemToCart={addItemToCart} addFavourite={addFavourite} />} />
+          </Route>
+          <Route path='/favourites' element={<Layout />}>
+            <Route index element={<FavouritesPage favourites={favourites} removeFavourite={removeFavourite} />} />
+          </Route>
+        </Routes>
+      </div>
+      <Sidebar items={items} clearCart={clearCart} total={total} />
+
     </>
   )
 }
-
 export default App

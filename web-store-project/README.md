@@ -13,11 +13,12 @@ Specifications of the product: Czederick
 Vite Setup/Management: Dominique
 
 ## Sprint 2
-Feature Page: Dominique, Czedrick, Joshua
+Feature Page: Dominique (Main Page), Czedrick (Favourites and Product), Joshua (Cart)
 Shared state across pages: Dominique
 Multi-Page Navigation: Czedrick
 Elemental Addition/Removal: Dominique, Czedrick
 Header Items are connected with Routes: Czedrick
 Form Component: Dominique, Czedrick
 Browse products by label such as GPU, CPU, RAM, etc: Dominique
+Sidebar: Dominique
 Parts: Dominique
