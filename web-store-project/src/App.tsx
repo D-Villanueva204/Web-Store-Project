@@ -20,7 +20,6 @@ function App() {
     setFavourites(favourites.filter((_, i) => i !== index));
   };
 
-
   return (
     <>
       <div className="main-content">
