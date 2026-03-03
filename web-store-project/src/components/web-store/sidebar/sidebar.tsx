@@ -2,8 +2,17 @@
 import type { CartItem } from "./CartItem";
 import "./sidebar.css"
 
-function Sidebar({ items, total, clearAllItems }: {items: CartItem[], total: number, clearAllItems: () => void}) {
-    
+/**
+ * Dominique Villanueva:
+ * 
+ * Sidebar now is refactored to make sure of the useCart hook functions,
+ * now using CartItem instead of Part.
+ * The only major difference is that total is no longer calculated.
+ * 
+ */
+
+
+function Sidebar({ items, total, clearAllItems }: { items: CartItem[], total: number, clearAllItems: () => void }) {
     return (
         <section className="sidebar-section">
             <h3> Cart </h3>

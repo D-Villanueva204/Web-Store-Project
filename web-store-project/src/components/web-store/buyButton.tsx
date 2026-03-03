@@ -1,9 +1,15 @@
 import type { Part } from "./repositories/PartTypes";
-import { fetchAllItems } from "./repositories/sidebarRepository";
+
+/**
+ * Dominique Villanueva:
+ * Originally, we had to pass down the price along with the productName into BuyButton.
+ * Here, we can add some quick validation to check if null, and pass on the part directly
+ * instead of creating the part ourselves.
+ * 
+ */
 function BuyButton({ part, addToCart }: { part: Part | null, addToCart: (item: Part) => void }) {
-    const cartSize = fetchAllItems().length;
     function BuyItem() {
-        if (part && cartSize <= 10) {
+        if (part) {
             addToCart(part);
         }
     }

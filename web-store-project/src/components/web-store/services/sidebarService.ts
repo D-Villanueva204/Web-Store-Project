@@ -5,7 +5,6 @@ import { fetchAllParts } from "../repositories/productRepository";
 import { validateStock } from "./productService";
 
 export function addItem(part: Part): CartItem | null {
-
     if (fetchAllItems().length >= 10) {
         return null;
     }
@@ -34,6 +33,10 @@ export function addItem(part: Part): CartItem | null {
     }
     addCartItem(newCartItem);
     return newCartItem;
+}
+
+export function fetchItems(): CartItem[] {
+    return fetchAllItems();
 }
 
 export function removeItem(cartItem: CartItem): boolean {

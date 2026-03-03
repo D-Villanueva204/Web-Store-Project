@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { fetchAllItems, clearCart } from "../repositories/sidebarRepository";
-import { addItem, getTotal, removeItem } from "../services/sidebarService";
+import { clearCart } from "../repositories/sidebarRepository";
+import { addItem, getTotal, removeItem, fetchItems } from "../services/sidebarService";
 import type { CartItem } from "../sidebar/CartItem";
 import type { Part } from "../repositories/PartTypes";
 
 export function useCart() {
-    const [items, setItems] = useState<CartItem[]>(fetchAllItems());
+    const [items, setItems] = useState<CartItem[]>(fetchItems());
     const [total, setTotal] = useState<number>(getTotal());
 
     function refreshCart() {
-        setItems([...fetchAllItems()]);
+        setItems([...fetchItems()]);
     }
 
     const addItemsToCart = (part: Part) => {

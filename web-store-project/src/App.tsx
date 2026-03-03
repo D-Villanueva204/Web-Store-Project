@@ -11,6 +11,13 @@ import { useCart } from './components/web-store/hooks/useCart';
 
 function App() {
 
+  /**
+   * Dominique Villanueva:
+   * 
+   * Originally, state would've handled directly in App. We now use the useCart()
+   * hook for retrieving state of the cart and modifying its state.
+   * 
+   */
   const {addItemsToCart, clearAllItems, items, total} = useCart();
   
   const [favourites, setFavourites] = useState<Part[]>([]);
