@@ -43,6 +43,15 @@ export function removeItem(cartItem: CartItem): boolean {
     return false;
 }
 
+export function getTotal(): number {
+    let total = 0;
+    for (const item of fetchAllItems()){
+        total = total + item.price;
+    }
+
+    return total;
+};
+
 function checkIfPartExists(itemId: string): boolean {
     const partType: string = itemId.split("-")[0];
     const partData = getPartType(partType);
