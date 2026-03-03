@@ -56,7 +56,20 @@ export function getByID(id: string): Part | null {
     } else {
         return null;
     }
-}
+};
+
+export function getByName(name: string, type: string): Part | null {
+    const partType = getByType(type);
+    if (partType) {
+        for (const retrievedPart of partType) {
+            if (retrievedPart.name === name) {
+                return retrievedPart;
+            }
+        }
+    }
+
+    return null;
+};
 
 export function addPart(part: Part): Part | null {
     const partType = getTypeByID(part);

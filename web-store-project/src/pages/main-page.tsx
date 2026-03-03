@@ -30,7 +30,7 @@ function MainPage() {
         <div>
             <div>
                 <h2> Latest Item On Sale: </h2>
-                <GeneralSelector name={"ARCTIC Freezer A35 RGB"} partType={PartTypes.COOLER} addItemToCart={addItemToCart} />
+                <GeneralSelector name={"ARCTIC Freezer A35 RGB"} partType={PartTypes.COOLER}/>
             </div>
             <div>
                 <h2>

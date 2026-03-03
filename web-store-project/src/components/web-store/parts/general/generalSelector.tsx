@@ -1,8 +1,9 @@
 import type { Part } from "../../repositories/PartTypes";
 import BuyButton from "../../buyButton";
 import PartTypes from '../../repositories/PartTypes';
+import { getTypeByID } from "../../repositories/productRepository";
 
-function GeneralSelector({ name, partType, addItemToCart }: { name: string; partType: typeof PartTypes[keyof typeof PartTypes], addItemToCart: (item: Part) => void }) {
+function GeneralSelector({ name, partType}: { name: string; partType: typeof PartTypes[keyof typeof PartTypes]}) {
     let retrievedPart = null;
     let partName = "Not Found";
     let price = 0;
