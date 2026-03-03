@@ -5,7 +5,7 @@ import { fetchAllParts } from "../repositories/productRepository";
 
 export function addItem(part: Part): CartItem | null {
 
-    if (fetchAllItems().length >= 6) {
+    if (fetchAllItems().length >= 10) {
         return null;
     }
 

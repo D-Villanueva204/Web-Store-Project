@@ -3,7 +3,7 @@ import { fetchAllItems } from "./repositories/sidebarRepository";
 function BuyButton({ part, addToCart }: { part: Part | null, addToCart: (item: Part) => void }) {
     const cartSize = fetchAllItems().length;
     function BuyItem() {
-        if (part && cartSize <= 6) {
+        if (part && cartSize <= 10) {
             addToCart(part);
         }
     }
