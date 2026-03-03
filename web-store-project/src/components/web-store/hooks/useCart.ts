@@ -7,28 +7,20 @@ import type { Part } from "../repositories/PartTypes";
 export function useCart() {
     const [items, setItems] = useState<CartItem[]>([]);
 
-    const refreshCart = () => {
+    function refreshCart() {
         setItems([...fetchAllItems()]);
-    };
+    }
 
-    const handleAddItem = (part: Part) => {
+    const addItemsToCart = (part: Part) => {
         addItem(part);
         refreshCart();
     };
 
-    const handleRemoveItem = (item: CartItem) => {
-        removeItem(item);
+    const removeItemFromCart = (cartItem: CartItem) => {
+        removeItem(cartItem);
         refreshCart();
     };
 
-    const calculateTotal = () => {
-        return items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    };
+    return { items, addItemsToCart, removeItemFromCart };
 
-    return {
-        items,
-        handleAddItem,
-        handleRemoveItem,
-        total: calculateTotal()
-    };
 }
