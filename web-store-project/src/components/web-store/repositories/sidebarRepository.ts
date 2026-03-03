@@ -14,7 +14,7 @@ export function addCartItem(cartItem: CartItem): CartItem {
 }
 
 export function updateCartItem(cartItem: CartItem, quantity: number): boolean {
-    for (const item of fetchAllItems()) {
+    for (const item of fetchAllItems()) {;
         if (item.id === cartItem.id) {
             item.quantity = quantity;
             return true;

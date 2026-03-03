@@ -2,6 +2,7 @@ import { addCartItem, removeCartItem, fetchAllItems, updateCartItem } from "../r
 import type { CartItem } from "../sidebar/CartItem";
 import { type Part, PartType } from "../repositories/PartTypes";
 import { fetchAllParts } from "../repositories/productRepository";
+import { validateStock } from "./productService";
 
 export function addItem(part: Part): CartItem | null {
 
@@ -15,8 +16,13 @@ export function addItem(part: Part): CartItem | null {
                 if (part.stock == 0) {
                     return null;
                 }
-                updateCartItem(cartItem, (cartItem.quantity + 1));
-                return cartItem;
+                if (validateStock(part, cartItem.quantity + 1)) {
+                    updateCartItem(cartItem, (cartItem.quantity + 1));
+                    return cartItem;
+                }
+                else {
+                    return null;
+                }
             }
         }
     }
@@ -45,7 +51,7 @@ export function removeItem(cartItem: CartItem): boolean {
 
 export function getTotal(): number {
     let total = 0;
-    for (const item of fetchAllItems()){
+    for (const item of fetchAllItems()) {
         total = total + item.price;
     }
 
@@ -58,7 +64,7 @@ function checkIfPartExists(itemId: string): boolean {
 
     if (partData) {
         for (const part of partData) {
-            if (part.id == itemId) {
+            if (part.id === itemId) {
                 return true;
             }
         }
