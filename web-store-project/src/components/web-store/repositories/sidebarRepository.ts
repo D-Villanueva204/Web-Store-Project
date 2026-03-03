@@ -18,19 +18,25 @@ export function updateCartItem(cartItem: CartItem, quantity: number): boolean {
             return true;
         }
     }
-
     return false;
 }
 
-export function removeCartItem(cartItem: CartItem): CartItem {
-    const remaining = cartItem.quantity - 1;
+export function removeCartItem(cartItem: CartItem): boolean {
+    for (const item of fetchAllItems()) {
+        if (item.id === cartItem.id) {
+            const remaining = cartItem.quantity - 1;
 
-    if (remaining >= 0) {
-        cartItemData = cartItemData.filter(item => item.id !== cartItem.id);
-    }
-    else {
-        cartItem.quantity = cartItem.quantity - 1;
+            if (remaining == 0) {
+                cartItemData = cartItemData.filter(item => item.id !== cartItem.id);
+                return true;
+            }
+            else {
+                updateCartItem(cartItem, (cartItem.quantity - 1));
+                return true;
+
+            }
+        }
     }
 
-    return cartItem;
+    return false;
 }
