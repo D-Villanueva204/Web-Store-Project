@@ -1,23 +1,18 @@
-import type { Part } from "../../repositories/PartTypes";
 import BuyButton from "../../buyButton";
-import PartTypes from '../../repositories/PartTypes';
-import { getTypeByID } from "../../repositories/productRepository";
+import { getByName } from "../../services/productService";
 
-function GeneralSelector({ name, partType}: { name: string; partType: typeof PartTypes[keyof typeof PartTypes]}) {
-    let retrievedPart = null;
+function GeneralSelector({ name, partType }: { name: string, partType: string }) {
     let partName = "Not Found";
     let price = 0;
     let stock = 0;
 
-    for (const part of partType.data) {
-        if (part.name.toLowerCase().trim() === name.toLowerCase().trim()) {
-            retrievedPart = part;
-            partName = retrievedPart.name;
-            price = Number(retrievedPart.price);
-            stock = retrievedPart.stock;
-            break;
-        }
-    };
+    const retrievedPart = getByName(name, partType);
+
+    if (retrievedPart) {
+       partName = getByName(name, partType)!.name;
+       price = getByName(name, partType)!.price;
+       stock = getByName(name, partType)!.stock;
+    }
 
     return (
         <section className="part-section">
@@ -28,7 +23,7 @@ function GeneralSelector({ name, partType}: { name: string; partType: typeof Par
                 Price: ${price}
             </p>
             <p>Stock: {stock} </p>
-            <BuyButton addItemToCart={addItemToCart} price={price} productName={partName} />
+            <BuyButton part={retrievedPart} />
         </section>
     )
 }

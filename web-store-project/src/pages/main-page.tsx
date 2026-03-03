@@ -36,7 +36,7 @@ function MainPage() {
                 <h2>
                     Wanna look for a specific part? Take a quick look!
                 </h2>
-                <form onSubmit={searchForPart}>
+                {/* <form onSubmit={searchForPart}>
                     <select
                         value={selectedPartType}
                         onChange={(e) => setSelectedPartType(e.target.value as keyof typeof PartTypes)}
@@ -54,7 +54,7 @@ function MainPage() {
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                </form>
+                </form> */}
                 <GeneralSelector
                     name={searchTerm}
                     partType={PartTypes[selectedPartType]}

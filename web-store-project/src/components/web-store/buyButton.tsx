@@ -1,10 +1,12 @@
 import type { Part } from "./repositories/PartTypes";
 import { useCart } from "./hooks/useCart";
 
-function BuyButton({ part }: { part: Part }) {
+function BuyButton({ part }: { part: Part | null }) {
     const { addItemsToCart } = useCart();
     function BuyItem() {
-        addItemsToCart(part);
+        if (part) {
+            addItemsToCart(part);
+        }
     }
 
     return (
