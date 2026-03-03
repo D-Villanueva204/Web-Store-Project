@@ -1,9 +1,9 @@
-import { useCart } from "../hooks/useCart";
+
+import type { CartItem } from "./CartItem";
 import "./sidebar.css"
 
-function Sidebar() {
-    const { items, total, clearAllItems } = useCart();
-
+function Sidebar({ items, total, clearAllItems }: {items: CartItem[], total: number, clearAllItems: () => void}) {
+    
     return (
         <section className="sidebar-section">
             <h3> Cart </h3>
@@ -14,10 +14,11 @@ function Sidebar() {
                         <tr key={index}>
                             <td className="item-name"> {index + 1}. {item.name}</td>
                             <td className="item-price"> ${item.price}</td>
+                            <td className="item-quantity"> Quantity: {item.quantity} </td>
                         </tr>
                     )}
                     <tr>
-                        <td> Total: ${total}</td>
+                        <td> Total: ${total.toFixed(2)}</td>
                     </tr>
                 </tbody>
             </table>

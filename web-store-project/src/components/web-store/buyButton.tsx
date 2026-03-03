@@ -1,11 +1,10 @@
 import type { Part } from "./repositories/PartTypes";
-import { useCart } from "./hooks/useCart";
-
-function BuyButton({ part }: { part: Part | null }) {
-    const { addItemsToCart } = useCart();
+import { fetchAllItems } from "./repositories/sidebarRepository";
+function BuyButton({ part, addToCart }: { part: Part | null, addToCart: (item: Part) => void }) {
+    const cartSize = fetchAllItems().length;
     function BuyItem() {
-        if (part) {
-            addItemsToCart(part);
+        if (part && cartSize <= 6) {
+            addToCart(part);
         }
     }
 

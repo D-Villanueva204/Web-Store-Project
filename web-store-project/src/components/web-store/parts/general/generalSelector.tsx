@@ -1,7 +1,8 @@
 import BuyButton from "../../buyButton";
+import type { Part } from "../../repositories/PartTypes";
 import { getByName } from "../../services/productService";
 
-function GeneralSelector({ name, partType }: { name: string, partType: string }) {
+function GeneralSelector({ name, partType, addItemToCart }: { name: string, partType: string, addItemToCart: (item: Part) => void }) {
     let partName = "Not Found";
     let price = 0;
     let stock = 0;
@@ -23,7 +24,7 @@ function GeneralSelector({ name, partType }: { name: string, partType: string })
                 Price: ${price}
             </p>
             <p>Stock: {stock} </p>
-            <BuyButton part={retrievedPart} />
+            <BuyButton part={retrievedPart} addToCart={addItemToCart}/>
         </section>
     )
 }

@@ -13,8 +13,10 @@ export function useCart() {
     }
 
     const addItemsToCart = (part: Part) => {
-        addItem(part);
-        setTotal(total + Number(part.price));
+        const result = addItem(part);
+        if (result){
+            setTotal(total + Number(part.price));
+        }
         refreshCart();
     };
 
@@ -27,6 +29,7 @@ export function useCart() {
     const clearAllItems = () => {
         clearCart();
         setTotal(0.00);
+        refreshCart();
     };
 
     return { items, total, addItemsToCart, removeItemFromCart, clearAllItems };
