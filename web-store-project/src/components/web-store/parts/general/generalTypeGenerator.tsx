@@ -16,12 +16,13 @@ function GeneralTypeGenerator({ partType, addFavourite, favourite, addItemToCart
     
     /**
      * Originally, partType would have a link directly to the data, we can just get the arrays ourselves
-     * with a getByType service.
+     * with a getByType service. Because getByType returns null if the type is incorrect, we can simply
+     * check for it.
      * 
      */
     const partData = getByType(partType);
     let retrievedPart = null;
-    if (partType && partData) {
+    if (partData) {
         let partName = "Not Found";
         let price = 0.00;
         let stock = 0;
