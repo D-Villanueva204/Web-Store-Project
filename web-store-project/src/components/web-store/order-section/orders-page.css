@@ -1,0 +1,153 @@
+/* Orders page CSS Start */
+.orders-page {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+
+  background-color: #212227;
+  color: #aab9cf;
+
+  border: 2px solid #31555b;
+  border-radius: 8px;
+
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.orders-page header {
+  margin-bottom: 1.5rem;
+}
+
+.orders-page header h1 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+
+  border-bottom: 2px solid #31555b;
+  padding-bottom: 0.5rem;
+
+  color: #aab9cf;
+}
+
+.orders-page header p {
+  margin: 0.5rem 0 0 0;
+  font-size: 1rem;
+  color: #31555b;
+}
+
+/* Loading state */
+.loading {
+  text-align: center;
+  padding: 2rem;
+
+  font-size: 1rem;
+  color: #31555b;
+
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Orders table */
+.orders-table {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+.orders-table table {
+  width: 100%;
+  border-collapse: collapse;
+
+  background-color: #212227;
+
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.orders-table th,
+.orders-table td {
+  padding: 0.75rem;
+  text-align: left;
+
+  border-bottom: 1px solid #31555b;
+
+  font-size: 1rem;
+}
+
+.orders-table th {
+  background-color: #31555b;
+  font-weight: 600;
+
+  color: #c4cdcf;
+}
+
+.orders-table tbody tr:hover {
+  background-color: #31555b;
+}
+
+/* Order items list */
+.order-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.order-items li {
+  font-size: 1rem;
+  padding: 0.25rem 0;
+
+  color: #aab9cf;
+
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Empty message */
+.empty-message {
+  text-align: center;
+  padding: 2rem 1rem;
+
+  color: #31555b;
+  font-size: 1rem;
+
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Message styles (for cart page) */
+.message {
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 1rem;
+
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.message.success {
+  background-color: #31555b;
+  color: #c4cdcf;
+
+  border: 2px solid #aab9cf;
+}
+
+.message.error {
+  background-color: #31555b;
+  color: #c4cdcf;
+
+  border: 2px solid #aab9cf;
+}
+
+.place-order-btn {
+  background-color: #31555b;
+  color: #c4cdcf;
+
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+
+  font-family: "Segoe UI", Arial, sans-serif;
+
+  transition: background-color 0.2s;
+}
+

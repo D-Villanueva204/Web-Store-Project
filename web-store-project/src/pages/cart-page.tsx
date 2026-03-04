@@ -1,14 +1,49 @@
+import { useState } from "react"
 import "../components/web-store/cart-section/cart-section.css"
-import type { Part } from "../components/web-store/repositories/PartTypes"
+import { useOrders } from "../hooks/useOrders"
+import type { CartItem } from "../components/web-store/sidebar/CartItem"
+
+/**
+ * CartPage Component
+ * 
+ * - Hook: useOrders() - manages order placement and history
+ * - Service: orderService.validateOrder() - validates cart before checkout
+ * - Repository: orderRepository.createOrder() - persists order data
+ * 
+ */
 
 interface CartPageProps {
-  items: Part[]
+  items: CartItem[]
   total: number
-  removeItemFromCart: (index: number) => void
+  removeItemFromCart: (cartItem: CartItem) => void //added Parameter
   clearCart: () => void
 }
 
 function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps) {
+  const { placeOrder } = useOrders()
+  const [message, setMessage] = useState<string>("")
+  
+  const handlePlaceOrder = () => {
+    const partsForOrder = items.map(cartItem => ({
+      id: cartItem.id,
+      name: cartItem.name,
+      price: cartItem.price,
+      partType: "", // You might need to store this in CartItem if needed
+      stock: cartItem.quantity // Using "quantity" as stock
+    }))
+    
+    const result = placeOrder(partsForOrder, total)
+    
+    setMessage(result.message)
+    
+    if (result.success) {
+      // Clear cart after successful order
+      clearCart()
+      
+      // Clear message after 3 seconds
+      setTimeout(() => setMessage(""), 3000)
+    }
+  }
   
   return (
     <div className="cart-page">
@@ -17,6 +52,11 @@ function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps
         <p>Total Items: {items.length}</p>
       </header>
       
+      {message && (
+        <div className={`message ${message.includes("success") ? "success" : "error"}`}>
+          {message}
+        </div>
+      )}
       
       <div className="cart-table">
         <table>
@@ -31,7 +71,7 @@ function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps
           <tbody>
             {items.length === 0 ? (
               <tr>
-                <td className="empty-message">
+                <td colSpan={4} className="empty-message">
                   Your cart is empty. Start shopping!
                 </td>
               </tr>
@@ -44,10 +84,10 @@ function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps
                   <td>
                     <button 
                       className="remove-btn" 
-                      onClick={() => removeItemFromCart(index)}
+                      onClick={() => removeItemFromCart(item)}    //Fixed: Pass CartItem
                       aria-label={`Remove ${item.name}`}
                     >
-                      X
+                      ✕
                     </button>
                   </td>
                 </tr>
@@ -56,20 +96,20 @@ function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps
           </tbody>
           <tfoot>
             <tr className="total-row">
-              <td colSpan={4}><strong>Total:</strong></td>
+              <td colSpan={3}><strong>Total:</strong></td>
               <td><strong>${total.toFixed(2)}</strong></td>
             </tr>
           </tfoot>
         </table>
-      <div className="cart-actions">
-        <button 
-          onClick={clearCart}
-          className="clear-cart-btn"
-          disabled={items.length === 0}
-        >
-          Buy
-        </button>
-      </div>
+        <div className="cart-actions">
+          <button 
+            onClick={handlePlaceOrder}
+            className="place-order-btn"
+            disabled={items.length === 0}
+          >
+            Place Order
+          </button>
+        </div>
       </div>
     </div>
   )
