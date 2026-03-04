@@ -1,5 +1,5 @@
 import { useState } from "react";
-import GeneralTypeGenerator from "../components/web-store/parts/general/generalTypeGenerator";
+import GeneralTypeGenerator from "../components/web-store/parts/general/partRandomizer";
 import type { Part } from "../components/web-store/repositories/PartTypes";
 import PartTypes from "../components/web-store/repositories/PartTypes";
 
