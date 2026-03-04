@@ -1,21 +1,23 @@
 import * as FavouritesRepo from "../repositories/favouritesRepository";
+import { getByID } from "./productService";
 
-export function toggleFavourite(id: number) {
-    const foundFavourite = FavouritesRepo.getFavouriteById(id);
-
-    if (foundFavourite.favourited) {
-        FavouritesRepo.deleteFavourites(id);
-    } else {
-        FavouritesRepo.createFavourites(
-            foundFavourite.id, 
-            foundFavourite.name, 
-            foundFavourite.price, 
-            foundFavourite.stock, 
-            true
-        );
+export function toggleFavourite(id: string) {
+    try {
+        const foundFavourite = FavouritesRepo.getFavouriteById(id);
+        if (foundFavourite.favourited) {
+            FavouritesRepo.toggleFavourited(id);
+        } else {
+            FavouritesRepo.toggleFavourited(id);
+        }
+    } catch {
+        const part = getByID(id);
+        if (part) {
+            FavouritesRepo.toggleFavourited(id);
+        }
     }
 }
 
 export function getFavourites() {
     return FavouritesRepo.getFavourites();
 }
+

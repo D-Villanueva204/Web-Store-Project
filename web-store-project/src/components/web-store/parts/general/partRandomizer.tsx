@@ -4,6 +4,7 @@ import { getByType } from "../../services/productService";
 import AddFavouriteButton from "../../favourite-button/favourite-button";
 import type { Part } from "../../repositories/PartTypes";
 import "./generalTypeGenerator.css"
+import { getFavouriteById } from "../../repositories/favouritesRepository";
 
 /**
  * Dominique Villanueva:
@@ -12,7 +13,7 @@ import "./generalTypeGenerator.css"
  * 
  */
 
-function GeneralTypeGenerator({ partType, addFavourite, favourite, addItemToCart }: { partType: typeof PartTypes[keyof typeof PartTypes], addFavourite: (item: Part) => void, favourite: boolean, addItemToCart: (item: Part) => void }) {
+function GeneralTypeGenerator({ partType, addFavourite, favourite, addItemToCart }: { partType: typeof PartTypes[keyof typeof PartTypes], addFavourite: (id: string) => void, favourite: boolean, addItemToCart: (item: Part) => void }) {
     
     /**
      * Originally, partType would have a link directly to the data, we can just get the arrays ourselves
@@ -36,6 +37,14 @@ function GeneralTypeGenerator({ partType, addFavourite, favourite, addItemToCart
         }
 
         if (favourite) {
+            let retrievedFavourite = false
+            try {
+                getFavouriteById(retrievedPart.id);
+                retrievedFavourite = true;
+            } catch (error) {
+                retrievedFavourite = false;
+            }
+
             return (
                 <section className="random-part-section">
                     <h3>
@@ -46,7 +55,7 @@ function GeneralTypeGenerator({ partType, addFavourite, favourite, addItemToCart
                     </p>
                     <p>In stock: {stock}</p>
                     <BuyButton part={retrievedPart} addToCart={addItemToCart} />
-                    <AddFavouriteButton addFavourite={addFavourite} price={price} productName={partName} />
+                    <AddFavouriteButton id={retrievedPart.id} handleToggleFavourite={addFavourite} isFavourited={f} />
                 </section>
             )
         }
