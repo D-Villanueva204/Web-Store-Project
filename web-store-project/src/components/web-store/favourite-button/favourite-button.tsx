@@ -1,19 +1,19 @@
-import type {Part} from "../repositories/PartTypes";
+import { useFavourites } from "../hooks/useFavourites";
 
-function AddFavouriteButton({ addFavourite, productName, price }: { addFavourite: (item: Part) => void, productName: string, price: number }) {
-    const handleAddFavourite = () => {
-        const newFavourite: Part = {
-            name: productName,
-            price: price,
-            stock: 0
-        };
-        addFavourite(newFavourite);
-    };
+function AddFavouriteButton({ id }: { id: number }) {
+    const { handleToggleFavourite, error, favourites } = useFavourites();
+    const isFavourited = favourites.find(fav => fav.id === id)?.favourited;
 
     return (
-        <div>
-            <button type="button" onClick={handleAddFavourite}>Add to Favourites</button>
-        </div>
+        <>
+        {!isFavourited && 
+        <button type="button" onClick={() => handleToggleFavourite(id)}>Add to Favourites</button>}
+
+        {isFavourited &&
+            <button type="button" onClick={() => handleToggleFavourite(id)}>Remove from Favourites</button>}
+        {error &&    
+            <p className="error">{error}</p>}
+        </>
     )
 }
 

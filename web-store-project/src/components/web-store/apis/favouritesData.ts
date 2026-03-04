@@ -1,0 +1,79 @@
+export const pcParts = [
+  {
+    id: 1,
+    name: "NVIDIA RTX 4090",
+    price: 1599.99,
+    stock: 12,
+    favourited: true
+  },
+  {
+    id: 2,
+    name: "AMD Ryzen 9 7950X",
+    price: 699.99,
+    stock: 0,
+    favourited: false
+  },
+  {
+    id: 3,
+    name: "Samsung 990 Pro 2TB SSD",
+    price: 179.99,
+    stock: 45,
+    favourited: true
+  },
+  {
+    id: 4,
+    name: "Corsair Vengeance 32GB DDR5",
+    price: 109.99,
+    stock: 8,
+    favourited: false
+  },
+  {
+    id: 5,
+    name: "ASUS ROG Strix Z790-E",
+    price: 489.99,
+    stock: 3,
+    favourited: true
+  },
+  {
+    id: 6,
+    name: "Noctua NH-D15 CPU Cooler",
+    price: 99.99,
+    stock: 0,
+    favourited: false
+  },
+  {
+    id: 7,
+    name: "Seasonic Focus GX-850W PSU",
+    price: 139.99,
+    stock: 21,
+    favourited: false
+  },
+  {
+    id: 8,
+    name: "Fractal Design Torrent Case",
+    price: 189.99,
+    stock: 7,
+    favourited: true
+  },
+  {
+    id: 9,
+    name: "WD Black SN850X 1TB NVMe",
+    price: 99.99,
+    stock: 33,
+    favourited: false
+  },
+  {
+    id: 10,
+    name: "AMD Radeon RX 7900 XTX",
+    price: 899.99,
+    stock: 5,
+    favourited: true
+  },
+  {
+    id: 11,
+    name: "AMD Radeon RX 7900 XTX",
+    price: 899.99,
+    stock: 5,
+    favourited: true
+  },
+];
