@@ -1,22 +1,19 @@
-import type { Part } from "../components/web-store/repositories/PartTypes";
+import { useFavourites } from "../components/web-store/hooks/useFavourites";
+import AddFavouriteButton from "../components/web-store/favourite-button/favourite-button";
 
-interface FavouritesPageProps {
-    favourites: Part[];
-    removeFavourite: (index: number) => void;
-}
-
-function FavouritesPage({ favourites, removeFavourite }: FavouritesPageProps) {
+function FavouritesPage() {
+    const { favourites, error } = useFavourites();
     return (
         <div>
             <h2>My Favourites</h2>
-
+            {error && <p className="error">{error}</p>}
 
             {favourites.length === 0 && <p>No favourite items added yet.</p>}
             <ul>
-                {favourites.map((item, index) => (
-                    <li key={index}>
+                {favourites.map((item) => (
+                    <li key={item.id}>
                         {item.name} - ${item.price}
-                        <button onClick={() => removeFavourite(index)}>Remove</button>
+                        <AddFavouriteButton id={item.id} />
                     </li>
                 ))}
             </ul>
