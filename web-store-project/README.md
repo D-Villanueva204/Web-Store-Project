@@ -25,3 +25,5 @@ Parts: Dominique
 
 ## Sprint 3:
 Sidebar Component, Product Repository, Sidebar Repository, Sidebar Service, useCart, GeneralSelector refactor, GeneralGenerator refactor: Dominique
+Product Service: Czedrick
+useFavourites hook, favouritesRepo, favouritesService, refactor favouritesButton, refactor favouritesPage: Czedrick
