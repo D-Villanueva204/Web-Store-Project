@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import type { Order } from "../types/order"
-import * as orderRepository from "../repositories/orderRepository"
+import * as orderRepository from "../components/web-store/repositories/orderRepository"
 import * as orderService from "../services/orderService"
-import type { Part } from "../components/web-store/parts/general/PartTypes"
+import type { Part } from "../components/web-store/repositories/PartTypes"
 
 /**
  * useOrders Hook

@@ -1,5 +1,5 @@
-import type { Order } from "../types/order"
-import { testOrders } from "../data/testOrders"
+import type { Order } from "../../../types/order"
+import { testOrders } from "../../../data/testOrders"
 
 /**
  * Order Repository

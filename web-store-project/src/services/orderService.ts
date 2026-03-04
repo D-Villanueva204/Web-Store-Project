@@ -1,4 +1,4 @@
-import type { Part } from "../components/web-store/parts/general/PartTypes"
+import type { Part } from "../components/web-store/repositories/PartTypes"
 import type { Order } from "../types/order"
 
 /**

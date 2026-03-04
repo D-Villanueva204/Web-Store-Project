@@ -15,7 +15,7 @@ import type { CartItem } from "../components/web-store/sidebar/CartItem"
 interface CartPageProps {
   items: CartItem[]
   total: number
-  removeItemFromCart: () => void
+  removeItemFromCart: (cartItem: CartItem) => void //added Parameter
   clearCart: () => void
 }
 
@@ -24,7 +24,15 @@ function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps
   const [message, setMessage] = useState<string>("")
   
   const handlePlaceOrder = () => {
-    const result = placeOrder(items, total)
+    const partsForOrder = items.map(cartItem => ({
+      id: cartItem.id,
+      name: cartItem.name,
+      price: cartItem.price,
+      partType: "", // You might need to store this in CartItem if needed
+      stock: cartItem.quantity // Using "quantity" as stock
+    }))
+    
+    const result = placeOrder(partsForOrder, total)
     
     setMessage(result.message)
     
@@ -76,7 +84,7 @@ function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps
                   <td>
                     <button 
                       className="remove-btn" 
-                      onClick={() => removeItemFromCart(index)}
+                      onClick={() => removeItemFromCart(item)}    //Fixed: Pass CartItem
                       aria-label={`Remove ${item.name}`}
                     >
                       ✕
