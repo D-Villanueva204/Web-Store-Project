@@ -1,19 +1,16 @@
-import type {Part} from "../parts/general/PartTypes";
-
-function AddFavouriteButton({ addFavourite, productName, price }: { addFavourite: (item: Part) => void, productName: string }) {
-    const handleAddFavourite = () => {
-        const newFavourite: Part = {
-            name: productName,
-            price: price,
-            stock: 0
-        };
-        addFavourite(newFavourite);
-    };
-
+function AddFavouriteButton({ id, handleToggleFavourite, isFavourited }: { 
+    id: string,
+    handleToggleFavourite: (id: string) => void,
+    isFavourited: boolean
+}) {
     return (
-        <div>
-            <button type="button" onClick={handleAddFavourite}>Add to Favourites</button>
-        </div>
+        <>
+        {!isFavourited && 
+            <button type="button" onClick={() => handleToggleFavourite(id)}>Add to Favourites</button>}
+
+        {isFavourited &&
+            <button type="button" onClick={() => handleToggleFavourite(id)}>Remove from Favourites</button>}
+        </>
     )
 }
 
