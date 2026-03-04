@@ -1,12 +1,18 @@
-import GeneralSelector from "../components/web-store/parts/general/generalSelector";
-import PartTypes from "../components/web-store/parts/general/PartTypes";
+import PartSelector from "../components/web-store/parts/general/partSelector";
+import PartType from "../components/web-store/repositories/PartTypes";
 import { useState } from "react";
-import type { Part } from "../components/web-store/parts/general/PartTypes";
+import type { Part } from "../components/web-store/repositories/PartTypes";
 
+/**
+ * Dominique Villanueva
+ * 
+ * This component simply uses the new Part type. No other adjustments.
+ * 
+ */
 function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
-    const [selectedPartType, setSelectedPartType] = useState<keyof typeof PartTypes>("CPU");
+    const [selectedPartType, setSelectedPartType] = useState<keyof typeof PartType>("CPU");
     const [searchTerm, setSearchTerm] = useState("AMD Ryzen 7 7800X3D");
-    const partTypeOptions: (keyof typeof PartTypes)[] = ["CASE", "COOLER", "CPU", "GPU", "MOBO", "PSU", "RAM", "STORAGE", "OS"];
+    const partTypeOptions: (keyof typeof PartType)[] = ["CASE", "COOLER", "CPU", "GPU", "MOBO", "PSU", "RAM", "STORAGE", "OS"];
     const [errorMessage, setErrorMessage] = useState("");
 
     function addToCart(item: Part) {
@@ -27,7 +33,7 @@ function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
         <div>
             <div>
                 <h2> Latest Item On Sale: </h2>
-                <GeneralSelector name={"ARCTIC Freezer A35 RGB"} partType={PartTypes.COOLER} addItemToCart={addItemToCart} />
+                <PartSelector name={"ARCTIC Liquid Freezer III Pro 360"} partType={PartType.COOLER} addItemToCart={addItemToCart} />
             </div>
             <div>
                 <h2>
@@ -36,7 +42,7 @@ function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
                 <form onSubmit={searchForPart}>
                     <select
                         value={selectedPartType}
-                        onChange={(e) => setSelectedPartType(e.target.value as keyof typeof PartTypes)}
+                        onChange={(e) => setSelectedPartType(e.target.value as keyof typeof PartType)}
                     >
                         {partTypeOptions.map(type => (
                             <option key={type} value={type}>
@@ -52,9 +58,9 @@ function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </form>
-                <GeneralSelector
+                <PartSelector
                     name={searchTerm}
-                    partType={PartTypes[selectedPartType]}
+                    partType={PartType[selectedPartType]}
                     addItemToCart={addToCart}
                 />
                 <h3>

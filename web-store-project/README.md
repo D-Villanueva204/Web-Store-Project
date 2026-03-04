@@ -13,11 +13,19 @@ Specifications of the product: Czederick
 Vite Setup/Management: Dominique
 
 ## Sprint 2
-Feature Page: Dominique, Czedrick, Joshua
+Feature Page: Dominique (Main Page), Czedrick (Favourites and Product), Joshua (Cart)
 Shared state across pages: Dominique
 Multi-Page Navigation: Czedrick
-Elemental Addition/Removal: Dominique, Czedrick
+Elemental Addition/Removal: Dominique, Czedrick, Joshus
 Header Items are connected with Routes: Czedrick
-Form Component: Dominique, Czedrick
+Form Component: Dominique, Czedrick, Joshua
 Browse products by label such as GPU, CPU, RAM, etc: Dominique
+Sidebar: Dominique
 Parts: Dominique
+
+
+## Sprint 3:
+Sidebar Component, Product Repository, Sidebar Repository, Sidebar Service, useCart, GeneralSelector refactor, GeneralGenerator refactor: Dominique
+Product Service: Czedrick
+New Component (Order) with new architecture, Order Repository/Service/Hook with Definitions, Order Test Data, Order Page: Joshua
+useFavourites hook, favouritesRepo, favouritesService, refactor favouritesButton, refactor favouritesPage: Czedrick
