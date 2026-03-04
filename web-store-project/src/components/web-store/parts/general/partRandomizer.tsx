@@ -46,7 +46,7 @@ function GeneralTypeGenerator({ partType, addFavourite, favourite, addItemToCart
                     </p>
                     <p>In stock: {stock}</p>
                     <BuyButton part={retrievedPart} addToCart={addItemToCart} />
-                    <AddFavouriteButton addFavourite={addFavourite} price={price} productName={partName} />
+                    <AddFavouriteButton id={retrievedPart.id} />
                 </section>
             )
         }

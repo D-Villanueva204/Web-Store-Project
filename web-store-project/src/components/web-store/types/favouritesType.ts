@@ -1,5 +1,5 @@
 export interface Favourites {
-    id: number;
+    id: string;
     name: string;
     price: number;
     stock: number;

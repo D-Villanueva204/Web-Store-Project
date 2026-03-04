@@ -18,7 +18,7 @@ export function useFavourites() {
         fetchFavourites();
     }, []);
 
-    async function handleToggleFavourite(id: number) {
+    async function handleToggleFavourite(id: string) {
         try {
             FavouriteService.toggleFavourite(id);
             await fetchFavourites();
