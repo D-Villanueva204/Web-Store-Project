@@ -1,7 +1,7 @@
 import { getByID } from "../services/productService";
 import type { Favourites } from "../types/favouritesType";
 
-let faovouritesData: Favourites[] = [
+let favouritesData: Favourites[] = [
       { id: "1000", name: "NVIDIA RTX 4090", price: 1599.99, stock: 12, favourited: true },
   { id: "1002", name: "AMD Ryzen 9 7950X", price: 699.99, stock: 0, favourited: false },
   { id: "1003", name: "Samsung 990 Pro 2TB SSD", price: 179.99, stock: 45, favourited: true },
@@ -16,10 +16,10 @@ let faovouritesData: Favourites[] = [
 
 
 export function getFavourites(): Favourites[] {
-    return faovouritesData;
+    return favouritesData;
 }
 export function getFavouriteById(id: string): Favourites {
-    const foundFavourite = faovouritesData.find(part => part.id === id);
+    const foundFavourite = favouritesData.find(part => part.id === id);
 
     if (!foundFavourite) {
         throw new Error(`Favourite with id ${id} not found.`);
@@ -28,9 +28,9 @@ export function getFavouriteById(id: string): Favourites {
 }
 
 export function toggleFavourited(id: string) {
-    const foundFavourite = faovouritesData.find(part => part.id === id);
+    const foundFavourite = favouritesData.find(part => part.id === id);
     if (foundFavourite) {
-        faovouritesData = faovouritesData.filter(item => item.id !== foundFavourite.id);
+        favouritesData = favouritesData.filter(item => item.id !== foundFavourite.id);
     } else {
         const newFavourite = getByID(id);
         const favourite: Favourites = {
@@ -40,6 +40,6 @@ export function toggleFavourited(id: string) {
             stock: newFavourite?.stock || 0,
             favourited: true
         }
-        faovouritesData.push(favourite)
+        favouritesData.push(favourite)
     }
 }
