@@ -1,5 +1,3 @@
-// src/pages/cart-page.tsx
-
 import { useState } from "react"
 import "../components/web-store/cart-section/cart-section.css"
 import { useOrders } from "../hooks/useOrders"
