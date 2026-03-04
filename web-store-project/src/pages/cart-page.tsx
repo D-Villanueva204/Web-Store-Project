@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import "../components/web-store/cart-section/cart-section.css"
-import type { Part } from "../components/web-store/parts/general/PartTypes"
 import { useOrders } from "../hooks/useOrders"
+import type { CartItem } from "../components/web-store/sidebar/CartItem"
 
 /**
  * CartPage Component
@@ -13,12 +13,11 @@ import { useOrders } from "../hooks/useOrders"
  * - Repository: orderRepository.createOrder() - persists order data
  * 
  */
-import type { Part } from "../components/web-store/repositories/PartTypes"
 
 interface CartPageProps {
-  items: Part[]
+  items: CartItem[]
   total: number
-  removeItemFromCart: (index: number) => void
+  removeItemFromCart: () => void
   clearCart: () => void
 }
 
@@ -27,7 +26,6 @@ function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps
   const [message, setMessage] = useState<string>("")
   
   const handlePlaceOrder = () => {
-    console.log("Cart items:", items)
     const result = placeOrder(items, total)
     
     setMessage(result.message)

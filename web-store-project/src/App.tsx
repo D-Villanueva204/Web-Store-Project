@@ -19,7 +19,7 @@ function App() {
    * hook for retrieving state of the cart and modifying its state.
    * 
    */
-  const {addItemsToCart, clearAllItems, items, total} = useCart();
+  const {addItemsToCart, clearAllItems, items, total, removeItemFromCart} = useCart();
   const {handleToggleFavourite, } = useFavourites();
 
 
@@ -34,9 +34,9 @@ function App() {
           <Route path='/' element={<Layout />}>
             <Route index element={<MainPage addItemToCart={addItemsToCart}/>} />
           </Route>
-          {/* <Route path='/cart' element={<Layout />}>
-            <Route index element={<CartPage items={items} total={total} removeItemFromCart={removeItemFromCart} clearCart={clearCart} />} />
-          </Route> */}
+          <Route path='/cart' element={<Layout />}>
+            <Route index element={<CartPage items={items} total={total} removeItemFromCart={removeItemFromCart} clearCart={clearAllItems} />} />
+          </Route>
           <Route path='/product' element={<Layout />}>
             <Route index element={<ProductPage addItemToCart={addItemsToCart} addFavourite={createFavourite} />} />
           </Route>
