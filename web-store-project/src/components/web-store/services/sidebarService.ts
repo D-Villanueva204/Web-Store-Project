@@ -1,11 +1,10 @@
-import { addCartItem, removeCartItem, fetchAllItems, updateCartItem } from "../repositories/sidebarRepository";
+import { addCartItem, removeCartItem, fetchAllItems, updateCartItem, clearCart } from "../repositories/sidebarRepository";
 import type { CartItem } from "../sidebar/CartItem";
-import { type Part, PartType } from "../repositories/PartTypes";
-import { fetchAllParts } from "../repositories/productRepository";
+import { type Part  } from "../repositories/PartTypes";
+import { getByType, validateStock } from "./productService";
 
 export function addItem(part: Part): CartItem | null {
-
-    if (fetchAllItems().length >= 6) {
+    if (fetchAllItems().length >= 10) {
         return null;
     }
 
@@ -15,8 +14,13 @@ export function addItem(part: Part): CartItem | null {
                 if (part.stock == 0) {
                     return null;
                 }
-                updateCartItem(cartItem, (cartItem.quantity + 1));
-                return cartItem;
+                if (validateStock(part, cartItem.quantity + 1)) {
+                    updateCartItem(cartItem, (cartItem.quantity + 1));
+                    return cartItem;
+                }
+                else {
+                    return null;
+                }
             }
         }
     }
@@ -28,6 +32,14 @@ export function addItem(part: Part): CartItem | null {
     }
     addCartItem(newCartItem);
     return newCartItem;
+}
+
+export function fetchItems(): CartItem[] {
+    return fetchAllItems();
+}
+
+export function clearItems() {
+    return clearCart();
 }
 
 export function removeItem(cartItem: CartItem): boolean {
@@ -43,13 +55,21 @@ export function removeItem(cartItem: CartItem): boolean {
     return false;
 }
 
+export function getTotal(): number {
+    let total = 0;
+    for (const item of fetchAllItems()) {
+        total = total + item.price;
+    }
+
+    return total;
+};
+
 function checkIfPartExists(itemId: string): boolean {
     const partType: string = itemId.split("-")[0];
-    const partData = getPartType(partType);
-
+    const partData = getByType(partType);
     if (partData) {
         for (const part of partData) {
-            if (part.id == itemId) {
+            if (part.id === itemId) {
                 return true;
             }
         }
@@ -57,30 +77,4 @@ function checkIfPartExists(itemId: string): boolean {
 
     return false;
 
-}
-
-function getPartType(id: string): Part[] | null {
-    const allItems = fetchAllParts();
-    switch (id) {
-        case PartType.CASE:
-            return allItems.caseData;
-        case PartType.COOLER:
-            return allItems.coolerData;
-        case PartType.CPU:
-            return allItems.cpuData;
-        case PartType.GPU:
-            return allItems.gpuData;
-        case PartType.MOBO:
-            return allItems.moboData;
-        case PartType.OS:
-            return allItems.osData;
-        case PartType.PSU:
-            return allItems.psuData;
-        case PartType.RAM:
-            return allItems.ramData;
-        case PartType.STORAGE:
-            return allItems.storageData;
-        default:
-            return null;
-    }
 }

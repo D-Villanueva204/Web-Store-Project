@@ -7,9 +7,19 @@ import { useState } from 'react';
 import Sidebar from "./components/web-store/sidebar/sidebar";
 import type { Part } from "./components/web-store/repositories/PartTypes";
 import FavouritesPage from './pages/favourites-page';
+import { useCart } from './components/web-store/hooks/useCart';
 
 function App() {
 
+  /**
+   * Dominique Villanueva
+   * 
+   * Originally, state would've handled directly in App. We now use the useCart()
+   * hook for retrieving state of the cart and modifying its state.
+   * 
+   */
+  const {addItemsToCart, clearAllItems, items, total} = useCart();
+  
   const [favourites, setFavourites] = useState<Part[]>([]);
 
   const addFavourite = (item: Part) => {
@@ -25,22 +35,22 @@ function App() {
       <div className="main-content">
         <Routes>
           <Route path='/' element={<Layout />}>
-            <Route index element={<MainPage/>} />
+            <Route index element={<MainPage addItemToCart={addItemsToCart}/>} />
           </Route>
-          <Route path='/cart' element={<Layout />}>
+          {/* <Route path='/cart' element={<Layout />}>
             <Route index element={<CartPage items={items} total={total} removeItemFromCart={removeItemFromCart} clearCart={clearCart} />} />
-          </Route>
+          </Route> */}
           <Route path='/product' element={<Layout />}>
-            <Route index element={<ProductPage addItemToCart={addItemToCart} addFavourite={addFavourite} />} />
+            <Route index element={<ProductPage addItemToCart={addItemsToCart} addFavourite={addFavourite} />} />
           </Route>
           <Route path='/favourites' element={<Layout />}>
             <Route index element={<FavouritesPage favourites={favourites} removeFavourite={removeFavourite} />} />
           </Route>
         </Routes>
       </div>
-      <Sidebar/>
+      <Sidebar items={items} total={total} clearAllItems={clearAllItems}/>
 
     </>
   )
 }
-export default App
+export default App;
