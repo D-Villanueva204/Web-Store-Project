@@ -5,6 +5,7 @@ import type { Part } from "../repositories/PartTypes";
 
 /**
  * Dominique Villanueva:
+ * 
  * useCart is the hook used to tie together any cart state, and handles any 
  * adding to cart, removing from cart, and keeping track of total.
  * 
@@ -20,7 +21,7 @@ export function useCart() {
 
     const addItemsToCart = (part: Part) => {
         const result = addItem(part);
-        if (result){
+        if (result) {
             setTotal(total + Number(part.price));
         }
         refreshCart();

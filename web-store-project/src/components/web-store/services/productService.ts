@@ -1,10 +1,6 @@
-import { fetchAllParts, addNewCPU, addNewCase, addNewCooler, addNewGPU, addNewMOBO, addNewOS, addNewPSU, addNewRAM, addNewStorage, getTypeByID, updateStock } from "../repositories/productRepository";
+import { fetchAllParts, addNewCPU, addNewCase, addNewCooler, addNewGPU, addNewMOBO, addNewOS, addNewPSU, addNewRAM, addNewStorage, getTypeByID } from "../repositories/productRepository";
 import type { Part, Case, Storage, Cooler, GPU, MOBO, OS, PSU, RAM, CPU } from "../repositories/PartTypes";
 import { PartType } from "../repositories/PartTypes";
-
-// getbytype
-// getbyId
-// AddPart generates new ID
 
 export function validateStock(part: Part, quantity: number): boolean {
     const getAllParts = fetchAllParts();
