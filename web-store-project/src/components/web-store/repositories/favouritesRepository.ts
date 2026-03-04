@@ -1,3 +1,4 @@
+import { getByID } from "../services/productService";
 import type { Favourites } from "../types/favouritesType";
 
 let faovouritesData: Favourites[] = [
@@ -15,9 +16,8 @@ let faovouritesData: Favourites[] = [
 
 
 export function getFavourites(): Favourites[] {
-    return faovouritesData.filter(part => part.favourited === true);
+    return faovouritesData;
 }
-
 export function getFavouriteById(id: string): Favourites {
     const foundFavourite = faovouritesData.find(part => part.id === id);
 
@@ -27,23 +27,19 @@ export function getFavouriteById(id: string): Favourites {
     return foundFavourite;
 }
 
-export function createFavourites(id: string, name: string, price: number, stock: number, favourited: boolean) {
+export function toggleFavourited(id: string) {
     const foundFavourite = faovouritesData.find(part => part.id === id);
-
-    if (!foundFavourite) {
-        faovouritesData.push({ id, name, price, stock, favourited });
+    if (foundFavourite) {
+        faovouritesData = faovouritesData.filter(item => item.id !== foundFavourite.id);
     } else {
-        throw new Error(`Favourite with id ${id} already exists.`);
+        const newFavourite = getByID(id);
+        const favourite: Favourites = {
+            id: newFavourite?.id || "",
+            name: newFavourite?.name || "",
+            price: newFavourite?.price || 0,
+            stock: newFavourite?.stock || 0,
+            favourited: true
+        }
+        faovouritesData.push(favourite)
     }
-} 
-
-export function deleteFavourites(id: string) {
-    const foundFavourite = faovouritesData.find(part => part.id === id);
-
-    if (!foundFavourite) {
-        throw new Error(`Favourite with id ${id} does not exist.`);
-    } else {
-        foundFavourite.favourited = false;
-    }
-
 }

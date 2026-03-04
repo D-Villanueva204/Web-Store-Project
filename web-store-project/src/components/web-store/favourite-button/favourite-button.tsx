@@ -1,4 +1,3 @@
-
 function AddFavouriteButton({ id, handleToggleFavourite, isFavourited }: { 
     id: string,
     handleToggleFavourite: (id: string) => void,

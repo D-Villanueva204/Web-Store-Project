@@ -3,10 +3,11 @@ import GeneralTypeGenerator from "../components/web-store/parts/general/partRand
 import type { Part } from "../components/web-store/repositories/PartTypes";
 import PartTypes from "../components/web-store/repositories/PartTypes";
 
-function ProductPage({ addItemToCart, addFavourite }: { addItemToCart: (item: Part) => void, addFavourite: (item: Part) => void }) {
+function ProductPage({ addItemToCart, addFavourite }: { addItemToCart: (item: Part) => void, addFavourite: (id: string) => void }) {
     const [selectedCategory, setSelectedCategory] = useState<keyof typeof PartTypes>("CPU");
     const categories = ["CASE", "COOLER", "CPU", "GPU", "MOBO", "PSU", "RAM", "STORAGE", "OS"];
-    // const defaultRating = localStorage.getItem("starRating");
+
+
     return (
         <div>
             <h2>Browse Parts</h2>
