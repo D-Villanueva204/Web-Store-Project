@@ -2,11 +2,13 @@ import { Route, Routes } from 'react-router-dom';
 import MainPage from './pages/main-page';
 import { Layout } from './components/web-store/layout/Layout';
 import CartPage from './pages/cart-page';
+import OrdersPage from './pages/orders-page';
 import ProductPage from './pages/product-page';
 import { useState } from 'react';
 import Sidebar from "./components/web-store/sidebar/sidebar";
 import type { Part } from "./components/web-store/parts/general/PartTypes";
 import FavouritesPage from './pages/favourites-page';
+
 
 function App() {
 
@@ -55,6 +57,9 @@ function App() {
           </Route>
           <Route path='/favourites' element={<Layout />}>
             <Route index element={<FavouritesPage favourites={favourites} removeFavourite={removeFavourite} />} />
+          </Route>
+          <Route path='/orders' element={<Layout />}>
+            <Route index element={<OrdersPage />} />
           </Route>
         </Routes>
       </div>

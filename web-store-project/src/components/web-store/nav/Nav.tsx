@@ -9,6 +9,7 @@ export function Nav() {
                 <NavLink to="/cart">Cart</NavLink>
                 <NavLink to="/product">Product</NavLink>
                 <NavLink to="/favourites">Favourites</NavLink>
+                <NavLink to="/orders">Orders</NavLink>
             </div>
         </nav>
     )
