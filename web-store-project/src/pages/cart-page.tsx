@@ -13,6 +13,7 @@ import { useOrders } from "../hooks/useOrders"
  * - Repository: orderRepository.createOrder() - persists order data
  * 
  */
+import type { Part } from "../components/web-store/repositories/PartTypes"
 
 interface CartPageProps {
   items: Part[]
