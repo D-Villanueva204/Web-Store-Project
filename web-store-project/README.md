@@ -16,9 +16,12 @@ Vite Setup/Management: Dominique
 Feature Page: Dominique (Main Page), Czedrick (Favourites and Product), Joshua (Cart)
 Shared state across pages: Dominique
 Multi-Page Navigation: Czedrick
-Elemental Addition/Removal: Dominique, Czedrick
+Elemental Addition/Removal: Dominique, Czedrick, Joshus
 Header Items are connected with Routes: Czedrick
-Form Component: Dominique, Czedrick
+Form Component: Dominique, Czedrick, Joshua
 Browse products by label such as GPU, CPU, RAM, etc: Dominique
 Sidebar: Dominique
 Parts: Dominique
+
+## Sprint 3
+New Component (Order) with new architecture, Order Repository/Service/Hook with Definitions, Order Test Data, Order Page: Joshua
