@@ -1,11 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
 import MainPage from './pages/main-page';
 import { Layout } from './components/web-store/layout/Layout';
+import CartPage from './pages/cart-page';
+import OrdersPage from './pages/orders-page';
 import ProductPage from './pages/product-page';
 import Sidebar from "./components/web-store/sidebar/sidebar";
 import FavouritesPage from './pages/favourites-page';
 import { useCart } from './components/web-store/hooks/useCart';
 import { useFavourites } from './components/web-store/hooks/useFavourites';
+
 
 function App() {
 
@@ -39,6 +42,9 @@ function App() {
           </Route>
           <Route path='/favourites' element={<Layout />}>
             <Route index element={<FavouritesPage />} />
+          </Route>
+          <Route path='/orders' element={<Layout />}>
+            <Route index element={<OrdersPage />} />
           </Route>
         </Routes>
       </div>
