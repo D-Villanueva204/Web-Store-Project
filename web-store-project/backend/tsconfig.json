@@ -1,7 +1,7 @@
 {
     // Use the root directory for configuration
     // any overriding configs defined here
-    "extends": "../../tsconfig.base.json",
+    "extends": "../tsconfig.base.json",
     "compilerOptions": {
       "target": "ES6",
       "module": "commonjs",
@@ -9,6 +9,8 @@
       "baseUrl": "./",
       "sourceMap": true,
       "lib": ["ESNext"],
+      "moduleResolution": "node",
+      "esModuleInterop": true,
       "paths": {
         "*": ["*"]
       }
