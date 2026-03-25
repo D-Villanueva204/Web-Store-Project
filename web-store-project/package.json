@@ -1,5 +1,5 @@
 {
-  "name": "complexicon",
+  "name": "web-store-project",
   "workspaces": [
     "frontend", "backend", "shared"
   ],
@@ -7,9 +7,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"npm:start:frontend\" \"npm:start:backend\"",
-    "migrate:backend": "npx --workspace=@complexicon/backend prisma migrate dev",
+    "migrate:backend": "npx --workspace=@web-store-project/backend prisma migrate dev",
     "start:frontend": "npm run dev --workspace=@web-store-project/frontend",
-    "start:backend": "npm start --workspace=@complexicon/backend"
+    "start:backend": "npm start --workspace=@web-store-project/backend"
   },
   "keywords": [],
   "author": "",

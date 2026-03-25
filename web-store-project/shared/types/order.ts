@@ -1,4 +1,4 @@
-import type { Part } from "../components/web-store/repositories/PartTypes"
+import type { Part } from "./PartTypes"
 
 export interface Order {
   id: number
