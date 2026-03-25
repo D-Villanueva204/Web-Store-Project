@@ -1,5 +1,5 @@
 {
-  "name": "@complexicon/backend",
+  "name": "@web-store-project/backend",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
