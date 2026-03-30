@@ -1,4 +1,4 @@
-import type { Order } from "../../../../shared/types/order"
+import type { Order } from "../../../shared/types/order"
 import { testOrders } from "../../../data/testOrders"
 
 /**
