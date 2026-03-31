@@ -32,16 +32,15 @@ model Part {
   partType PartType
   stock    Int
 
-
-  case     Case?
-  cooler   Cooler?
-  cpu      CPU?
-  gpu      GPU?
-  mobo     MOBO?
-  os       OS?
-  psu      PSU?
-  ram      RAM?
-  storage  Storage?
+  case    Case?
+  cooler  Cooler?
+  cpu     CPU?
+  gpu     GPU?
+  mobo    MOBO?
+  os      OS?
+  psu     PSU?
+  ram     RAM?
+  storage Storage?
 
   cartItems  CartItem[]
   orderItems OrderItem[]
@@ -65,16 +64,16 @@ model Cart {
 }
 
 model Favourite {
-  id     String  @id @default(uuid())
+  id     String @id @default(uuid())
   partId String
-  part   Part    @relation(fields: [partId], references: [id])
+  part   Part   @relation(fields: [partId], references: [id])
 }
 
 model Order {
-  id        Int         @id @default(autoincrement())
-  total     Float
-  date      DateTime    @default(now())
-  items     OrderItem[]
+  id    Int         @id @default(autoincrement())
+  total Float
+  date  DateTime    @default(now())
+  items OrderItem[]
 }
 
 model OrderItem {
@@ -82,61 +81,61 @@ model OrderItem {
   quantity Int
 
   orderId Int
-  order   Order  @relation(fields: [orderId], references: [id])
+  order   Order @relation(fields: [orderId], references: [id])
 
   partId String
   part   Part   @relation(fields: [partId], references: [id])
 }
 
 model Case {
-  partId          String  @id
-  part            Part    @relation(fields: [partId], references: [id])
+  partId String @id
+  part   Part   @relation(fields: [partId], references: [id])
 
-  type            String
-  color           String
-  psu             String?
-  side_panel      String
-  external_volume Float
+  type             String
+  color            String
+  psu              String?
+  side_panel       String
+  external_volume  Float
   internal_35_bays Int
 }
 
 model Storage {
-  partId       String  @id
-  part         Part    @relation(fields: [partId], references: [id])
+  partId String @id
+  part   Part   @relation(fields: [partId], references: [id])
 
   capacity     Float
   price_per_gb Float?
-  type         String     
+  type         String
   cache        Float?
-  form_factor  String       
+  form_factor  String
   interface    String
 }
 
 model Cooler {
-  partId      String  @id
-  part        Part    @relation(fields: [partId], references: [id])
+  partId String @id
+  part   Part   @relation(fields: [partId], references: [id])
 
-  rpm         String        
-  noise_level String?       
+  rpm         String
+  noise_level String?
   color       String
   size        Float?
 }
 
 model CPU {
-  partId           String  @id
-  part             Part    @relation(fields: [partId], references: [id])
+  partId String @id
+  part   Part   @relation(fields: [partId], references: [id])
 
-  core_count       Int
-  core_clock       Float
-  boost_clock      Float
+  core_count        Int
+  core_clock        Float
+  boost_clock       Float
   microarchitecture String?
-  tdp              Int
-  graphics         String?
+  tdp               Int
+  graphics          String?
 }
 
 model GPU {
-  partId      String  @id
-  part        Part    @relation(fields: [partId], references: [id])
+  partId String @id
+  part   Part   @relation(fields: [partId], references: [id])
 
   chipset     String
   memory      Int
@@ -147,8 +146,8 @@ model GPU {
 }
 
 model MOBO {
-  partId       String  @id
-  part         Part    @relation(fields: [partId], references: [id])
+  partId String @id
+  part   Part   @relation(fields: [partId], references: [id])
 
   socket       String
   form_factor  String
@@ -158,30 +157,30 @@ model MOBO {
 }
 
 model OS {
-  partId     String  @id
-  part       Part    @relation(fields: [partId], references: [id])
+  partId String @id
+  part   Part   @relation(fields: [partId], references: [id])
 
-  mode       String     
+  mode       String
   max_memory Int
 }
 
 model PSU {
-  partId     String  @id
-  part       Part    @relation(fields: [partId], references: [id])
+  partId String @id
+  part   Part   @relation(fields: [partId], references: [id])
 
   type       String
   efficiency String
   wattage    Int
-  modular    String      
+  modular    String
   color      String?
 }
 
 model RAM {
-  partId             String  @id
-  part               Part    @relation(fields: [partId], references: [id])
+  partId String @id
+  part   Part   @relation(fields: [partId], references: [id])
 
-  speed              String     
-  modules            String         
+  speed              String
+  modules            String
   color              String
   first_word_latency Float
   cas_latency        Float
