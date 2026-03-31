@@ -1,5 +1,5 @@
-import type { Part } from "../components/web-store/repositories/PartTypes"
-import type { Order } from "../types/order"
+import type { Part } from "../../../shared/types/PartTypes"
+import type { Order } from "../../../shared/types/order"
 
 /**
  * Order Service

@@ -1,13 +1,13 @@
 // Imports
-import cases from '../../../data/case.json'
-import coolers from '../../../data/cooler.json'
-import cpus from '../../../data/cpu.json'
-import gpus from '../../../data/gpu.json'
-import mobos from '../../../data/mobo.json'
-import oss from '../../../data/os.json'
-import psus from '../../../data/psu.json'
-import rams from '../../../data/ram.json'
-import storages from '../../../data/storage.json'
+import cases from '../../../shared/data/case.json'
+import coolers from '../../../shared/data/cooler.json'
+import cpus from '../../../shared/data/cpu.json'
+import gpus from '../../../shared/data/gpu.json'
+import mobos from '../../../shared/data/mobo.json'
+import oss from '../../../shared/data/os.json'
+import psus from '../../../shared/data/psu.json'
+import rams from '../../../shared/data/ram.json'
+import storages from '../../../shared/data/storage.json'
 
 // Import for PartTypes
 import { type Part, PartType, type Case, type Cooler, type CPU, type GPU, type MOBO, type OS, type PSU, type RAM, type Storage } from "../../../shared/types/PartTypes";
