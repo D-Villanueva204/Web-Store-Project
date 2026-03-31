@@ -42,7 +42,5 @@ export async function createStorage(data: any): Promise<void> {
 }
 
 export async function updateStock(id: string, adding: boolean, amount: number): Promise<Part> {
-    const part = await productRepository.fetchPartByID(id);
-    if (!part) throw new Error("Part not found");
     return productRepository.updateStock(id, adding, amount);
 }

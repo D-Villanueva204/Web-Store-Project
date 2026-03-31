@@ -26,8 +26,6 @@ export async function fetchPartByID(id: string): Promise<Part> {
   return data.data;
 }
  
-// Fetch functions per partType
- 
 export async function fetchAllCases(): Promise<Case[]> {
   const res = await fetch(`${BASE_URL}/api/v1/products/case`);
   const data = await res.json();

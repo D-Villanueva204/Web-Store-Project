@@ -1,5 +1,5 @@
 import { prisma } from "../../../../lib/prisma";
-import { PartType, type Case, type Cooler, type CPU, type GPU, type MOBO, type OS, type Part, type PSU, type RAM, type Storage } from "../../../../../shared/types/PartTypes";
+import { type Case, type Cooler, type CPU, type GPU, type MOBO, type OS, type Part, type PSU, type RAM, type Storage } from "../../../../../shared/types/PartTypes";
 
 export async function fetchAllParts(): Promise<Part[]> {
   return prisma.part.findMany();
@@ -410,10 +410,12 @@ export async function fetchStorageByID(id: string): Promise<Storage | null> {
     interface: part.storage.interface
   };
 }
-
 export async function createCase(data: any): Promise<void> {
-  prisma.part.create({
+  const id = `case-${data.name.toLowerCase()}`;
+
+  await prisma.part.create({
     data: {
+      id: id,
       name: data.name,
       price: data.price,
       stock: data.stock,
@@ -434,16 +436,19 @@ export async function createCase(data: any): Promise<void> {
 }
 
 export async function createCooler(data: any): Promise<void> {
-  prisma.part.create({
+  const id = `cooler-${data.name.toLowerCase()}`;
+
+  await prisma.part.create({
     data: {
+      id: id,
       name: data.name,
       price: data.price,
       stock: data.stock,
       partType: 'COOLER',
       cooler: {
         create: {
-          rpm: data.rpm,
-          noise_level: data.noise_level,
+          rpm: Array.isArray(data.rpm) ? data.rpm.join(' - ') : String(data.rpm),
+          noise_level: Array.isArray(data.noise_level) ? data.noise_level.join(' - ') : String(data.noise_level ?? 'N/A'),
           color: data.color,
           size: data.size ?? null,
         }
@@ -453,10 +458,10 @@ export async function createCooler(data: any): Promise<void> {
   });
 }
 
-export async function createCPU(data: any): Promise<CPU> {
+export async function createCPU(data: any): Promise<void> {
   const id = `cpu-${data.name.toLowerCase()}`;
-  
-  const part = await prisma.part.create({
+
+  await prisma.part.create({
     data: {
       id: id,
       name: data.name,
@@ -476,25 +481,14 @@ export async function createCPU(data: any): Promise<CPU> {
     },
     include: { cpu: true }
   });
-  
-  return {
-    id: part.id,
-    name: part.name,
-    price: part.price,
-    stock: part.stock,
-    partType: part.partType.toLowerCase(),
-    core_count: part.cpu!.core_count,
-    core_clock: part.cpu!.core_clock,
-    boost_clock: part.cpu!.boost_clock,
-    microarchitecture: part.cpu!.microarchitecture,
-    tdp: part.cpu!.tdp,
-    graphics: part.cpu!.graphics
-  };
 }
 
 export async function createGPU(data: any): Promise<void> {
-  prisma.part.create({
+  const id = `gpu-${data.name.toLowerCase()}`;
+
+  await prisma.part.create({
     data: {
+      id: id,
       name: data.name,
       price: data.price,
       stock: data.stock,
@@ -515,8 +509,11 @@ export async function createGPU(data: any): Promise<void> {
 }
 
 export async function createMOBO(data: any): Promise<void> {
-  prisma.part.create({
+  const id = `mobo-${data.name.toLowerCase()}`;
+
+  await prisma.part.create({
     data: {
+      id: id,
       name: data.name,
       price: data.price,
       stock: data.stock,
@@ -536,15 +533,17 @@ export async function createMOBO(data: any): Promise<void> {
 }
 
 export async function createOS(data: any): Promise<void> {
-  prisma.part.create({
+  const id = `os-${data.name.toLowerCase()}`;
+  await prisma.part.create({
     data: {
+      id: id,
       name: data.name,
       price: data.price,
       stock: data.stock,
       partType: 'OS',
       os: {
         create: {
-          mode: data.mode,
+          mode: Array.isArray(data.mode) ? data.mode.join('/') : String(data.mode),
           max_memory: data.max_memory,
         }
       }
@@ -554,8 +553,11 @@ export async function createOS(data: any): Promise<void> {
 }
 
 export async function createPSU(data: any): Promise<void> {
-  prisma.part.create({
+  const id = `psu-${data.name.toLowerCase()}`;
+
+  await prisma.part.create({
     data: {
+      id: id,
       name: data.name,
       price: data.price,
       stock: data.stock,
@@ -565,7 +567,7 @@ export async function createPSU(data: any): Promise<void> {
           type: data.type,
           efficiency: data.efficiency,
           wattage: data.wattage,
-          modular: data.modular,
+          modular: String(data.modular),
           color: data.color ?? null,
         }
       }
@@ -575,16 +577,19 @@ export async function createPSU(data: any): Promise<void> {
 }
 
 export async function createRAM(data: any): Promise<void> {
-  prisma.part.create({
+  const id = `ram-${data.name.toLowerCase()}`;
+
+  await prisma.part.create({
     data: {
+      id: id,
       name: data.name,
       price: data.price,
       stock: data.stock,
       partType: 'RAM',
       ram: {
         create: {
-          speed: data.speed,
-          modules: data.modules,
+          speed: `DDR${data.speed[0]}-${data.speed[1]}`,
+          modules: `${data.modules[0]} x ${data.modules[1]}GB`,
           color: data.color,
           first_word_latency: data.first_word_latency,
           cas_latency: data.cas_latency,
@@ -596,8 +601,11 @@ export async function createRAM(data: any): Promise<void> {
 }
 
 export async function createStorage(data: any): Promise<void> {
-  prisma.part.create({
+  const id = `storage-${data.name.toLowerCase()}`;
+
+  await prisma.part.create({
     data: {
+      id: id,
       name: data.name,
       price: data.price,
       stock: data.stock,
@@ -606,9 +614,9 @@ export async function createStorage(data: any): Promise<void> {
         create: {
           capacity: data.capacity,
           price_per_gb: data.price_per_gb ?? null,
-          type: data.type,
+          type: String(data.type),
           cache: data.cache ?? null,
-          form_factor: data.form_factor,
+          form_factor: String(data.form_factor),
           interface: data.interface,
         }
       }
@@ -616,7 +624,6 @@ export async function createStorage(data: any): Promise<void> {
     include: { storage: true }
   });
 }
-
 export async function updateStock(id: string, adding: boolean, amount: number) {
   const amountChanged = adding ? amount : -amount;
   return prisma.part.update({
