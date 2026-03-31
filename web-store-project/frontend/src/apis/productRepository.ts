@@ -8,7 +8,7 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
  * 
  * @returns all partData.
  */
-export async function fetchAllParts() {
+export async function fetchAllParts(): Promise<Part[]> {
     const res = await fetch(`${BASE_URL}/api/v1/products`);
     const data = await res.json();
     return data.data;
@@ -112,7 +112,8 @@ export async function addNewStorage(newStorage: Storage): Promise<Storage> {
     const data = await res.json();
     return data.data;
 }
-export async function getTypeByID(part: Part): Promise<Part[] | null> {
+
+export async function getTypeByPart(part: Part): Promise<Part[] | null> {
     const res = await fetch(`${BASE_URL}/api/v1/products/${part.partType}`);
     const data = await res.json();
     return data.data;
