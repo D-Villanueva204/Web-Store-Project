@@ -14,7 +14,7 @@ export async function fetchAllParts(): Promise<Part[]> {
   return data.data;
 }
  
-export async function fetchAllCoolers(): Promise<Part[]> {
+export async function fetchAllCoolers(): Promise<Cooler[]> {
   const res = await fetch(`${BASE_URL}/api/v1/products/cooler`);
   const data = await res.json();
   return data.data;

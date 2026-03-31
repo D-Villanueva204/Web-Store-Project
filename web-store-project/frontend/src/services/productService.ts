@@ -10,7 +10,16 @@ import {
     addNewPSU,
     addNewRAM,
     addNewStorage,
-    updateStock
+    updateStock,
+    fetchAllCases,
+    fetchAllCoolers,
+    fetchAllCPUs,
+    fetchAllGPUs,
+    fetchAllMOBOs,
+    fetchAllOSs,
+    fetchAllPSUs,
+    fetchAllRAMs,
+    fetchAllStorages
 } from "../apis/productRepository";
 import type { Part, Case, Cooler, CPU, GPU, MOBO, OS, PSU, RAM, Storage } from "../../../shared/types/PartTypes";
 import { PartType } from "../../../shared/types/PartTypes";
@@ -29,7 +38,20 @@ export async function getByID(id: string): Promise<Part | null> {
     return fetchPartByID(id);
 }
 
-async function getByType(type: string):
+async function getByType(type: string): Promise<Cooler[] | Case[] | CPU[] | GPU[] | MOBO[] | MOBO[] | OS[] | PSU[] | RAM[] | Storage[] | undefined> {
+    switch (type) {
+        case PartType.CASE: return fetchAllCases();
+        case PartType.COOLER: return fetchAllCoolers();
+        case PartType.CPU: return fetchAllCPUs();
+        case PartType.GPU: return fetchAllGPUs();
+        case PartType.MOBO: return fetchAllMOBOs();
+        case PartType.OS: return fetchAllOSs();
+        case PartType.PSU: return fetchAllPSUs();
+        case PartType.RAM: return fetchAllRAMs();
+        case PartType.STORAGE: return fetchAllStorages();
+        default: break;
+    }
+}
 
 export async function getByName(name: string, type: string): Promise<Part | null> {
     const parts = await getByType(type);
