@@ -15,18 +15,280 @@ export const getAllParts = async (
     }
 };
 
-export const getPartByID = async (
+export const getAllCases = async (
+    _req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const cases = await productService.fetchAllCases();
+        res.status(200).json(successResponse(cases, "Cases retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getCaseByID = async (
     req: Request,
     res: Response,
     next: NextFunction
 ): Promise<void> => {
     try {
-        const part = await productService.fetchPartByID(req.params.id[0]);
-        if (part) {
-            res.status(200).json(successResponse(part, "Part retrieved successfully"));
-        } else {
-            throw new Error("Part not found");
+        const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+        const part = await productService.fetchCaseByID(id);
+        if (!part) {
+            res.status(404).json({ error: "Case not found" });
+            return;
         }
+        res.status(200).json(successResponse(part, "Case retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getAllCoolers = async (
+    _req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const coolers = await productService.fetchAllCoolers();
+        res.status(200).json(successResponse(coolers, "Coolers retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getCoolerByID = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+        const part = await productService.fetchCoolerByID(id);
+        if (!part) {
+            res.status(404).json({ error: "Cooler not found" });
+            return;
+        }
+        res.status(200).json(successResponse(part, "Cooler retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getAllCPUs = async (
+    _req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const cpus = await productService.fetchAllCPUs();
+        res.status(200).json(successResponse(cpus, "CPUs retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getCPUByID = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+        const part = await productService.fetchCPUByID(id);
+        if (!part) {
+            res.status(404).json({ error: "CPU not found" });
+            return;
+        }
+        res.status(200).json(successResponse(part, "CPU retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getAllGPUs = async (
+    _req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const gpus = await productService.fetchAllGPUs();
+        res.status(200).json(successResponse(gpus, "GPUs retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getGPUByID = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+        const part = await productService.fetchGPUByID(id);
+        if (!part) {
+            res.status(404).json({ error: "GPU not found" });
+            return;
+        }
+        res.status(200).json(successResponse(part, "GPU retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getAllMOBOs = async (
+    _req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const mobos = await productService.fetchAllMOBOs();
+        res.status(200).json(successResponse(mobos, "Motherboards retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getMOBOByID = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+        const part = await productService.fetchMOBOByID(id);
+        if (!part) {
+            res.status(404).json({ error: "Motherboard not found" });
+            return;
+        }
+        res.status(200).json(successResponse(part, "Motherboard retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getAllOSs = async (
+    _req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const oss = await productService.fetchAllOSs();
+        res.status(200).json(successResponse(oss, "Operating systems retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getOSByID = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+        const part = await productService.fetchOSByID(id);
+        if (!part) {
+            res.status(404).json({ error: "Operating system not found" });
+            return;
+        }
+        res.status(200).json(successResponse(part, "Operating system retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getAllPSUs = async (
+    _req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const psus = await productService.fetchAllPSUs();
+        res.status(200).json(successResponse(psus, "Power supplies retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getPSUByID = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+        const part = await productService.fetchPSUByID(id);
+        if (!part) {
+            res.status(404).json({ error: "Power supply not found" });
+            return;
+        }
+        res.status(200).json(successResponse(part, "Power supply retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getAllRAMs = async (
+    _req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const rams = await productService.fetchAllRAMs();
+        res.status(200).json(successResponse(rams, "RAM modules retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getRAMByID = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+        const part = await productService.fetchRAMByID(id);
+        if (!part) {
+            res.status(404).json({ error: "RAM not found" });
+            return;
+        }
+        res.status(200).json(successResponse(part, "RAM retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getAllStorages = async (
+    _req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const storages = await productService.fetchAllStorages();
+        res.status(200).json(successResponse(storages, "Storage devices retrieved successfully"));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getStorageByID = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+        const part = await productService.fetchStorageByID(id);
+        if (!part) {
+            res.status(404).json({ error: "Storage device not found" });
+            return;
+        }
+        res.status(200).json(successResponse(part, "Storage device retrieved successfully"));
     } catch (error) {
         next(error);
     }
@@ -38,8 +300,8 @@ export const createCase = async (
     next: NextFunction
 ): Promise<void> => {
     try {
-        const newPart = await productService.createCase(req.body);
-        res.status(201).json(successResponse(newPart, "Case created successfully"));
+        await productService.createCase(req.body);
+        res.status(201).json(successResponse(null, "Case created successfully"));
     } catch (error) {
         next(error);
     }
@@ -51,8 +313,8 @@ export const createCooler = async (
     next: NextFunction
 ): Promise<void> => {
     try {
-        const newPart = await productService.createCooler(req.body);
-        res.status(201).json(successResponse(newPart, "Cooler created successfully"));
+        await productService.createCooler(req.body);
+        res.status(201).json(successResponse(null, "Cooler created successfully"));
     } catch (error) {
         next(error);
     }
@@ -64,8 +326,8 @@ export const createCPU = async (
     next: NextFunction
 ): Promise<void> => {
     try {
-        const newPart = await productService.createCPU(req.body);
-        res.status(201).json(successResponse(newPart, "CPU created successfully"));
+        await productService.createCPU(req.body);
+        res.status(201).json(successResponse(null, "CPU created successfully"));
     } catch (error) {
         next(error);
     }
@@ -77,8 +339,8 @@ export const createGPU = async (
     next: NextFunction
 ): Promise<void> => {
     try {
-        const newPart = await productService.createGPU(req.body);
-        res.status(201).json(successResponse(newPart, "GPU created successfully"));
+        await productService.createGPU(req.body);
+        res.status(201).json(successResponse(null, "GPU created successfully"));
     } catch (error) {
         next(error);
     }
@@ -90,8 +352,8 @@ export const createMOBO = async (
     next: NextFunction
 ): Promise<void> => {
     try {
-        const newPart = await productService.createMOBO(req.body);
-        res.status(201).json(successResponse(newPart, "Motherboard created successfully"));
+        await productService.createMOBO(req.body);
+        res.status(201).json(successResponse(null, "Motherboard created successfully"));
     } catch (error) {
         next(error);
     }
@@ -103,8 +365,8 @@ export const createOS = async (
     next: NextFunction
 ): Promise<void> => {
     try {
-        const newPart = await productService.createOS(req.body);
-        res.status(201).json(successResponse(newPart, "OS created successfully"));
+        await productService.createOS(req.body);
+        res.status(201).json(successResponse(null, "OS created successfully"));
     } catch (error) {
         next(error);
     }
@@ -116,8 +378,8 @@ export const createPSU = async (
     next: NextFunction
 ): Promise<void> => {
     try {
-        const newPart = await productService.createPSU(req.body);
-        res.status(201).json(successResponse(newPart, "PSU created successfully"));
+        await productService.createPSU(req.body);
+        res.status(201).json(successResponse(null, "PSU created successfully"));
     } catch (error) {
         next(error);
     }
@@ -129,8 +391,8 @@ export const createRAM = async (
     next: NextFunction
 ): Promise<void> => {
     try {
-        const newPart = await productService.createRAM(req.body);
-        res.status(201).json(successResponse(newPart, "RAM created successfully"));
+        await productService.createRAM(req.body);
+        res.status(201).json(successResponse(null, "RAM created successfully"));
     } catch (error) {
         next(error);
     }
@@ -142,8 +404,8 @@ export const createStorage = async (
     next: NextFunction
 ): Promise<void> => {
     try {
-        const newPart = await productService.createStorage(req.body);
-        res.status(201).json(successResponse(newPart, "Storage created successfully"));
+        await productService.createStorage(req.body);
+        res.status(201).json(successResponse(null, "Storage created successfully"));
     } catch (error) {
         next(error);
     }
@@ -156,7 +418,8 @@ export const updateStock = async (
 ): Promise<void> => {
     try {
         const { adding, amount } = req.body;
-        const updatedPart = await productService.updateStock(req.params.id[0], adding, amount);
+        const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+        const updatedPart = await productService.updateStock(id, adding, amount);
         res.status(200).json(successResponse(updatedPart, "Stock updated successfully"));
     } catch (error) {
         next(error);

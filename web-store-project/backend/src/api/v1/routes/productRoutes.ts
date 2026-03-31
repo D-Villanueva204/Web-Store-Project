@@ -4,7 +4,6 @@ import * as productController from "../controllers/productController";
 const router: Router = express.Router();
 
 router.get("/products", productController.getAllParts);
-router.get("/products/:id", productController.getPartByID);
 
 router.post("/products/case",
     productController.createCase);
