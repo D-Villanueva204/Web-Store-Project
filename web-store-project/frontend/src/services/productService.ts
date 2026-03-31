@@ -1,7 +1,6 @@
 import {
     fetchAllParts,
     fetchPartByID,
-    getTypeByPart,
     addNewCase,
     addNewCooler,
     addNewCPU,
@@ -26,14 +25,11 @@ export async function validateStock(part: Part, quantity: number): Promise<boole
     return fresh.stock >= quantity;
 }
 
-export async function getByType(partType: string): Promise<Part[] | null> {
-    const mockPart = { partType } as Part;
-    return getTypeByPart(mockPart);
-}
-
 export async function getByID(id: string): Promise<Part | null> {
     return fetchPartByID(id);
 }
+
+async function getByType(type: string):
 
 export async function getByName(name: string, type: string): Promise<Part | null> {
     const parts = await getByType(type);
