@@ -18,10 +18,14 @@ const prisma = new PrismaClient({ adapter });
 
 async function main() {
     await prisma.part.deleteMany();
+    
+    const usedIds = new Set<string>();
 
     for (const c of cases) {
+        let id = `case-${c.name.toLowerCase()}`;
         await prisma.part.create({
             data: {
+                id: id,
                 name: c.name,
                 price: c.price,
                 stock: c.stock,
@@ -41,8 +45,10 @@ async function main() {
     }
 
     for (const item of cpus) {
+        let id = `cpu-${item.name.toLowerCase()}`;
         await prisma.part.create({
             data: {
+                id: id,
                 name: item.name,
                 price: item.price,
                 stock: item.stock,
@@ -62,8 +68,10 @@ async function main() {
     }
 
     for (const item of gpus) {
+        let id = `gpu-${item.name.toLowerCase()}`;
         await prisma.part.create({
             data: {
+                id: id,
                 name: item.name,
                 price: item.price,
                 stock: item.stock,
@@ -83,8 +91,10 @@ async function main() {
     }
 
     for (const item of mobos) {
+        let id = `mobo-${item.name.toLowerCase()}`;
         await prisma.part.create({
             data: {
+                id: id,
                 name: item.name,
                 price: item.price,
                 stock: item.stock,
@@ -103,8 +113,10 @@ async function main() {
     }
 
     for (const item of psus) {
+        let id = `psu-${item.name.toLowerCase()}`;
         await prisma.part.create({
             data: {
+                id: id,
                 name: item.name,
                 price: item.price,
                 stock: item.stock,
@@ -123,8 +135,16 @@ async function main() {
     }
 
     for (const item of storages) {
+        let id = `storage-${item.name.toLowerCase()}`;
+        let counter = 1;
+        while (usedIds.has(id)) {
+            id = `storage-${item.name.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')}-${counter}`;
+            counter++;
+        }
+        usedIds.add(id);
         await prisma.part.create({
             data: {
+                id: id,
                 name: item.name,
                 price: item.price,
                 stock: item.stock,
@@ -144,8 +164,10 @@ async function main() {
     }
 
     for (const item of coolers) {
+        let id = `cooler-${item.name.toLowerCase()}`;
         await prisma.part.create({
             data: {
+                id: id,
                 name: item.name,
                 price: item.price,
                 stock: item.stock,
@@ -163,8 +185,10 @@ async function main() {
     }
 
     for (const item of oss) {
+        let id = `os-${item.name.toLowerCase()}`;
         await prisma.part.create({
             data: {
+                id: id,
                 name: item.name,
                 price: item.price,
                 stock: item.stock,
@@ -179,33 +203,35 @@ async function main() {
         });
     }
 
-        for (const item of rams) {
-            await prisma.part.create({
-                data: {
-                    name: item.name,
-                    price: item.price,
-                    stock: item.stock,
-                    partType: 'RAM',
-                    ram: {
-                        create: {
-                            speed: `DDR${item.speed[0]}-${item.speed[1]}`,
-                            modules: `${item.modules[0]} x ${item.modules[1]}GB`,
-                            color: item.color,
-                            first_word_latency: item.first_word_latency,
-                            cas_latency: item.cas_latency,
-                        }
+    for (const item of rams) {
+        let id = `ram-${item.name.toLowerCase()}`;
+        await prisma.part.create({
+            data: {
+                id: id,
+                name: item.name,
+                price: item.price,
+                stock: item.stock,
+                partType: 'RAM',
+                ram: {
+                    create: {
+                        speed: `DDR${item.speed[0]}-${item.speed[1]}`,
+                        modules: `${item.modules[0]} x ${item.modules[1]}GB`,
+                        color: item.color,
+                        first_word_latency: item.first_word_latency,
+                        cas_latency: item.cas_latency,
                     }
                 }
-            });
-        }
-    }
-
-    main()
-        .then(async () => {
-            await prisma.$disconnect();
-        })
-        .catch(async (e) => {
-            console.error(e);
-            await prisma.$disconnect();
-            process.exit(1);
+            }
         });
+    }
+}
+
+main()
+    .then(async () => {
+        await prisma.$disconnect();
+    })
+    .catch(async (e) => {
+        console.error(e);
+        await prisma.$disconnect();
+        process.exit(1);
+    });

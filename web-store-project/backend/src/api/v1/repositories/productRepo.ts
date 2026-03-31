@@ -1,155 +1,418 @@
 import { prisma } from "../../../../lib/prisma";
-import type { Case, Cooler, CPU, GPU, MOBO, OS, Part, PSU, RAM, Storage } from "../../../../../shared/types/PartTypes";
- 
+import { PartType, type Case, type Cooler, type CPU, type GPU, type MOBO, type OS, type Part, type PSU, type RAM, type Storage } from "../../../../../shared/types/PartTypes";
+
 export async function fetchAllParts(): Promise<Part[]> {
   return prisma.part.findMany();
 }
- 
-export async function fetchPartByID(id: string): Promise<Part> {
-  return prisma.part.findUnique({
-    where: { id },
-    include: {
-      case: true,
-      cooler: true,
-      cpu: true,
-      gpu: true,
-      mobo: true,
-      os: true,
-      psu: true,
-      ram: true,
-      storage: true,
-    }
-  });
-}
- 
+
 export async function fetchAllCases(): Promise<Case[]> {
-  return prisma.part.findMany({
+  const parts = await prisma.part.findMany({
     where: { partType: 'CASE' },
     include: { case: true }
   });
+
+  return parts.map(part => ({
+    id: part.id,
+    name: part.name,
+    price: part.price,
+    stock: part.stock,
+    partType: part.partType.toLowerCase(),
+    type: part.case!.type,
+    color: part.case!.color,
+    psu: part.case!.psu,
+    side_panel: part.case!.side_panel,
+    external_volume: part.case!.external_volume,
+    internal_35_bays: part.case!.internal_35_bays
+  }));
 }
- 
+
 export async function fetchCaseByID(id: string): Promise<Case | null> {
-  return prisma.part.findUnique({
+  const part = await prisma.part.findUnique({
     where: { id },
     include: { case: true }
   });
+
+  if (!part || !part.case) return null;
+
+  return {
+    id: part.id,
+    name: part.name,
+    price: part.price,
+    stock: part.stock,
+    partType: part.partType.toLowerCase(),
+    type: part.case.type,
+    color: part.case.color,
+    psu: part.case.psu,
+    side_panel: part.case.side_panel,
+    external_volume: part.case.external_volume,
+    internal_35_bays: part.case.internal_35_bays
+  };
 }
- 
+
 export async function fetchAllCoolers(): Promise<Cooler[]> {
-  return prisma.part.findMany({
+  const parts = await prisma.part.findMany({
     where: { partType: 'COOLER' },
     include: { cooler: true }
   });
+
+  return parts.map(part => ({
+    id: part.id,
+    name: part.name,
+    price: part.price,
+    stock: part.stock,
+    partType: part.partType.toLowerCase(),
+    rpm: part.cooler!.rpm.includes(' - ')
+      ? part.cooler!.rpm.split(' - ').map(Number)
+      : Number(part.cooler!.rpm),
+    noise_level: part.cooler!.noise_level && part.cooler!.noise_level !== 'N/A'
+      ? (part.cooler!.noise_level.includes(' - ')
+        ? part.cooler!.noise_level.split(' - ').map(Number)
+        : Number(part.cooler!.noise_level))
+      : null,
+    color: part.cooler!.color,
+    size: part.cooler!.size
+  }));
 }
- 
+
 export async function fetchCoolerByID(id: string): Promise<Cooler | null> {
-  return prisma.part.findUnique({
+  const part = await prisma.part.findUnique({
     where: { id },
     include: { cooler: true }
   });
+
+  if (!part || !part.cooler) return null;
+
+  return {
+    id: part.id,
+    name: part.name,
+    price: part.price,
+    stock: part.stock,
+    partType: part.partType.toLowerCase(),
+    rpm: part.cooler.rpm.includes(' - ')
+      ? part.cooler.rpm.split(' - ').map(Number)
+      : Number(part.cooler.rpm),
+    noise_level: part.cooler.noise_level && part.cooler.noise_level !== 'N/A'
+      ? (part.cooler.noise_level.includes(' - ')
+        ? part.cooler.noise_level.split(' - ').map(Number)
+        : Number(part.cooler.noise_level))
+      : null,
+    color: part.cooler.color,
+    size: part.cooler.size
+  };
 }
- 
+
 export async function fetchAllCPUs(): Promise<CPU[]> {
-  return prisma.part.findMany({
+  const parts = await prisma.part.findMany({
     where: { partType: 'CPU' },
     include: { cpu: true }
   });
+
+  return parts.map(part => ({
+    id: part.id,
+    name: part.name,
+    price: part.price,
+    stock: part.stock,
+    partType: part.partType.toLowerCase(),
+    core_count: part.cpu!.core_count,
+    core_clock: part.cpu!.core_clock,
+    boost_clock: part.cpu!.boost_clock,
+    microarchitecture: part.cpu!.microarchitecture,
+    tdp: part.cpu!.tdp,
+    graphics: part.cpu!.graphics
+  }));
 }
- 
+
 export async function fetchCPUByID(id: string): Promise<CPU | null> {
-  return prisma.part.findUnique({
+  const part = await prisma.part.findUnique({
     where: { id },
     include: { cpu: true }
   });
+
+  if (!part || !part.cpu) return null;
+
+  return {
+    id: part.id,
+    name: part.name,
+    price: part.price,
+    stock: part.stock,
+    partType: part.partType.toLowerCase(),
+    core_count: part.cpu.core_count,
+    core_clock: part.cpu.core_clock,
+    boost_clock: part.cpu.boost_clock,
+    microarchitecture: part.cpu.microarchitecture,
+    tdp: part.cpu.tdp,
+    graphics: part.cpu.graphics
+  };
 }
- 
+
 export async function fetchAllGPUs(): Promise<GPU[]> {
-  return prisma.part.findMany({
+  const parts = await prisma.part.findMany({
     where: { partType: 'GPU' },
     include: { gpu: true }
   });
+
+  return parts.map(part => ({
+    id: part.id,
+    name: part.name,
+    price: part.price,
+    stock: part.stock,
+    partType: part.partType.toLowerCase(),
+    chipset: part.gpu!.chipset,
+    memory: part.gpu!.memory,
+    core_clock: part.gpu!.core_clock,
+    boost_clock: part.gpu!.boost_clock,
+    color: part.gpu!.color,
+    length: part.gpu!.length
+  }));
 }
- 
+
 export async function fetchGPUByID(id: string): Promise<GPU | null> {
-  return prisma.part.findUnique({
+  const part = await prisma.part.findUnique({
     where: { id },
     include: { gpu: true }
   });
+
+  if (!part || !part.gpu) return null;
+
+  return {
+    id: part.id,
+    name: part.name,
+    price: part.price,
+    stock: part.stock,
+    partType: part.partType.toLowerCase(),
+    chipset: part.gpu.chipset,
+    memory: part.gpu.memory,
+    core_clock: part.gpu.core_clock,
+    boost_clock: part.gpu.boost_clock,
+    color: part.gpu.color,
+    length: part.gpu.length
+  };
 }
- 
+
 export async function fetchAllMOBOs(): Promise<MOBO[]> {
-  return prisma.part.findMany({
+  const parts = await prisma.part.findMany({
     where: { partType: 'MOBO' },
     include: { mobo: true }
   });
+
+  return parts.map(part => ({
+    id: part.id,
+    name: part.name,
+    price: part.price,
+    stock: part.stock,
+    partType: part.partType.toLowerCase(),
+    socket: part.mobo!.socket,
+    form_factor: part.mobo!.form_factor,
+    max_memory: part.mobo!.max_memory,
+    memory_slots: part.mobo!.memory_slots,
+    color: part.mobo!.color
+  }));
 }
- 
+
 export async function fetchMOBOByID(id: string): Promise<MOBO | null> {
-  return prisma.part.findUnique({
+  const part = await prisma.part.findUnique({
     where: { id },
     include: { mobo: true }
   });
+
+  if (!part || !part.mobo) return null;
+
+  return {
+    id: part.id,
+    name: part.name,
+    price: part.price,
+    stock: part.stock,
+    partType: part.partType.toLowerCase(),
+    socket: part.mobo.socket,
+    form_factor: part.mobo.form_factor,
+    max_memory: part.mobo.max_memory,
+    memory_slots: part.mobo.memory_slots,
+    color: part.mobo.color
+  };
 }
- 
+
 export async function fetchAllOSs(): Promise<OS[]> {
-  return prisma.part.findMany({
+  const parts = await prisma.part.findMany({
     where: { partType: 'OS' },
     include: { os: true }
   });
+
+  return parts.map(part => ({
+    id: part.id,
+    name: part.name,
+    price: part.price,
+    stock: part.stock,
+    partType: part.partType.toLowerCase(),
+    mode: part.os!.mode.includes('/')
+      ? part.os!.mode.split('/').map(Number)
+      : Number(part.os!.mode),
+    max_memory: part.os!.max_memory
+  }));
 }
- 
+
 export async function fetchOSByID(id: string): Promise<OS | null> {
-  return prisma.part.findUnique({
+  const part = await prisma.part.findUnique({
     where: { id },
     include: { os: true }
   });
+
+  if (!part || !part.os) return null;
+
+  return {
+    id: part.id,
+    name: part.name,
+    price: part.price,
+    stock: part.stock,
+    partType: part.partType.toLowerCase(),
+    mode: part.os.mode.includes('/')
+      ? part.os.mode.split('/').map(Number)
+      : Number(part.os.mode),
+    max_memory: part.os.max_memory
+  };
 }
- 
+
 export async function fetchAllPSUs(): Promise<PSU[]> {
-  return prisma.part.findMany({
+  const parts = await prisma.part.findMany({
     where: { partType: 'PSU' },
     include: { psu: true }
   });
+
+  return parts.map(part => ({
+    id: part.id,
+    name: part.name,
+    price: part.price,
+    stock: part.stock,
+    partType: part.partType.toLowerCase(),
+    type: part.psu!.type,
+    efficiency: part.psu!.efficiency,
+    wattage: part.psu!.wattage,
+    modular: part.psu!.modular,
+    color: part.psu!.color
+  }));
 }
- 
+
 export async function fetchPSUByID(id: string): Promise<PSU | null> {
-  return prisma.part.findUnique({
+  const part = await prisma.part.findUnique({
     where: { id },
     include: { psu: true }
   });
+
+  if (!part || !part.psu) return null;
+
+  return {
+    id: part.id,
+    name: part.name,
+    price: part.price,
+    stock: part.stock,
+    partType: part.partType.toLowerCase(),
+    type: part.psu.type,
+    efficiency: part.psu.efficiency,
+    wattage: part.psu.wattage,
+    modular: part.psu.modular,
+    color: part.psu.color
+  };
 }
- 
+
 export async function fetchAllRAMs(): Promise<RAM[]> {
-  return prisma.part.findMany({
+  const parts = await prisma.part.findMany({
     where: { partType: 'RAM' },
     include: { ram: true }
   });
+
+  return parts.map(part => ({
+    id: part.id,
+    name: part.name,
+    price: part.price,
+    stock: part.stock,
+    partType: part.partType.toLowerCase(),
+    speed: (() => {
+      const match = part.ram!.speed.match(/DDR(\d+)-(\d+)/);
+      return match ? [parseInt(match[1]), parseInt(match[2])] : [0, 0];
+    })(),
+    modules: (() => {
+      const match = part.ram!.modules.match(/(\d+) x (\d+)GB/);
+      return match ? [parseInt(match[1]), parseInt(match[2])] : [0, 0];
+    })(),
+    color: part.ram!.color,
+    first_word_latency: part.ram!.first_word_latency,
+    cas_latency: part.ram!.cas_latency
+  }));
 }
- 
+
 export async function fetchRAMByID(id: string): Promise<RAM | null> {
-  return prisma.part.findUnique({
+  const part = await prisma.part.findUnique({
     where: { id },
     include: { ram: true }
   });
+
+  if (!part || !part.ram) return null;
+
+  return {
+    id: part.id,
+    name: part.name,
+    price: part.price,
+    stock: part.stock,
+    partType: part.partType.toLowerCase(),
+    speed: (() => {
+      const match = part.ram.speed.match(/DDR(\d+)-(\d+)/);
+      return match ? [parseInt(match[1]), parseInt(match[2])] : [0, 0];
+    })(),
+    modules: (() => {
+      const match = part.ram.modules.match(/(\d+) x (\d+)GB/);
+      return match ? [parseInt(match[1]), parseInt(match[2])] : [0, 0];
+    })(),
+    color: part.ram.color,
+    first_word_latency: part.ram.first_word_latency,
+    cas_latency: part.ram.cas_latency
+  };
 }
- 
+
 export async function fetchAllStorages(): Promise<Storage[]> {
-  return prisma.part.findMany({
+  const parts = await prisma.part.findMany({
     where: { partType: 'STORAGE' },
     include: { storage: true }
   });
+
+  return parts.map(part => ({
+    id: part.id,
+    name: part.name,
+    price: part.price,
+    stock: part.stock,
+    partType: part.partType.toLowerCase(),
+    capacity: part.storage!.capacity,
+    price_per_gb: part.storage!.price_per_gb,
+    type: part.storage!.type,
+    cache: part.storage!.cache,
+    form_factor: part.storage!.form_factor,
+    interface: part.storage!.interface
+  }));
 }
- 
+
 export async function fetchStorageByID(id: string): Promise<Storage | null> {
-  return prisma.part.findUnique({
+  const part = await prisma.part.findUnique({
     where: { id },
     include: { storage: true }
   });
+
+  if (!part || !part.storage) return null;
+
+  return {
+    id: part.id,
+    name: part.name,
+    price: part.price,
+    stock: part.stock,
+    partType: part.partType.toLowerCase(),
+    capacity: part.storage.capacity,
+    price_per_gb: part.storage.price_per_gb,
+    type: part.storage.type,
+    cache: part.storage.cache,
+    form_factor: part.storage.form_factor,
+    interface: part.storage.interface
+  };
 }
- 
-export async function createCase(data: any): Promise<Case> {
-  return prisma.part.create({
+
+export async function createCase(data: any): Promise<void> {
+  prisma.part.create({
     data: {
       name: data.name,
       price: data.price,
@@ -169,9 +432,9 @@ export async function createCase(data: any): Promise<Case> {
     include: { case: true }
   });
 }
- 
-export async function createCooler(data: any): Promise<Cooler> {
-  return prisma.part.create({
+
+export async function createCooler(data: any): Promise<void> {
+  prisma.part.create({
     data: {
       name: data.name,
       price: data.price,
@@ -189,10 +452,13 @@ export async function createCooler(data: any): Promise<Cooler> {
     include: { cooler: true }
   });
 }
- 
+
 export async function createCPU(data: any): Promise<CPU> {
-  return prisma.part.create({
+  const id = `cpu-${data.name.toLowerCase()}`;
+  
+  const part = await prisma.part.create({
     data: {
+      id: id,
       name: data.name,
       price: data.price,
       stock: data.stock,
@@ -210,10 +476,24 @@ export async function createCPU(data: any): Promise<CPU> {
     },
     include: { cpu: true }
   });
+  
+  return {
+    id: part.id,
+    name: part.name,
+    price: part.price,
+    stock: part.stock,
+    partType: part.partType.toLowerCase(),
+    core_count: part.cpu!.core_count,
+    core_clock: part.cpu!.core_clock,
+    boost_clock: part.cpu!.boost_clock,
+    microarchitecture: part.cpu!.microarchitecture,
+    tdp: part.cpu!.tdp,
+    graphics: part.cpu!.graphics
+  };
 }
- 
-export async function createGPU(data: any): Promise<GPU> {
-  return prisma.part.create({
+
+export async function createGPU(data: any): Promise<void> {
+  prisma.part.create({
     data: {
       name: data.name,
       price: data.price,
@@ -233,9 +513,9 @@ export async function createGPU(data: any): Promise<GPU> {
     include: { gpu: true }
   });
 }
- 
-export async function createMOBO(data: any): Promise<MOBO> {
-  return prisma.part.create({
+
+export async function createMOBO(data: any): Promise<void> {
+  prisma.part.create({
     data: {
       name: data.name,
       price: data.price,
@@ -254,9 +534,9 @@ export async function createMOBO(data: any): Promise<MOBO> {
     include: { mobo: true }
   });
 }
- 
-export async function createOS(data: any): Promise<OS> {
-  return prisma.part.create({
+
+export async function createOS(data: any): Promise<void> {
+  prisma.part.create({
     data: {
       name: data.name,
       price: data.price,
@@ -272,9 +552,9 @@ export async function createOS(data: any): Promise<OS> {
     include: { os: true }
   });
 }
- 
-export async function createPSU(data: any): Promise<PSU> {
-  return prisma.part.create({
+
+export async function createPSU(data: any): Promise<void> {
+  prisma.part.create({
     data: {
       name: data.name,
       price: data.price,
@@ -293,9 +573,9 @@ export async function createPSU(data: any): Promise<PSU> {
     include: { psu: true }
   });
 }
- 
-export async function createRAM(data: any): Promise<RAM> {
-  return prisma.part.create({
+
+export async function createRAM(data: any): Promise<void> {
+  prisma.part.create({
     data: {
       name: data.name,
       price: data.price,
@@ -314,9 +594,9 @@ export async function createRAM(data: any): Promise<RAM> {
     include: { ram: true }
   });
 }
- 
-export async function createStorage(data: any): Promise<Storage> {
-  return prisma.part.create({
+
+export async function createStorage(data: any): Promise<void> {
+  prisma.part.create({
     data: {
       name: data.name,
       price: data.price,
@@ -336,7 +616,7 @@ export async function createStorage(data: any): Promise<Storage> {
     include: { storage: true }
   });
 }
- 
+
 export async function updateStock(id: string, adding: boolean, amount: number) {
   const amountChanged = adding ? amount : -amount;
   return prisma.part.update({

@@ -5,6 +5,8 @@
 
 // prisma/schema.prisma
 
+// prisma/schema.prisma
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -26,7 +28,7 @@ enum PartType {
 }
 
 model Part {
-  id       String   @id @default(uuid())
+  id       String   @id
   name     String
   price    Float
   partType PartType
