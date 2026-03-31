@@ -8,14 +8,14 @@ import { getByName } from "../../../../services/productService";
  * 
  */
 
-function GeneralSelector({ name, partType, addItemToCart }: { name: string, partType: string, addItemToCart: (item: Part) => void }) {
+async function GeneralSelector({ name, partType, addItemToCart }: { name: string, partType: string, addItemToCart: (item: Part) => void }) {
     let partName = "Not Found";
     let price = 0;
     let stock = 0;
 
     // Instead of retrieving the data ourselves, we can just extract it using the service, and pass on the object
     // directly from the repository than to construct the product later.
-    const retrievedPart = getByName(name, partType);
+    const retrievedPart = await getByName(name, partType);
 
     if (retrievedPart) {
        partName = retrievedPart.name;

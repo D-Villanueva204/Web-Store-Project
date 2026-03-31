@@ -38,17 +38,17 @@ export async function getByID(id: string): Promise<Part | null> {
     return fetchPartByID(id);
 }
 
-async function getByType(type: string): Promise<Cooler[] | Case[] | CPU[] | GPU[] | MOBO[] | MOBO[] | OS[] | PSU[] | RAM[] | Storage[] | undefined> {
+export async function getByType(type: string): Promise<Cooler[] | Case[] | CPU[] | GPU[] | MOBO[] | MOBO[] | OS[] | PSU[] | RAM[] | Storage[] | undefined> {
     switch (type) {
-        case PartType.CASE: return fetchAllCases();
-        case PartType.COOLER: return fetchAllCoolers();
-        case PartType.CPU: return fetchAllCPUs();
-        case PartType.GPU: return fetchAllGPUs();
-        case PartType.MOBO: return fetchAllMOBOs();
-        case PartType.OS: return fetchAllOSs();
-        case PartType.PSU: return fetchAllPSUs();
-        case PartType.RAM: return fetchAllRAMs();
-        case PartType.STORAGE: return fetchAllStorages();
+        case PartType.CASE: return await fetchAllCases();
+        case PartType.COOLER: return await fetchAllCoolers();
+        case PartType.CPU: return await fetchAllCPUs();
+        case PartType.GPU: return await fetchAllGPUs();
+        case PartType.MOBO: return await fetchAllMOBOs();
+        case PartType.OS: return await fetchAllOSs();
+        case PartType.PSU: return await fetchAllPSUs();
+        case PartType.RAM: return await fetchAllRAMs();
+        case PartType.STORAGE: return await fetchAllStorages();
         default: break;
     }
 }

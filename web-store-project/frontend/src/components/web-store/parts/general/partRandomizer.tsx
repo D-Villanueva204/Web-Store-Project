@@ -13,7 +13,7 @@ import { getFavouriteById } from "../../../../apis/favouritesRepository";
  * 
  */
 
-function GeneralTypeGenerator({ partType, addFavourite, favourite, addItemToCart }: { partType: typeof PartTypes[keyof typeof PartTypes], addFavourite: (id: string) => void, favourite: boolean, addItemToCart: (item: Part) => void }) {
+async function GeneralTypeGenerator({ partType, addFavourite, favourite, addItemToCart }: { partType: typeof PartTypes[keyof typeof PartTypes], addFavourite: (id: string) => void, favourite: boolean, addItemToCart: (item: Part) => void }) {
     
     /**
      * Originally, partType would have a link directly to the data, we can just get the arrays ourselves
@@ -21,7 +21,7 @@ function GeneralTypeGenerator({ partType, addFavourite, favourite, addItemToCart
      * check for it.
      * 
      */
-    const partData = getByType(partType);
+    const partData = await getByType(partType);
     let retrievedPart = null;
     if (partData) {
         let partName = "Not Found";
