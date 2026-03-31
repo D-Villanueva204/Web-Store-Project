@@ -113,12 +113,6 @@ export async function addNewStorage(newStorage: Storage): Promise<Storage> {
     return data.data;
 }
 
-export async function getTypeByPart(part: Part): Promise<Part[] | null> {
-    const res = await fetch(`${BASE_URL}/api/v1/products/${part.partType}`);
-    const data = await res.json();
-    return data.data;
-};
-
 
 export async function updateStock(part: Part, adding: boolean, amount: number): Promise<Part> {
     const res = await fetch(`${BASE_URL}/api/v1/products/${part.partType}/${part.id}/stock`, {
