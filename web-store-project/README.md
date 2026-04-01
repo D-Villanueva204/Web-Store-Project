@@ -29,3 +29,7 @@ Sidebar Component, Product Repository, Sidebar Repository, Sidebar Service, useC
 Product Service: Czedrick
 New Component (Order) with new architecture, Order Repository/Service/Hook with Definitions, Order Test Data, Order Page: Joshua
 useFavourites hook, favouritesRepo, favouritesService, refactor favouritesButton, refactor favouritesPage: Czedrick
+
+## Sprint 4: 
+Favourites Backend, Monorepo creation, Favourites Frontend : Czedrick
+Products (Front End/Back End), Sidebar (Front End/ Back End), Vercel, Prisma Schema, Prisma Seed - Dominique
