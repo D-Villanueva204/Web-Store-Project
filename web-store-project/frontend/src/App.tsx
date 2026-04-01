@@ -20,12 +20,8 @@ function App() {
    * 
    */
   const {addItemsToCart, clearAllItems, items, total, removeItemFromCart} = useCart();
-  const {handleToggleFavourite, } = useFavourites();
+  const {handleAddFavourite } = useFavourites();
 
-
-  const createFavourite = (id: string) => {
-    handleToggleFavourite(id);
-  };
 
   return (
     <>
@@ -38,7 +34,7 @@ function App() {
             <Route index element={<CartPage items={items} total={total} removeItemFromCart={removeItemFromCart} clearCart={clearAllItems} />} />
           </Route>
           <Route path='/product' element={<Layout />}>
-            <Route index element={<ProductPage addItemToCart={addItemsToCart} addFavourite={createFavourite} />} />
+            <Route index element={<ProductPage addItemToCart={addItemsToCart} handleAddFavourite={handleAddFavourite} />} />
           </Route>
           <Route path='/favourites' element={<Layout />}>
             <Route index element={<FavouritesPage />} />
