@@ -1,3 +1,4 @@
+
 import type { CartItem } from "../../../../../shared/types/CartItem";
 import "./sidebar.css"
 

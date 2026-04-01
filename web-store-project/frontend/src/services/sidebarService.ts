@@ -1,80 +1,45 @@
 import { addCartItem, removeCartItem, fetchAllItems, updateCartItem, clearCart } from "../apis/sidebarRepository";
 import type { CartItem } from "../../../shared/types/CartItem";
-import { type Part  } from "../../../shared/types/PartTypes";
-import { getByType, validateStock } from "./productService";
+import { type Part } from "../../../shared/types/PartTypes";
+import { validateStock } from "./productService";
 
-export function addItem(part: Part): CartItem | null {
-    if (fetchAllItems().length >= 10) {
+export async function addItem(part: Part): Promise<CartItem | null> {
+    const allItems = await fetchAllItems();
+
+    if (allItems.length >= 10) {
         return null;
     }
 
-    if (checkIfPartExists(part.id)) {
-        for (const cartItem of fetchAllItems()) {
-            if (cartItem.id == part.id) {
-                if (part.stock == 0) {
-                    return null;
-                }
-                if (validateStock(part, cartItem.quantity + 1)) {
-                    updateCartItem(cartItem, (cartItem.quantity + 1));
-                    return cartItem;
-                }
-                else {
-                    return null;
-                }
-            }
+    if (part.stock === 0) {
+        return null;
+    }
+
+    const existingItem = allItems.find(item => item.id === part.id);
+
+    if (existingItem) {
+        const newQuantity = existingItem.quantity + 1;
+        if (!await validateStock(part, newQuantity)) {
+            return null;
         }
+        return await updateCartItem(existingItem.id, newQuantity);
     }
-    const newCartItem: CartItem = {
-        id: part.id,
-        name: part.name,
-        price: part.price,
-        quantity: 1
-    }
-    addCartItem(newCartItem);
-    return newCartItem;
+
+    return await addCartItem(part.id);
 }
 
-export function fetchItems(): CartItem[] {
-    return fetchAllItems();
+export async function fetchItems(): Promise<CartItem[]> {
+    return await fetchAllItems();
 }
 
-export function clearItems() {
-    return clearCart();
+export async function clearItems(): Promise<boolean> {
+    return await clearCart();
 }
 
-export function removeItem(cartItem: CartItem): boolean {
-    const allItems = fetchAllItems();
-
-    for (const item of allItems) {
-        if (item.id == cartItem.id) {
-            removeCartItem(item);
-            return true;
-        }
-    }
-
-    return false;
+export async function removeItem(cartItem: CartItem): Promise<boolean> {
+    return await removeCartItem(cartItem.id);
 }
 
-export function getTotal(): number {
-    let total = 0;
-    for (const item of fetchAllItems()) {
-        total = total + item.price;
-    }
-
-    return total;
-};
-
-function checkIfPartExists(itemId: string): boolean {
-    const partType: string = itemId.split("-")[0];
-    const partData = getByType(partType);
-    if (partData) {
-        for (const part of partData) {
-            if (part.id === itemId) {
-                return true;
-            }
-        }
-    }
-
-    return false;
-
+export async function getTotal(): Promise<number> {
+    const allItems = await fetchAllItems();
+    return allItems.reduce((total, item) => total + item.price * item.quantity, 0);
 }

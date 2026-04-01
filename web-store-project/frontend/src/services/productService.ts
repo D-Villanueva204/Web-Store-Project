@@ -1,100 +1,56 @@
-import { fetchAllParts, addNewCPU, addNewCase, addNewCooler, addNewGPU, addNewMOBO, addNewOS, addNewPSU, addNewRAM, addNewStorage, getTypeByID } from "../apis/productRepository";
-import type { Part, Case, Storage, Cooler, GPU, MOBO, OS, PSU, RAM, CPU } from "../../../shared/types/PartTypes";
+import {
+    fetchAllParts,
+    fetchPartByID,
+    updateStock,
+    fetchAllCases,
+    fetchAllCoolers,
+    fetchAllCPUs,
+    fetchAllGPUs,
+    fetchAllMOBOs,
+    fetchAllOSs,
+    fetchAllPSUs,
+    fetchAllRAMs,
+    fetchAllStorages
+} from "../apis/productRepository";
+import type { Part, Case, Cooler, CPU, GPU, MOBO, OS, PSU, RAM, Storage } from "../../../shared/types/PartTypes";
 import { PartType } from "../../../shared/types/PartTypes";
 
-export function validateStock(part: Part, quantity: number): boolean {
-    const getAllParts = fetchAllParts();
-    if (!getAllParts) {
-        return false;
-    }
-    const partType = getTypeByID(part);
-    if (partType) {
-        const foundPart = partType.find((p) => p.id === part.id);
-        if (foundPart) {
-            return foundPart.stock >= quantity;
-        }
-    }
-    return false;
+export async function getAllParts(): Promise<Part[]> {
+    return fetchAllParts();
 }
 
-export function getByType(id: string): Part[] | null {
-    const allItems = fetchAllParts();
-    switch (id) {
-        case PartType.CASE:
-            return allItems.caseData;
-        case PartType.COOLER:
-            return allItems.coolerData;
-        case PartType.CPU:
-            return allItems.cpuData;
-        case PartType.GPU:
-            return allItems.gpuData;
-        case PartType.MOBO:
-            return allItems.moboData;
-        case PartType.OS:
-            return allItems.osData;
-        case PartType.PSU:
-            return allItems.psuData;
-        case PartType.RAM:
-            return allItems.ramData;
-        case PartType.STORAGE:
-            return allItems.storageData;
-        default:
-            return null;
+export async function validateStock(part: Part, quantity: number): Promise<boolean> {
+    const fresh = await fetchPartByID(part.id);
+    if (!fresh) return false;
+    return fresh.stock >= quantity;
+}
+
+export async function getByID(id: string): Promise<Part | null> {
+    return fetchPartByID(id);
+}
+
+export async function getByType(type: string): Promise<Cooler[] | Case[] | CPU[] | GPU[] | MOBO[] | MOBO[] | OS[] | PSU[] | RAM[] | Storage[] | undefined> {
+    switch (type) {
+        case PartType.CASE: return await fetchAllCases();
+        case PartType.COOLER: return await fetchAllCoolers();
+        case PartType.CPU: return await fetchAllCPUs();
+        case PartType.GPU: return await fetchAllGPUs();
+        case PartType.MOBO: return await fetchAllMOBOs();
+        case PartType.OS: return await fetchAllOSs();
+        case PartType.PSU: return await fetchAllPSUs();
+        case PartType.RAM: return await fetchAllRAMs();
+        case PartType.STORAGE: return await fetchAllStorages();
+        default: break;
     }
 }
 
-export function getByID(id: string): Part | null {
-    const prefix = id.split("-")[0];
-    const array = getByType(prefix);
-    if (array) {
-        const foundPart = array.find((p) => p.id === id);
-        return foundPart || null;
-    } else {
-        return null;
-    }
-};
-
-export function getByName(name: string, type: string): Part | null {
+export async function getByName(name: string, type: string): Promise<Part | null> {
+    const parts = await getByType(type);
+    if (!parts) return null;
     const productName = name.toLowerCase().trim();
-    const partType = getByType(type);
-    if (partType) {
-        for (const retrievedPart of partType) {
-            if (retrievedPart.name.toLowerCase().trim() === productName) {
-                return retrievedPart;
-            }
-        }
-    }
+    return parts.find(p => p.name.toLowerCase().trim() === productName) ?? null;
+}
 
-    return null;
-};
-
-export function addPart(part: Part): Part | null {
-    const partType = getTypeByID(part);
-    if (partType) {
-        part.id = `${part.partType.toLowerCase()}-${partType.length + 1}`;
-        switch (part.id.split("-")[0]) {
-            case PartType.CASE:
-                return addNewCase(part as Case);
-            case PartType.COOLER:
-                return addNewCooler(part as Cooler);
-            case PartType.CPU:
-                return addNewCPU(part as CPU);
-            case PartType.GPU:
-                return addNewGPU(part as GPU);
-            case PartType.MOBO:
-                return addNewMOBO(part as MOBO);
-            case PartType.OS:
-                return addNewOS(part as OS);
-            case PartType.PSU:
-                return addNewPSU(part as PSU);
-            case PartType.RAM:
-                return addNewRAM(part as RAM);
-            case PartType.STORAGE:
-                return addNewStorage(part as Storage);
-            default:
-                return null;
-        }
-    } else {
-        return null;
-    }
+export async function changeStock(part: Part, adding: boolean, amount: number): Promise<Part> {
+    return updateStock(part, adding, amount);
 }
