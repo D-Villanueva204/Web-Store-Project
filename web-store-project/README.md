@@ -23,9 +23,11 @@ Browse products by label such as GPU, CPU, RAM, etc: Dominique
 Sidebar: Dominique
 Parts: Dominique
 
-
 ## Sprint 3:
 Sidebar Component, Product Repository, Sidebar Repository, Sidebar Service, useCart, GeneralSelector refactor, GeneralGenerator refactor: Dominique
 Product Service: Czedrick
 New Component (Order) with new architecture, Order Repository/Service/Hook with Definitions, Order Test Data, Order Page: Joshua
 useFavourites hook, favouritesRepo, favouritesService, refactor favouritesButton, refactor favouritesPage: Czedrick
+
+## Sprint 4
+Orders(Backend and Frontend), Prisma Installation, Client Initialization - Joshua Robleza
