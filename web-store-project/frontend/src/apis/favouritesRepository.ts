@@ -1,5 +1,5 @@
 import { getByID } from "../services/productService";
-import type { Favourites } from "../types/favouritesType";
+import type { Favourites } from "../../../shared/types/favouritesType";
 
 let favouritesData: Favourites[] = [
       { id: "1000", name: "NVIDIA RTX 4090", price: 1599.99, stock: 12, favourited: true },

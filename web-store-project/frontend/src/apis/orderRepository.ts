@@ -1,5 +1,5 @@
 import type { Order } from "../../../shared/types/order"
-import { testOrders } from "../../../data/testOrders"
+import { testOrders } from "../../../shared/data/testOrders"
 
 /**
  * Order Repository
