@@ -17,15 +17,34 @@ const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
+    await prisma.case.deleteMany();
+    await prisma.cooler.deleteMany();
+    await prisma.cPU.deleteMany();
+    await prisma.gPU.deleteMany();
+    await prisma.mOBO.deleteMany();
+    await prisma.oS.deleteMany();
+    await prisma.pSU.deleteMany();
+    await prisma.rAM.deleteMany();
+    await prisma.storage.deleteMany();
     await prisma.part.deleteMany();
-    
+
     const usedIds = new Set<string>();
 
+    function makeId(prefix: string, name: string): string {
+        const baseId = `${prefix}-${name.toLowerCase()}`;
+        let id = baseId;
+        let counter = 1;
+        while (usedIds.has(id)) {
+            id = `${baseId}-${counter++}`;
+        }
+        usedIds.add(id);
+        return id;
+    }
+
     for (const c of cases) {
-        let id = `case-${c.name.toLowerCase()}`;
         await prisma.part.create({
             data: {
-                id: id,
+                id: makeId("case", c.name),
                 name: c.name,
                 price: c.price,
                 stock: c.stock,
@@ -45,10 +64,9 @@ async function main() {
     }
 
     for (const item of cpus) {
-        let id = `cpu-${item.name.toLowerCase()}`;
         await prisma.part.create({
             data: {
-                id: id,
+                id: makeId("cpu", item.name),
                 name: item.name,
                 price: item.price,
                 stock: item.stock,
@@ -68,10 +86,9 @@ async function main() {
     }
 
     for (const item of gpus) {
-        let id = `gpu-${item.name.toLowerCase()}`;
         await prisma.part.create({
             data: {
-                id: id,
+                id: makeId("gpu", item.name),
                 name: item.name,
                 price: item.price,
                 stock: item.stock,
@@ -91,10 +108,9 @@ async function main() {
     }
 
     for (const item of mobos) {
-        let id = `mobo-${item.name.toLowerCase()}`;
         await prisma.part.create({
             data: {
-                id: id,
+                id: makeId("mobo", item.name),
                 name: item.name,
                 price: item.price,
                 stock: item.stock,
@@ -113,10 +129,9 @@ async function main() {
     }
 
     for (const item of psus) {
-        let id = `psu-${item.name.toLowerCase()}`;
         await prisma.part.create({
             data: {
-                id: id,
+                id: makeId("psu", item.name),
                 name: item.name,
                 price: item.price,
                 stock: item.stock,
@@ -135,16 +150,9 @@ async function main() {
     }
 
     for (const item of storages) {
-        let id = `storage-${item.name.toLowerCase()}`;
-        let counter = 1;
-        while (usedIds.has(id)) {
-            id = `storage-${item.name.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')}-${counter}`;
-            counter++;
-        }
-        usedIds.add(id);
         await prisma.part.create({
             data: {
-                id: id,
+                id: makeId("storage", item.name),
                 name: item.name,
                 price: item.price,
                 stock: item.stock,
@@ -164,10 +172,9 @@ async function main() {
     }
 
     for (const item of coolers) {
-        let id = `cooler-${item.name.toLowerCase()}`;
         await prisma.part.create({
             data: {
-                id: id,
+                id: makeId("cooler", item.name),
                 name: item.name,
                 price: item.price,
                 stock: item.stock,
@@ -185,10 +192,9 @@ async function main() {
     }
 
     for (const item of oss) {
-        let id = `os-${item.name.toLowerCase()}`;
         await prisma.part.create({
             data: {
-                id: id,
+                id: makeId("os", item.name),
                 name: item.name,
                 price: item.price,
                 stock: item.stock,
@@ -204,10 +210,9 @@ async function main() {
     }
 
     for (const item of rams) {
-        let id = `ram-${item.name.toLowerCase()}`;
         await prisma.part.create({
             data: {
-                id: id,
+                id: makeId("ram", item.name),
                 name: item.name,
                 price: item.price,
                 stock: item.stock,
