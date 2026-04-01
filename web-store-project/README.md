@@ -32,3 +32,4 @@ useFavourites hook, favouritesRepo, favouritesService, refactor favouritesButton
 
 ## Sprint 4: 
 Favourites Backend, Monorepo creation, Favourites Frontend : Czedrick
+Products (Front End/Back End), Sidebar (Front End/ Back End), Vercel, Prisma Schema, Prisma Seed - Dominique
