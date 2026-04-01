@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import BuyButton from "../../buyButton/buyButton";
 import PartTypes from "../../../../../../shared/types/PartTypes";
 import { getByType } from "../../../../services/productService";
@@ -7,13 +8,12 @@ import "./generalTypeGenerator.css"
 import { getFavouriteById } from "../../../../apis/favouritesRepository";
 
 /**
- * Dominique Villanueva:
  * This component now uses the getByType service, and the new BuyButton,
  * and the new Part and PartType types.
  * 
  */
 
-async function GeneralTypeGenerator({ partType, addFavourite, favourite, addItemToCart }: { partType: typeof PartTypes[keyof typeof PartTypes], addFavourite: (id: string) => void, favourite: boolean, addItemToCart: (item: Part) => void }) {
+function GeneralTypeGenerator({ partType, addFavourite, favourite, addItemToCart }: { partType: typeof PartTypes[keyof typeof PartTypes], addFavourite: (id: string) => void, favourite: boolean, addItemToCart: (item: Part) => void }) {
     
     /**
      * Originally, partType would have a link directly to the data, we can just get the arrays ourselves
@@ -21,59 +21,40 @@ async function GeneralTypeGenerator({ partType, addFavourite, favourite, addItem
      * check for it.
      * 
      */
-    const partData = await getByType(partType);
-    let retrievedPart = null;
-    if (partData) {
-        let partName = "Not Found";
-        let price = 0.00;
-        let stock = 0;
-        // And because these new Part arrays can return null, we can use this for quick validation.
-        const randomIndex = Math.floor(Math.random() * partData.length);
-        retrievedPart = partData[randomIndex];
-        if (retrievedPart) {
-            partName = retrievedPart.name;
-            price = retrievedPart.price;
-            stock = retrievedPart.stock;
-        }
+    const [part, setPart] = useState<Part | null>(null);
+    const [isFavourited, setIsFavourited] = useState(false);
 
-        if (favourite) {
-            let retrievedFavourite = false
-            try {
-                getFavouriteById(retrievedPart.id);
-                retrievedFavourite = true;
-            } catch (error) {
-                retrievedFavourite = false;
+    useEffect(() => {
+        getByType(partType).then(partData => {
+            if (!partData || partData.length === 0) return;
+            const randomIndex = Math.floor(Math.random() * partData.length);
+            const randomPart = partData[randomIndex];
+            setPart(randomPart);
+
+            if (favourite && randomPart) {
+                try {
+                    getFavouriteById(randomPart.id);
+                    setIsFavourited(true);
+                } catch {
+                    setIsFavourited(false);
+                }
             }
+        });
+    }, [partType, favourite]);
 
-            return (
-                <section className="random-part-section">
-                    <h3>
-                        {partName}
-                    </h3>
-                    <p>
-                        Price: ${price}
-                    </p>
-                    <p>In stock: {stock}</p>
-                    <BuyButton part={retrievedPart} addToCart={addItemToCart} />
-                    <AddFavouriteButton id={retrievedPart.id} handleToggleFavourite={addFavourite} isFavourited={retrievedFavourite} />
-                </section>
-            )
-        }
-        if (!favourite) {
-            return (
-                <section className="random-part-section">
-                    <h3>
-                        {partName}
-                    </h3>
-                    <p>
-                        Price: ${price}
-                    </p>
-                    <p>In stock: {stock}</p>
-                    <BuyButton part={retrievedPart} addToCart={addItemToCart} />
-                </section>
-            )
-        }
-    }
+    if (!part) return <p>Loading...</p>;
+
+    return (
+        <section className="random-part-section">
+            <h3>{part.name}</h3>
+            <p>Price: ${part.price}</p>
+            <p>In stock: {part.stock}</p>
+            <BuyButton part={part} addToCart={addItemToCart} />
+            {favourite && (
+                <AddFavouriteButton id={part.id} handleToggleFavourite={addFavourite} isFavourited={isFavourited} />
+            )}
+        </section>
+    );
 };
 
 export default GeneralTypeGenerator;

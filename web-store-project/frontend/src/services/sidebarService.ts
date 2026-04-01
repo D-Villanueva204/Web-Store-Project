@@ -64,9 +64,9 @@ export function getTotal(): number {
     return total;
 };
 
-function checkIfPartExists(itemId: string): boolean {
+async function checkIfPartExists(itemId: string): Promise<boolean> {
     const partType: string = itemId.split("-")[0];
-    const partData = getByType(partType);
+    const partData = await getByType(partType);
     if (partData) {
         for (const part of partData) {
             if (part.id === itemId) {
