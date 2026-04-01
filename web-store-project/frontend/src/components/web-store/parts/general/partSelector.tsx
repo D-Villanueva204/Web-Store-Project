@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import BuyButton from "../../buyButton/buyButton";
 import type { Part } from "../../../../../../shared/types/PartTypes";
 import { getByName } from "../../../../services/productService";
@@ -9,31 +10,21 @@ import { getByName } from "../../../../services/productService";
  */
 
 function GeneralSelector({ name, partType, addItemToCart }: { name: string, partType: string, addItemToCart: (item: Part) => void }) {
-    let partName = "Not Found";
-    let price = 0;
-    let stock = 0;
+    const [part, setPart] = useState<Part | null>(null);
 
-    // Instead of retrieving the data ourselves, we can just extract it using the service, and pass on the object
-    // directly from the repository than to construct the product later.
-    const retrievedPart = getByName(name, partType);
+    useEffect(() => {
+        getByName(name, partType).then(setPart);
+    }, [name, partType]);
 
-    if (retrievedPart) {
-       partName = retrievedPart.name;
-       price = retrievedPart.price;
-       stock = retrievedPart.stock;
-    }
+    if (!part) return <p>Loading...</p>;
 
     return (
         <section className="part-section">
-            <h3>
-                {partName}
-            </h3>
-            <p>
-                Price: ${price}
-            </p>
-            <p>Stock: {stock} </p>
-            <BuyButton part={retrievedPart} addToCart={addItemToCart}/>
+            <h3>{part.name}</h3>
+            <p>Price: ${part.price}</p>
+            <p>Stock: {part.stock}</p>
+            <BuyButton part={part} addToCart={addItemToCart} />
         </section>
-    )
+    );
 }
 export default GeneralSelector;

@@ -1,15 +1,16 @@
-function AddFavouriteButton({ id, handleToggleFavourite, isFavourited }: { 
+function AddFavouriteButton({ id, handleAdd, handleDelete, isFavourited }: { 
     id: string,
-    handleToggleFavourite: (id: string) => void,
+    handleAdd: (id: string) => void,
+    handleDelete?: (id: string) => void,
     isFavourited: boolean
 }) {
     return (
         <>
         {!isFavourited && 
-            <button type="button" onClick={() => handleToggleFavourite(id)}>Add to Favourites</button>}
+            <button type="button" onClick={() => handleAdd(id)}>Add to Favourites</button>}
 
-        {isFavourited &&
-            <button type="button" onClick={() => handleToggleFavourite(id)}>Remove from Favourites</button>}
+        {isFavourited && handleDelete &&
+            <button type="button" onClick={() => handleDelete(id)}>Remove from Favourites</button>}
         </>
     )
 }

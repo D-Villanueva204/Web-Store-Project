@@ -3,7 +3,9 @@ import GeneralTypeGenerator from "../components/web-store/parts/general/partRand
 import type { Part } from "../../../shared/types/PartTypes";
 import PartTypes from "../../../shared/types/PartTypes";
 
-function ProductPage({ addItemToCart, addFavourite }: { addItemToCart: (item: Part) => void, addFavourite: (id: string) => void }) {
+function ProductPage({ addItemToCart, handleAddFavourite }: 
+    { addItemToCart: (item: Part) => void, 
+        handleAddFavourite: (id: string) => void }) {
     const [selectedCategory, setSelectedCategory] = useState<keyof typeof PartTypes>("CPU");
     const categories = ["CASE", "COOLER", "CPU", "GPU", "MOBO", "PSU", "RAM", "STORAGE", "OS"];
 
@@ -20,9 +22,9 @@ function ProductPage({ addItemToCart, addFavourite }: { addItemToCart: (item: Pa
                 ))}
             </select>
             <div>
-                <GeneralTypeGenerator partType={PartTypes[selectedCategory]} addItemToCart={addItemToCart} addFavourite={addFavourite} favourite={true} />
-                <GeneralTypeGenerator partType={PartTypes[selectedCategory]} addItemToCart={addItemToCart} addFavourite={addFavourite} favourite={true} />
-                <GeneralTypeGenerator partType={PartTypes[selectedCategory]} addItemToCart={addItemToCart} addFavourite={addFavourite} favourite={true} />
+                <GeneralTypeGenerator partType={PartTypes[selectedCategory]} addItemToCart={addItemToCart} handleAddFavourite={handleAddFavourite} favourite={true} />
+                <GeneralTypeGenerator partType={PartTypes[selectedCategory]} addItemToCart={addItemToCart} handleAddFavourite={handleAddFavourite} favourite={true} />
+                <GeneralTypeGenerator partType={PartTypes[selectedCategory]} addItemToCart={addItemToCart} handleAddFavourite={handleAddFavourite} favourite={true} />
             </div>
             <div>
                 {/* <StarRating iconSize={50} defaultRating={defaultRating} /> */}
