@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 
 import corsOptions from "../config/cors";
 import setupSwagger from "../config/swagger";
+import orderRoutes from "../src/api/v1/routes/orderRoutes"
 import errorHandler from "./api/v1/middleware/errorHandler";
 
 const app: Express = express();
@@ -22,6 +23,8 @@ setupSwagger(app);
 app.get("/", (_req, res) => {
     res.send("Got response from backend!");
 });
+
+app.use("/api/v1", orderRoutes) 
 
 app.use(errorHandler);
 
