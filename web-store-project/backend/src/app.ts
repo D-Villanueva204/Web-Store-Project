@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import corsOptions from "../config/cors";
 import setupSwagger from "../config/swagger";
 import productRoutes from "../src/api/v1/routes/productRoutes"
+import cartRoutes from "../src/api/v1/routes/cartRoute";
 import errorHandler from "./api/v1/middleware/errorHandler";
 
 const app: Express = express();
@@ -24,8 +25,8 @@ app.get("/", (_req, res) => {
     res.send("Got response from backend!");
 });
 
-// use termRoutes
 app.use("/api/v1", productRoutes);
+app.use("/api/v1", cartRoutes);
 
 app.use(errorHandler);
 
