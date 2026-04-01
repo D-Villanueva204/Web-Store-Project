@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { addItem, getTotal, removeItem, fetchItems, clearItems } from "../services/sidebarService";
 import type { CartItem } from "../../../shared/types/CartItem";
 import type { Part } from "../../../shared/types/PartTypes";
@@ -12,33 +12,33 @@ import type { Part } from "../../../shared/types/PartTypes";
  */
 
 export function useCart() {
-    const [items, setItems] = useState<CartItem[]>(fetchItems());
-    const [total, setTotal] = useState<number>(getTotal());
+    const [items, setItems] = useState<CartItem[]>([]);
+    const [total, setTotal] = useState<number>(0);
 
-    function refreshCart() {
-        setItems([...fetchItems()]);
+    async function refreshCart() {
+        const [cartItems, cartTotal] = await Promise.all([fetchItems(), getTotal()]);
+        setItems(cartItems);
+        setTotal(cartTotal);
     }
 
-    const addItemsToCart = (part: Part) => {
-        const result = addItem(part);
-        if (result) {
-            setTotal(total + Number(part.price));
-        }
+    useEffect(() => {
         refreshCart();
+    }, []);
+
+    const addItemsToCart = async (part: Part) => {
+        const result = await addItem(part);
+        if (result) await refreshCart();
     };
 
-    const removeItemFromCart = (cartItem: CartItem) => {
-        removeItem(cartItem);
-        setTotal(total - Number(cartItem.price));
-        refreshCart();
+    const removeItemFromCart = async (cartItem: CartItem) => {
+        await removeItem(cartItem);
+        await refreshCart();
     };
 
-    const clearAllItems = () => {
-        clearItems();
-        setTotal(0.00);
-        refreshCart();
+    const clearAllItems = async () => {
+        await clearItems();
+        await refreshCart();
     };
 
     return { items, total, addItemsToCart, removeItemFromCart, clearAllItems, setItems };
-
 }

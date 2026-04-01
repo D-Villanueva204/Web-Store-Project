@@ -1,5 +1,5 @@
 import { prisma } from "../../../../lib/prisma";
-import type { CartItem as CartItemType } from "../../../../../shared/types/CartItem";
+import type { CartItem } from "../../../../../shared/types/CartItem";
 
 function mapCartItem(item: {
     id: string;
@@ -13,7 +13,7 @@ function mapCartItem(item: {
         stock: number;
         partType: string;
     };
-}): CartItemType {
+}): CartItem {
     return {
         id: item.id,
         name: item.part.name,
@@ -22,7 +22,7 @@ function mapCartItem(item: {
     };
 }
 
-export async function fetchCart(cartId: string): Promise<CartItemType[]> {
+export async function fetchCart(cartId: string): Promise<CartItem[]> {
     let cart = await prisma.cart.findUnique({
         where: { id: cartId },
         include: { items: { include: { part: true } } }
@@ -38,7 +38,7 @@ export async function fetchCart(cartId: string): Promise<CartItemType[]> {
     return cart.items.map(mapCartItem);
 }
 
-export async function addCartItem(cartId: string, partId: string): Promise<CartItemType> {
+export async function addCartItem(cartId: string, partId: string): Promise<CartItem> {
     await fetchCart(cartId);
 
     const existingItem = await prisma.cartItem.findFirst({
@@ -63,7 +63,7 @@ export async function addCartItem(cartId: string, partId: string): Promise<CartI
     return mapCartItem(newItem);
 }
 
-export async function updateCartItem(itemId: string, quantity: number): Promise<CartItemType | null> {
+export async function updateCartItem(itemId: string, quantity: number): Promise<CartItem | null> {
     if (quantity <= 0) {
         await prisma.cartItem.delete({ where: { id: itemId } });
         return null;
