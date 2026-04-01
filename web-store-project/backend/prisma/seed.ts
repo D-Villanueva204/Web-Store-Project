@@ -17,6 +17,11 @@ const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
+    await prisma.cartItem.deleteMany();
+    await prisma.cart.deleteMany();
+    await prisma.favourite.deleteMany();
+    await prisma.orderItem.deleteMany();
+    await prisma.order.deleteMany();
     await prisma.case.deleteMany();
     await prisma.cooler.deleteMany();
     await prisma.cPU.deleteMany();
@@ -27,6 +32,7 @@ async function main() {
     await prisma.rAM.deleteMany();
     await prisma.storage.deleteMany();
     await prisma.part.deleteMany();
+
 
     const usedIds = new Set<string>();
 
