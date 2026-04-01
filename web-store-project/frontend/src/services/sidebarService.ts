@@ -3,18 +3,18 @@ import type { CartItem } from "../../../shared/types/CartItem";
 import { type Part  } from "../../../shared/types/PartTypes";
 import { getByType, validateStock } from "./productService";
 
-export function addItem(part: Part): CartItem | null {
+export async function addItem(part: Part): Promise<CartItem | null> {
     if (fetchAllItems().length >= 10) {
         return null;
     }
 
-    if (checkIfPartExists(part.id)) {
+    if (await checkIfPartExists(part.id)) {
         for (const cartItem of fetchAllItems()) {
             if (cartItem.id == part.id) {
                 if (part.stock == 0) {
                     return null;
                 }
-                if (validateStock(part, cartItem.quantity + 1)) {
+                if (await validateStock(part, cartItem.quantity + 1)) {
                     updateCartItem(cartItem, (cartItem.quantity + 1));
                     return cartItem;
                 }
