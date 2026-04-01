@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import { Favourite, Part } from "@prisma/client";
 import * as favouriteService from "../services/favouritesService"
 import { successResponse } from "../models/responseModel";
 

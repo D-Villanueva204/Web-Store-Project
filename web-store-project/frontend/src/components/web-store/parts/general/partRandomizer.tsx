@@ -5,7 +5,6 @@ import { getByType } from "../../../../services/productService";
 import AddFavouriteButton from "../../favourite-button/favourite-button";
 import type { Part } from "../../../../../../shared/types/PartTypes";
 import "./generalTypeGenerator.css"
-import { getFavouriteById } from "../../../../apis/favouritesRepository";
 
 /**
  * This component now uses the getByType service, and the new BuyButton,
@@ -13,7 +12,12 @@ import { getFavouriteById } from "../../../../apis/favouritesRepository";
  * 
  */
 
-function GeneralTypeGenerator({ partType, addFavourite, favourite, addItemToCart }: { partType: typeof PartTypes[keyof typeof PartTypes], addFavourite: (id: string) => void, favourite: boolean, addItemToCart: (item: Part) => void }) {
+function GeneralTypeGenerator({ partType, handleAddFavourite, favourite, handleDeleteFavourite, addItemToCart }: 
+    { partType: typeof PartTypes[keyof typeof PartTypes], 
+    handleAddFavourite: (id: string) => void, 
+    handleDeleteFavourite?: (id: string) => void,
+    favourite: boolean, 
+    addItemToCart: (item: Part) => void }) {
     
     /**
      * Originally, partType would have a link directly to the data, we can just get the arrays ourselves
@@ -32,12 +36,7 @@ function GeneralTypeGenerator({ partType, addFavourite, favourite, addItemToCart
             setPart(randomPart);
 
             if (favourite && randomPart) {
-                try {
-                    getFavouriteById(randomPart.id);
-                    setIsFavourited(true);
-                } catch {
-                    setIsFavourited(false);
-                }
+                setIsFavourited(false)
             }
         });
     }, [partType, favourite]);
@@ -51,7 +50,7 @@ function GeneralTypeGenerator({ partType, addFavourite, favourite, addItemToCart
             <p>In stock: {part.stock}</p>
             <BuyButton part={part} addToCart={addItemToCart} />
             {favourite && (
-                <AddFavouriteButton id={part.id} handleToggleFavourite={addFavourite} isFavourited={isFavourited} />
+                <AddFavouriteButton id={part.id} handleAdd={handleAddFavourite} handleDelete={handleDeleteFavourite} isFavourited={isFavourited} />
             )}
         </section>
     );

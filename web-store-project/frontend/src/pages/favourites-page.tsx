@@ -2,7 +2,7 @@ import { useFavourites } from "../hooks/useFavourites";
 import AddFavouriteButton from "../components/web-store/favourite-button/favourite-button";
 
 function FavouritesPage() {
-    const { favourites, error, handleToggleFavourite } = useFavourites();
+    const { favourites, error, handleAddFavourite, handleDeleteFavourite } = useFavourites();
     return (
         <div>
             <h2>My Favourites</h2>
@@ -11,11 +11,12 @@ function FavouritesPage() {
             <ul>
                 {favourites.map((item) => (
                     <li key={item.id}>
-                        {item.name} - ${item.price}
+                        {item.part.name} - ${item.part.price}
                         <AddFavouriteButton 
                             id={item.id} 
-                            handleToggleFavourite={handleToggleFavourite}
-                            isFavourited={item.favourited}
+                            handleAdd={handleAddFavourite}
+                            handleDelete={handleDeleteFavourite}
+                            isFavourited={true}
                         />
                     </li>
                 ))}

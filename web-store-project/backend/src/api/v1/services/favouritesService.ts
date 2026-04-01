@@ -1,36 +1,29 @@
-import { mockFavourites, mockParts } from "../../../../../shared/data/mockFavouritesData"
-import { Favourite, Part } from "@prisma/client"
+import { Favourite } from "@prisma/client"
+import { prisma } from "../../../../lib/prisma"
 
-export const fetchAllFavourites = async() => {
-    return mockFavourites
+export const fetchAllFavourites = async(): Promise<Favourite[]> => {
+    return prisma.favourite.findMany({
+        include: {part: true}
+    })
 }
 
 export const createFavourite = async(favouriteData: {
     partId: string
-}) => {
-    const foundPart = mockParts.find((f => f.id === favouriteData.partId))
-    if(!foundPart)
-        throw new Error(`${favouriteData.partId} not found.`)
+}): Promise<Favourite> => {
+    const newFavourite: Favourite = await prisma.favourite.create({
+        data: {
+            partId: favouriteData.partId
+        }, 
+        include: { part: true}
+    });
 
-    const newPart = {
-        id: crypto.randomUUID(),
-        partId: favouriteData.partId,
-        part: foundPart
-    }
-
-    mockFavourites.push(newPart)
-
-    return newPart
+    return newFavourite;
 }
 
-export const deleteFavourite = async(id: string) => {
-    const foundFavourite = mockFavourites.findIndex((f => f.id === id))
-
-    if(foundFavourite === -1)
-        throw new Error(`${id} not found`)
-    const deleteFavourite = mockFavourites[foundFavourite]
-
-    mockFavourites.splice(foundFavourite, 1)
-
-    return deleteFavourite
+export const deleteFavourite = async(id: string): Promise<void> => {
+    await prisma.favourite.delete({
+        where: {
+            id: id
+        }
+    })
 }
