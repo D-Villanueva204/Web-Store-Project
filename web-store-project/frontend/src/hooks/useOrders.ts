@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react"
 import * as orderRepository from "../apis/orderRepository"
-import * as orderService from "../services/orderService"
+import * as orderService from "../services/orderService"  // ✅ Match team pattern
 import type { Order } from "../../../shared/types/order"
-import type { Part } from "../../../shared/types/PartTypes"
 
 export function useOrders() {
   const [orders, setOrders] = useState<Order[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string>("")
 
-
+  /**
+   * Load all orders from backend
+   */
   const loadOrders = async () => {
     try {
       setLoading(true)
@@ -23,28 +24,30 @@ export function useOrders() {
     }
   }
 
-  const placeOrder = async (items: Part[], total: number): Promise<{ success: boolean; message: string }> => {
+  /**
+   * Place a new order
+   */
+  const placeOrder = async (
+    items: Array<{
+      id: string
+      name: string
+      price: number
+      quantity: number
+    }>,
+    total: number
+  ): Promise<{ success: boolean; message: string }> => {
     try {
-      // Client-side validation (immediate feedback)
-      const validation = orderService.validateOrderClient(items)
-      
-      if (!validation.valid) {
-        return { success: false, message: validation.message }
+      if (items.length === 0) {
+        return { success: false, message: "Cart is empty" }
       }
 
-      // Prepare items for backend (map Part to expected format)
-      const orderItems = items.map(item => ({
-        id: item.id,
-        name: item.name,
-        price: item.price,
-        quantity: 1  // Adjust if you track quantity elsewhere
-      }))
+      const calculatedTotal = orderService.calculateTotal(items)
+      if (Math.abs(calculatedTotal - total) > 0.01) {
+        return { success: false, message: "Total mismatch detected" }
+      }
 
-      // Send to backend (backend will validate again for security)
-      const newOrder = await orderRepository.createOrder({ 
-        items: orderItems, 
-        total 
-      })
+      // Send to backend via repository
+      const newOrder = await orderRepository.createOrder({ items, total })
       
       // Update local state
       setOrders([newOrder, ...orders])

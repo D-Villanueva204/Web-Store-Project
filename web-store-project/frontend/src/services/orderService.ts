@@ -16,10 +16,15 @@ export function formatPrice(price: number): string {
 }
 
 
-export function calculateTotal(items: Part[]): number {
+export function calculateTotal(
+  items: Array<{
+    price: number
+    quantity: number
+  }>
+): number {
   return items.reduce((sum, item) => {
     const price = Number(item.price)
-    const quantity = 1 // Adjust if Part has quantity field
+    const quantity = item.quantity || 1
     return sum + (price * quantity)
   }, 0)
 }
