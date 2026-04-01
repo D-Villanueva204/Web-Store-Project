@@ -9,7 +9,7 @@
     "postinstall": "prisma generate",
     "build": "tsc"
   },
-   "keywords": [],
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
