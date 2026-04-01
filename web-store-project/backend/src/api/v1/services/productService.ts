@@ -88,42 +88,6 @@ export async function fetchStorageByID(id: string): Promise<Storage | null> {
   return productRepository.fetchStorageByID(id);
 }
 
-export async function createCase(data: any): Promise<void> {
-  return productRepository.createCase(data);
-}
-
-export async function createCooler(data: any): Promise<void> {
-  return productRepository.createCooler(data);
-}
-
-export async function createCPU(data: any): Promise<void> {
-  return productRepository.createCPU(data);
-}
-
-export async function createGPU(data: any): Promise<void> {
-  return productRepository.createGPU(data);
-}
-
-export async function createMOBO(data: any): Promise<void> {
-  return productRepository.createMOBO(data);
-}
-
-export async function createOS(data: any): Promise<void> {
-  return productRepository.createOS(data);
-}
-
-export async function createPSU(data: any): Promise<void> {
-  return productRepository.createPSU(data);
-}
-
-export async function createRAM(data: any): Promise<void> {
-  return productRepository.createRAM(data);
-}
-
-export async function createStorage(data: any): Promise<void> {
-  return productRepository.createStorage(data);
-}
-
 export async function updateStock(id: string, adding: boolean, amount: number): Promise<Part> {
   return productRepository.updateStock(id, adding, amount);
 }
