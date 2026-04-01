@@ -33,7 +33,7 @@ function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
         <div>
             <div>
                 <h2> Latest Item On Sale: </h2>
-                <PartSelector name={"ARCTIC Liquid Freezer III Pro 360"} partType={PartType.COOLER} addItemToCart={addItemToCart} />
+                <PartSelector name={"Cooler Master Hyper 212 Black Edition"} partType={PartType.COOLER} addItemToCart={addItemToCart} />
             </div>
             <div>
                 <h2>

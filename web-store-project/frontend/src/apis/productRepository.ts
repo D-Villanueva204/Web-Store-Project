@@ -122,7 +122,6 @@ export async function fetchStorageByID(id: string): Promise<Storage> {
   return data.data;
 }
  
-// Add functions per partType (keep your existing ones)
 export async function addNewCase(newCase: Case): Promise<Case> {
   const res = await fetch(`${BASE_URL}/api/v1/products/case`, {
     method: "POST",
