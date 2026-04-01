@@ -22,6 +22,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# Environment Variables
-*.env
+/src/components/web-store/stars/*

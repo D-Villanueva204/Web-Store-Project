@@ -16,19 +16,17 @@ Vite Setup/Management: Dominique
 Feature Page: Dominique (Main Page), Czedrick (Favourites and Product), Joshua (Cart)
 Shared state across pages: Dominique
 Multi-Page Navigation: Czedrick
-Elemental Addition/Removal: Dominique, Czedrick, Joshus
+Elemental Addition/Removal: Dominique, Czedrick
 Header Items are connected with Routes: Czedrick
-Form Component: Dominique, Czedrick, Joshua
+Form Component: Dominique, Czedrick
 Browse products by label such as GPU, CPU, RAM, etc: Dominique
 Sidebar: Dominique
 Parts: Dominique
 
-
 ## Sprint 3:
 Sidebar Component, Product Repository, Sidebar Repository, Sidebar Service, useCart, GeneralSelector refactor, GeneralGenerator refactor: Dominique
 Product Service: Czedrick
-New Component (Order) with new architecture, Order Repository/Service/Hook with Definitions, Order Test Data, Order Page: Joshua
 useFavourites hook, favouritesRepo, favouritesService, refactor favouritesButton, refactor favouritesPage: Czedrick
 
-## Sprint 4: 
-Favourites Backend, Monorepo creation, Favourites Frontend : Czedrick
+## Sprint 4:
+Products (Front End/Back End), Sidebar (Front End/ Back End), Vercel, Prisma Schema, Prisma Seed - Dominique Villanueva
