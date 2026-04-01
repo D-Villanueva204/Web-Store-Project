@@ -1,26 +1,54 @@
 import type { Order } from "../../../shared/types/order"
-import { testOrders } from "../../../shared/data/testOrders"
 
-/**
- * Order Repository
- * Handles data access for order information
- * Uses test data for now
- */
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1'
 
-export function getAllOrders(): Order[] {
-  return testOrders
-}
 
-export function getOrderById(id: number): Order | undefined {
-  return testOrders.find(order => order.id === id)
-}
-
-export function createOrder(order: Omit<Order, "id">): Order {
-  const newOrder: Order = {
-    ...order,
-    id: testOrders.length + 1
+export async function getAllOrders(): Promise<Order[]> {
+  const response = await fetch(`${API_BASE_URL}/orders`)
+  
+  if (!response.ok) {
+    throw new Error('Failed to fetch orders')
   }
-  testOrders.push(newOrder)
-  return newOrder
+  
+  const result = await response.json()
+  return result.data  // Extract data from ApiResponse
 }
 
+
+export async function getOrderById(id: number): Promise<Order | undefined> {
+  const response = await fetch(`${API_BASE_URL}/orders/${id}`)
+  
+  if (!response.ok) {
+    if (response.status === 404) return undefined
+    throw new Error('Failed to fetch order')
+  }
+  
+  const result = await response.json()
+  return result.data
+}
+
+export async function createOrder(orderData: {
+  items: Array<{
+    id: string
+    name: string
+    price: number
+    quantity: number
+  }>
+  total: number
+}): Promise<Order> {
+  const response = await fetch(`${API_BASE_URL}/orders`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(orderData)
+  })
+  
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message || 'Failed to create order')
+  }
+  
+  const result = await response.json()
+  return result.data
+}

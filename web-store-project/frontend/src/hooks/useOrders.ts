@@ -1,71 +1,62 @@
 import { useState, useEffect } from "react"
-import type { Order } from "../../../shared/types/order"
 import * as orderRepository from "../apis/orderRepository"
 import * as orderService from "../services/orderService"
+import type { Order } from "../../../shared/types/order"
 import type { Part } from "../../../shared/types/PartTypes"
 
-/**
- * useOrders Hook
- * Returns:
- * - orders: Array of all orders
- * - placeOrder: Function to create a new order from cart items
- * - loadOrders: Function to fetch all orders
- * - getOrderById: Function to get a specific order
- */
 export function useOrders() {
-    const [orders, setOrders] = useState<Order[]>([])
-    const [loading, setLoading] = useState<boolean>(true)
-    const [error, setError] = useState<string | null>();
-  /**
-   * Load all orders from repository
-   */
+  const [orders, setOrders] = useState<Order[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string>("")
+
+
   const loadOrders = async () => {
     try {
       setLoading(true)
-      
-      // Fetch orders from repository
-      const result = orderRepository.getAllOrders()
-
-      // Update state with the fetched orders
-      setOrders([...result])
-      setError("") // Clear any previous errors
-      
+      const result = await orderRepository.getAllOrders()
+      setOrders(result)
+      setError("")
     } catch (errorObject) {
-      // Set the error state if an error is caught
       setError(`${errorObject}`)
     } finally {
       setLoading(false)
     }
   }
 
+  const placeOrder = async (items: Part[], total: number): Promise<{ success: boolean; message: string }> => {
+    try {
+      // Client-side validation (immediate feedback)
+      const validation = orderService.validateOrderClient(items)
+      
+      if (!validation.valid) {
+        return { success: false, message: validation.message }
+      }
 
-  const getOrderById = (id: number): Order | undefined => {
-    return orderRepository.getOrderById(id)
-  }
+      // Prepare items for backend (map Part to expected format)
+      const orderItems = items.map(item => ({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: 1  // Adjust if you track quantity elsewhere
+      }))
 
-  const placeOrder = (items: Part[], total: number): { success: boolean; message: string } => {
-    // Validate order using service
-    const validation = orderService.validateOrder(items)
-    
-    if (!validation.valid) {
-      return { success: false, message: validation.message }
+      // Send to backend (backend will validate again for security)
+      const newOrder = await orderRepository.createOrder({ 
+        items: orderItems, 
+        total 
+      })
+      
+      // Update local state
+      setOrders([newOrder, ...orders])
+
+      return { success: true, message: "Order placed successfully!" }
+      
+    } catch (errorObject) {
+      setError(`${errorObject}`)
+      return { success: false, message: "Failed to place order. Please try again." }
     }
-
-    // Create order using service
-    const orderData = orderService.createOrderFromCart(items, total)
-    
-    // Save order using repository
-    const newOrder = orderRepository.createOrder(orderData)
-    
-    // Update local state
-    setOrders([...orders, newOrder])
-
-    return { success: true, message: "Order placed successfully!" }
   }
 
-  /**
-   * Load orders on mount
-   */
   useEffect(() => {
     loadOrders()
   }, [])
@@ -75,6 +66,6 @@ export function useOrders() {
     loading,
     error,
     placeOrder,
-    getOrderById
+    loadOrders
   }
 }
