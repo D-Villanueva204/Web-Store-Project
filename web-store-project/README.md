@@ -31,3 +31,6 @@ useFavourites hook, favouritesRepo, favouritesService, refactor favouritesButton
 
 ## Sprint 4
 Orders(Backend and Frontend), Prisma Installation, Client Initialization - Joshua Robleza
+## Sprint 4: 
+Favourites Backend, Monorepo creation, Favourites Frontend : Czedrick
+
