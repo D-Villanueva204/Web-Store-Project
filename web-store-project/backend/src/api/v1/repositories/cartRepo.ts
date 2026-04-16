@@ -16,6 +16,7 @@ function mapCartItem(item: {
 }): CartItem {
     return {
         id: item.id,
+        partId: item.partId,
         name: item.part.name,
         price: item.part.price,
         quantity: item.quantity,

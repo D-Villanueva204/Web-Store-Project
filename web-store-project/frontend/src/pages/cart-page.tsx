@@ -15,33 +15,44 @@ import type { CartItem } from "../../../shared/types/CartItem"
 interface CartPageProps {
   items: CartItem[]
   total: number
-  removeItemFromCart: (cartItem: CartItem) => void //added Parameter
+  removeItemFromCart: (cartItem: CartItem) => void
   clearCart: () => void
 }
 
 function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps) {
   const { placeOrder } = useOrders()
   const [message, setMessage] = useState<string>("")
+  const [isPlacingOrder, setIsPlacingOrder] = useState<boolean>(false)
   
-  const handlePlaceOrder = () => {
-    const partsForOrder = items.map(cartItem => ({
-      id: cartItem.id,
-      name: cartItem.name,
-      price: cartItem.price,
-      partType: "", // You might need to store this in CartItem if needed
-      stock: cartItem.quantity // Using "quantity" as stock
-    }))
+  const handlePlaceOrder = async () => {  
+    setIsPlacingOrder(true)
+    setMessage("")
     
-    const result = placeOrder(partsForOrder, total)
-    
-    setMessage(result.message)
-    
-    if (result.success) {
-      // Clear cart after successful order
-      clearCart()
+    try {
+      // Map CartItem to the format expected by placeOrder
+      const orderItems = items.map(cartItem => ({
+        id: cartItem.partId,           
+        name: cartItem.name,
+        price: cartItem.price,
+        quantity: cartItem.quantity 
+      }))
       
-      // Clear message after 3 seconds
-      setTimeout(() => setMessage(""), 3000)
+      const result = await placeOrder(orderItems, total)  
+      
+      setMessage(result.message)
+      
+      if (result.success) {
+        // Clear cart after successful order
+        clearCart()
+        
+        // Clear message after 3 seconds
+        setTimeout(() => setMessage(""), 3000)
+      }
+    } catch (err) {
+      console.error("Order placement error:", err)
+      setMessage("An error occurred while placing the order")
+    } finally {
+      setIsPlacingOrder(false)
     }
   }
   
@@ -65,26 +76,28 @@ function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps
               <th>#</th>
               <th>Name</th>
               <th>Price</th>
+              <th>Quantity</th>
               <th>Remove</th>
             </tr>
           </thead>
           <tbody>
             {items.length === 0 ? (
               <tr>
-                <td colSpan={4} className="empty-message">
+                <td colSpan={5} className="empty-message">
                   Your cart is empty. Start shopping!
                 </td>
               </tr>
             ) : (
               items.map((item, index) => (
-                <tr key={index}>
+                <tr key={item.id}>
                   <td>{index + 1}</td>
                   <td>{item.name}</td>
                   <td>${Number(item.price).toFixed(2)}</td>
+                  <td>{item.quantity}</td>
                   <td>
                     <button 
                       className="remove-btn" 
-                      onClick={() => removeItemFromCart(item)}    //Fixed: Pass CartItem
+                      onClick={() => removeItemFromCart(item)}
                       aria-label={`Remove ${item.name}`}
                     >
                       ✕
@@ -96,7 +109,7 @@ function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps
           </tbody>
           <tfoot>
             <tr className="total-row">
-              <td colSpan={3}><strong>Total:</strong></td>
+              <td colSpan={4}><strong>Total:</strong></td>
               <td><strong>${total.toFixed(2)}</strong></td>
             </tr>
           </tfoot>
@@ -105,9 +118,9 @@ function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps
           <button 
             onClick={handlePlaceOrder}
             className="place-order-btn"
-            disabled={items.length === 0}
+            disabled={items.length === 0 || isPlacingOrder}
           >
-            Place Order
+            {isPlacingOrder ? "Placing Order..." : "Place Order"}
           </button>
         </div>
       </div>

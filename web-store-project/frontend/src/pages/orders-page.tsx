@@ -52,7 +52,7 @@ function OrdersPage() {
                     <ul className="order-items">
                       {order.items.map((item, idx) => (
                         <li key={idx}>
-                          {item.name} - ${Number(item.price).toFixed(2)}
+                          {item.part.name} - ${Number(item.part.price).toFixed(2)} (x{item.quantity})
                         </li>
                       ))}
                     </ul>

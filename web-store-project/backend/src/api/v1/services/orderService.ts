@@ -41,6 +41,8 @@ export const createOrder = async (orderData: {
   }>
   total: number
 }): Promise<Order> => {
+  console.log("Creating order with items:", JSON.stringify(orderData.items, null, 2))
+
   const newOrder: Order = await prisma.order.create({
     data: {
       total: orderData.total,
