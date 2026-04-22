@@ -2,25 +2,14 @@ import type { CartItem } from "../../../shared/types/CartItem";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-function getOrCreateCartId(): string {
-    let cartId = localStorage.getItem("cartId");
-    if (!cartId) {
-        cartId = crypto.randomUUID();
-        localStorage.setItem("cartId", cartId);
-    }
-    return cartId;
-}
-
-export async function fetchAllItems(): Promise<CartItem[]> {
-    const cartId = getOrCreateCartId();
-    const res = await fetch(`${BASE_URL}/api/v1/cart/${cartId}`);
+export async function fetchAllItems(userId: string): Promise<CartItem[]> {
+    const res = await fetch(`${BASE_URL}/api/v1/cart/${userId}`);
     const data = await res.json();
     return data.data;
 }
 
-export async function addCartItem(partId: string): Promise<CartItem> {
-    const cartId = getOrCreateCartId();
-    const res = await fetch(`${BASE_URL}/api/v1/cart/${cartId}`, {
+export async function addCartItem(userId: string, partId: string): Promise<CartItem> {
+    const res = await fetch(`${BASE_URL}/api/v1/cart/${userId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ partId })
@@ -29,9 +18,8 @@ export async function addCartItem(partId: string): Promise<CartItem> {
     return data.data;
 }
 
-export async function updateCartItem(itemId: string, quantity: number): Promise<CartItem | null> {
-    const cartId = getOrCreateCartId();
-    const res = await fetch(`${BASE_URL}/api/v1/cart/${cartId}/${itemId}`, {
+export async function updateCartItem(userId: string, itemId: string, quantity: number): Promise<CartItem | null> {
+    const res = await fetch(`${BASE_URL}/api/v1/cart/${userId}/${itemId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ quantity })
@@ -40,18 +28,16 @@ export async function updateCartItem(itemId: string, quantity: number): Promise<
     return data.data ?? null;
 }
 
-export async function removeCartItem(itemId: string): Promise<boolean> {
-    const cartId = getOrCreateCartId();
-    const res = await fetch(`${BASE_URL}/api/v1/cart/${cartId}/${itemId}`, {
+export async function removeCartItem(userId: string, itemId: string): Promise<boolean> {
+    const res = await fetch(`${BASE_URL}/api/v1/cart/${userId}/${itemId}`, {
         method: "DELETE"
     });
     const data = await res.json();
     return data.status === "success";
 }
 
-export async function clearCart(): Promise<boolean> {
-    const cartId = getOrCreateCartId();
-    const res = await fetch(`${BASE_URL}/api/v1/cart/${cartId}`, {
+export async function clearCart(userId: string): Promise<boolean> {
+    const res = await fetch(`${BASE_URL}/api/v1/cart/${userId}`, {
         method: "DELETE"
     });
     const data = await res.json();
