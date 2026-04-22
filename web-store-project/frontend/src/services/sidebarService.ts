@@ -3,8 +3,8 @@ import type { CartItem } from "../../../shared/types/CartItem";
 import { type Part } from "../../../shared/types/PartTypes";
 import { validateStock } from "./productService";
 
-export async function addItem(userId: string, part: Part): Promise<CartItem | null> {
-    const allItems = await fetchAllItems(userId);
+export async function addItem(part: Part, sessionToken: string | null): Promise<CartItem | null> {
+    const allItems = await fetchAllItems(sessionToken);
     if (allItems.length >= 10) return null;
     if (part.stock === 0) return null;
 
@@ -12,24 +12,24 @@ export async function addItem(userId: string, part: Part): Promise<CartItem | nu
     if (existingItem) {
         const newQuantity = existingItem.quantity + 1;
         if (!await validateStock(part, newQuantity)) return null;
-        return await updateCartItem(userId, existingItem.id, newQuantity);
+        return await updateCartItem(existingItem.id, newQuantity, sessionToken);
     }
-    return await addCartItem(userId, part.id);
+    return await addCartItem(part.id, sessionToken);
 }
 
-export async function fetchItems(userId: string): Promise<CartItem[]> {
-    return await fetchAllItems(userId);
+export async function fetchItems(sessionToken: string | null): Promise<CartItem[]> {
+    return await fetchAllItems(sessionToken);
 }
 
-export async function clearItems(userId: string): Promise<boolean> {
-    return await clearCart(userId);
+export async function clearItems(sessionToken: string | null): Promise<boolean> {
+    return await clearCart(sessionToken);
 }
 
-export async function removeItem(userId: string, cartItem: CartItem): Promise<boolean> {
-    return await removeCartItem(userId, cartItem.id);
+export async function removeItem(cartItem: CartItem, sessionToken: string | null): Promise<boolean> {
+    return await removeCartItem(cartItem.id, sessionToken);
 }
 
-export async function getTotal(userId: string): Promise<number> {
-    const allItems = await fetchAllItems(userId);
+export async function getTotal(sessionToken: string | null): Promise<number> {
+    const allItems = await fetchAllItems(sessionToken);
     return allItems.reduce((total, item) => total + item.price * item.quantity, 0);
 }
