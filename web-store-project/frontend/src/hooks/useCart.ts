@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { addItem, getTotal, removeItem, fetchItems, clearItems } from "../services/sidebarService";
+import { useAuth } from "@clerk/clerk-react";
 import type { CartItem } from "../../../shared/types/CartItem";
 import type { Part } from "../../../shared/types/PartTypes";
 
@@ -14,9 +15,15 @@ import type { Part } from "../../../shared/types/PartTypes";
 export function useCart() {
     const [items, setItems] = useState<CartItem[]>([]);
     const [total, setTotal] = useState<number>(0);
+    const { userId, isLoaded, getToken } = useAuth();
 
     async function refreshCart() {
-        const [cartItems, cartTotal] = await Promise.all([fetchItems(), getTotal()]);
+        if (!isLoaded || !userId) return;
+        const token = await getToken();
+        const [cartItems, cartTotal] = await Promise.all([
+            fetchItems(userId, token),
+            getTotal(userId, token)
+        ]);
         setItems(cartItems);
         setTotal(cartTotal);
     }
@@ -26,17 +33,20 @@ export function useCart() {
     }, []);
 
     const addItemsToCart = async (part: Part) => {
-        const result = await addItem(part);
+        const token = await getToken();
+        const result = await addItem(userId!, part, token);
         if (result) await refreshCart();
     };
 
     const removeItemFromCart = async (cartItem: CartItem) => {
-        await removeItem(cartItem);
+        const token = await getToken();
+        await removeItem(userId!, cartItem, token);
         await refreshCart();
     };
 
     const clearAllItems = async () => {
-        await clearItems();
+        const token = await getToken();
+        await clearItems(userId!, token);
         await refreshCart();
     };
 
