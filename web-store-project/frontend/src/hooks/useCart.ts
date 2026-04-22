@@ -19,10 +19,10 @@ export function useCart() {
 
     async function refreshCart() {
         if (!isLoaded || !userId) return;
-        const token = await getToken();
+        const sessionToken = await getToken();
         const [cartItems, cartTotal] = await Promise.all([
-            fetchItems(userId, token),
-            getTotal(userId, token)
+            fetchItems(sessionToken),
+            getTotal(sessionToken)
         ]);
         setItems(cartItems);
         setTotal(cartTotal);
@@ -33,20 +33,20 @@ export function useCart() {
     }, []);
 
     const addItemsToCart = async (part: Part) => {
-        const token = await getToken();
-        const result = await addItem(userId!, part, token);
+        const sessionToken = await getToken();
+        const result = await addItem(part, sessionToken);
         if (result) await refreshCart();
     };
 
     const removeItemFromCart = async (cartItem: CartItem) => {
-        const token = await getToken();
-        await removeItem(userId!, cartItem, token);
+        const sessionToken = await getToken();
+        await removeItem(cartItem, sessionToken);
         await refreshCart();
     };
 
     const clearAllItems = async () => {
-        const token = await getToken();
-        await clearItems(userId!, token);
+        const sessionToken = await getToken();
+        await clearItems(sessionToken);
         await refreshCart();
     };
 
