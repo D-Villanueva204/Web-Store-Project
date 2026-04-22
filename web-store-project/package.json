@@ -1,7 +1,9 @@
 {
   "name": "web-store-project",
   "workspaces": [
-    "frontend", "backend", "shared"
+    "frontend",
+    "backend",
+    "shared"
   ],
   "version": "1.0.0",
   "main": "index.js",
@@ -21,6 +23,7 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
+    "clerk": "^1.0.2",
     "dotenv": "^16.4.7"
   }
 }
