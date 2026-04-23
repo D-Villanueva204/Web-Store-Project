@@ -30,7 +30,7 @@ export function useCart() {
 
     useEffect(() => {
         refreshCart();
-    }, []);
+    }, [userId]);
 
     const addItemsToCart = async (part: Part) => {
         const sessionToken = await getToken();
