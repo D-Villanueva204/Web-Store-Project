@@ -2,6 +2,7 @@ import PartSelector from "../components/web-store/parts/general/partSelector";
 import PartType from "../../../shared/types/PartTypes";
 import { useState } from "react";
 import type { Part } from "../../../shared/types/PartTypes";
+import "./main-page.css"
 
 /**
  * Dominique Villanueva
@@ -25,47 +26,28 @@ function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
         }
     }
 
-    function searchForPart(e: React.FormEvent) {
-        e.preventDefault();
-    }
-
     return (
-        <div>
-            <div>
-                <h2> Latest Item On Sale: </h2>
+        <div className="main-page">
+            <div className="main-page-section">
+                <p className="section-label">Featured</p>
+                <h2 className="section-heading">Latest item on sale</h2>
+                <hr className="section-divider" />
                 <PartSelector name={"Cooler Master Hyper 212 Black Edition"} partType={PartType.COOLER} addItemToCart={addItemToCart} />
             </div>
-            <div>
-                <h2>
-                    Wanna look for a specific part? Take a quick look!
-                </h2>
-                <form onSubmit={searchForPart}>
-                    <select
-                        value={selectedPartType}
-                        onChange={(e) => setSelectedPartType(e.target.value as keyof typeof PartType)}
-                    >
+            <div className="main-page-section">
+                <p className="section-label">Search</p>
+                <h2 className="section-heading">Looking for something?</h2>
+                <hr className="section-divider" />
+                <div className="search-row">
+                    <select value={selectedPartType} onChange={(e) => setSelectedPartType(e.target.value as keyof typeof PartType)}>
                         {partTypeOptions.map(type => (
-                            <option key={type} value={type}>
-                                {type}
-                            </option>
+                            <option key={type} value={type}>{type}</option>
                         ))}
                     </select>
-                    <input
-                        type="text"
-                        id="search-bar"
-                        placeholder="Search"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                </form>
-                <PartSelector
-                    name={searchTerm}
-                    partType={PartType[selectedPartType]}
-                    addItemToCart={addToCart}
-                />
-                <h3>
-                    {errorMessage}
-                </h3>
+                    <input type="text" placeholder="Search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+                </div>
+                <PartSelector name={searchTerm} partType={PartType[selectedPartType]} addItemToCart={addToCart} />
+                <h3>{errorMessage}</h3>
             </div>
         </div>
     )

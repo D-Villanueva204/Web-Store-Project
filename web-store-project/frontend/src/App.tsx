@@ -19,16 +19,16 @@ function App() {
    * hook for retrieving state of the cart and modifying its state.
    * 
    */
-  const {addItemsToCart, clearAllItems, items, total, removeItemFromCart} = useCart();
-  const {handleAddFavourite } = useFavourites();
+  const { addItemsToCart, clearAllItems, items, total, removeItemFromCart } = useCart();
+  const { handleAddFavourite } = useFavourites();
 
 
   return (
-    <>
+    <div className="app-wrapper">
       <div className="main-content">
         <Routes>
           <Route path='/' element={<Layout />}>
-            <Route index element={<MainPage addItemToCart={addItemsToCart}/>} />
+            <Route index element={<MainPage addItemToCart={addItemsToCart} />} />
           </Route>
           <Route path='/cart' element={<Layout />}>
             <Route index element={<CartPage items={items} total={total} removeItemFromCart={removeItemFromCart} clearCart={clearAllItems} />} />
@@ -44,9 +44,9 @@ function App() {
           </Route>
         </Routes>
       </div>
-      <Sidebar items={items} total={total} clearAllItems={clearAllItems}/>
+      <Sidebar items={items} total={total} clearAllItems={clearAllItems} />
 
-    </>
+    </div>
   )
 }
 export default App;

@@ -76,11 +76,11 @@ model Cart {
 }
 
 model Favourite {
-  id     String @id @default(uuid())
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
+  id     String  @id @default(uuid())
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
   partId String
-  part   Part   @relation(fields: [partId], references: [id])
+  part   Part    @relation(fields: [partId], references: [id])
 }
 
 model Order {

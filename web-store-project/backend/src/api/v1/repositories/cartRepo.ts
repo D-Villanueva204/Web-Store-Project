@@ -1,66 +1,54 @@
 import { prisma } from "../../../../lib/prisma";
 import type { CartItem } from "../../../../../shared/types/CartItem";
 
-function mapCartItem(item: {
-    id: string;
-    quantity: number;
-    partId: string;
-    cartId: string;
-    part: {
-        id: string;
-        name: string;
-        price: number;
-        stock: number;
-        partType: string;
-    };
-}): CartItem {
-    return {
+export async function fetchCart(userId: string): Promise<CartItem[]> {
+    let cart = await prisma.cart.findUnique({
+        where: { userId },
+        include: { items: { include: { part: true } } }
+    });
+    if (!cart) {
+        cart = await prisma.cart.create({
+            data: { userId },
+            include: { items: { include: { part: true } } }
+        });
+    }
+    return cart.items.map(item => ({
         id: item.id,
         name: item.part.name,
         price: item.part.price,
         quantity: item.quantity,
-    };
+    }));
 }
 
-export async function fetchCart(cartId: string): Promise<CartItem[]> {
-    let cart = await prisma.cart.findUnique({
-        where: { id: cartId },
-        include: { items: { include: { part: true } } }
-    });
-
-    if (!cart) {
-        cart = await prisma.cart.create({
-            data: { id: cartId },
-            include: { items: { include: { part: true } } }
-        });
-    }
-
-    return cart.items.map(mapCartItem);
-}
-
-export async function addCartItem(cartId: string, partId: string): Promise<CartItem> {
-    await fetchCart(cartId);
-
+export async function addCartItem(userId: string, partId: string): Promise<CartItem> {
+    const cart = await prisma.cart.findUnique({ where: { userId } });
     const existingItem = await prisma.cartItem.findFirst({
-        where: { cartId, partId },
+        where: { cartId: cart!.id, partId },
         include: { part: true }
     });
-
     if (existingItem) {
         const updated = await prisma.cartItem.update({
             where: { id: existingItem.id },
             data: { quantity: existingItem.quantity + 1 },
             include: { part: true }
         });
-        return mapCartItem(updated);
+        return {
+            id: updated.id,
+            name: updated.part.name,
+            price: updated.part.price,
+            quantity: updated.quantity,
+        };
     }
-
     const newItem = await prisma.cartItem.create({
-        data: { cartId, partId, quantity: 1 },
+        data: { cartId: cart!.id, partId, quantity: 1 },
         include: { part: true }
     });
-
-    return mapCartItem(newItem);
+    return {
+        id: newItem.id,
+        name: newItem.part.name,
+        price: newItem.part.price,
+        quantity: newItem.quantity,
+    };
 }
 
 export async function updateCartItem(itemId: string, quantity: number): Promise<CartItem | null> {
@@ -68,14 +56,17 @@ export async function updateCartItem(itemId: string, quantity: number): Promise<
         await prisma.cartItem.delete({ where: { id: itemId } });
         return null;
     }
-
     const updated = await prisma.cartItem.update({
         where: { id: itemId },
         data: { quantity },
         include: { part: true }
     });
-
-    return mapCartItem(updated);
+    return {
+        id: updated.id,
+        name: updated.part.name,
+        price: updated.part.price,
+        quantity: updated.quantity,
+    };
 }
 
 export async function removeCartItem(itemId: string): Promise<boolean> {
@@ -83,7 +74,9 @@ export async function removeCartItem(itemId: string): Promise<boolean> {
     return true;
 }
 
-export async function clearCart(cartId: string): Promise<boolean> {
-    await prisma.cartItem.deleteMany({ where: { cartId } });
+export async function clearCart(userId: string): Promise<boolean> {
+    const cart = await prisma.cart.findUnique({ where: { userId } });
+    if (!cart) return true;
+    await prisma.cartItem.deleteMany({ where: { cartId: cart.id } });
     return true;
 }
