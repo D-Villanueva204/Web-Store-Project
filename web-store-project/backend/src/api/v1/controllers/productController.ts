@@ -15,6 +15,24 @@ export const getAllParts = async (
     }
 };
 
+export const searchParts = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const query = req.query.query as string;
+        if (!query || query.trim().length < 2) {
+            res.status(400).json({ error: "Query must be at least 2 characters" });
+            return;
+        }
+        const parts = await productService.searchParts(query);
+        res.status(200).json(successResponse(parts, "Search results retrieved"));
+    } catch (error) {
+        next(error);
+    }
+};
+
 export const getAllCases = async (
     _req: Request,
     res: Response,
