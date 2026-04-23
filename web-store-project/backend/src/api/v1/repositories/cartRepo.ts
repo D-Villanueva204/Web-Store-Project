@@ -14,6 +14,7 @@ export async function fetchCart(userId: string): Promise<CartItem[]> {
     }
     return cart.items.map(item => ({
         id: item.id,
+        partId: item.partId,
         name: item.part.name,
         price: item.part.price,
         quantity: item.quantity,
