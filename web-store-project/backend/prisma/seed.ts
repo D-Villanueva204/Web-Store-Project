@@ -17,6 +17,8 @@ const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
+    await prisma.orderItem.deleteMany();
+    await prisma.order.deleteMany();
     await prisma.case.deleteMany();
     await prisma.cooler.deleteMany();
     await prisma.cPU.deleteMany();

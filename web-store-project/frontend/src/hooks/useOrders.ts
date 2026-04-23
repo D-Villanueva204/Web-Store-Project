@@ -1,71 +1,65 @@
 import { useState, useEffect } from "react"
-import type { Order } from "../../../shared/types/order"
 import * as orderRepository from "../apis/orderRepository"
-import * as orderService from "../services/orderService"
-import type { Part } from "../../../shared/types/PartTypes"
+import * as orderService from "../services/orderService"  // ✅ Match team pattern
+import type { Order } from "../../../shared/types/order"
 
-/**
- * useOrders Hook
- * Returns:
- * - orders: Array of all orders
- * - placeOrder: Function to create a new order from cart items
- * - loadOrders: Function to fetch all orders
- * - getOrderById: Function to get a specific order
- */
 export function useOrders() {
-    const [orders, setOrders] = useState<Order[]>([])
-    const [loading, setLoading] = useState<boolean>(true)
-    const [error, setError] = useState<string | null>();
+  const [orders, setOrders] = useState<Order[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string>("")
+
   /**
-   * Load all orders from repository
+   * Load all orders from backend
    */
   const loadOrders = async () => {
     try {
       setLoading(true)
-      
-      // Fetch orders from repository
-      const result = orderRepository.getAllOrders()
-
-      // Update state with the fetched orders
-      setOrders([...result])
-      setError("") // Clear any previous errors
-      
+      const result = await orderRepository.getAllOrders()
+      setOrders(result)
+      setError("")
     } catch (errorObject) {
-      // Set the error state if an error is caught
       setError(`${errorObject}`)
     } finally {
       setLoading(false)
     }
   }
 
-
-  const getOrderById = (id: number): Order | undefined => {
-    return orderRepository.getOrderById(id)
-  }
-
-  const placeOrder = (items: Part[], total: number): { success: boolean; message: string } => {
-    // Validate order using service
-    const validation = orderService.validateOrder(items)
-    
-    if (!validation.valid) {
-      return { success: false, message: validation.message }
-    }
-
-    // Create order using service
-    const orderData = orderService.createOrderFromCart(items, total)
-    
-    // Save order using repository
-    const newOrder = orderRepository.createOrder(orderData)
-    
-    // Update local state
-    setOrders([...orders, newOrder])
-
-    return { success: true, message: "Order placed successfully!" }
-  }
-
   /**
-   * Load orders on mount
+   * Place a new order
    */
+  const placeOrder = async (
+    items: Array<{
+      id: string
+      name: string
+      price: number
+      quantity: number
+    }>,
+    total: number
+  ): Promise<{ success: boolean; message: string }> => {
+    try {
+      if (items.length === 0) {
+        return { success: false, message: "Cart is empty" }
+      }
+
+      const calculatedTotal = orderService.calculateTotal(items)
+      if (Math.abs(calculatedTotal - total) > 0.01) {
+        return { success: false, message: "Total mismatch detected" }
+      }
+
+      // Send to backend via repository
+      const newOrder = await orderRepository.createOrder({ items, total })
+      
+      // Update local state
+      setOrders([newOrder, ...orders])
+
+      return { success: true, message: "Order placed successfully!" }
+      
+    } catch (errorObject) {
+      setError(`${errorObject}`)
+      return { success: false, message: "Failed to place order. Please try again." }
+    }
+  }
+
   useEffect(() => {
     loadOrders()
   }, [])
@@ -75,6 +69,6 @@ export function useOrders() {
     loading,
     error,
     placeOrder,
-    getOrderById
+    loadOrders
   }
 }
