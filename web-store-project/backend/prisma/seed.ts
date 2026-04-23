@@ -91,7 +91,7 @@ async function main() {
         await prisma.part.create({
             data: {
                 id: makeId("gpu", item.name),
-                name: item.name,
+                name: `${item.name} ${item.chipset}`,
                 price: item.price,
                 stock: item.stock,
                 partType: 'GPU',

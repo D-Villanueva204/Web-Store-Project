@@ -27,6 +27,14 @@ enum PartType {
   STORAGE
 }
 
+model User {
+  id         String      @id
+  cart       Cart?
+  favourites Favourite[]
+  orders     Order[]
+}
+
+
 model Part {
   id       String   @id
   name     String
@@ -61,21 +69,27 @@ model CartItem {
 }
 
 model Cart {
-  id    String     @id @default(uuid())
-  items CartItem[]
+  id     String     @id @default(uuid())
+  userId String     @unique
+  user   User       @relation(fields: [userId], references: [id])
+  items  CartItem[]
 }
 
 model Favourite {
-  id     String @id @default(uuid())
+  id     String  @id @default(uuid())
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
   partId String
-  part   Part   @relation(fields: [partId], references: [id])
+  part   Part    @relation(fields: [partId], references: [id])
 }
 
 model Order {
-  id    Int         @id @default(autoincrement())
-  total Float
-  date  DateTime    @default(now())
-  items OrderItem[]
+  id     Int         @id @default(autoincrement())
+  userId String
+  user   User        @relation(fields: [userId], references: [id])
+  total  Float
+  date   DateTime    @default(now())
+  items  OrderItem[]
 }
 
 model OrderItem {

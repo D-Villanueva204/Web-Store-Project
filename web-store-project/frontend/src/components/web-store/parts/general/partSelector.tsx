@@ -16,7 +16,7 @@ function GeneralSelector({ name, partType, addItemToCart }: { name: string, part
         getByName(name, partType).then(setPart);
     }, [name, partType]);
 
-    if (!part) return <p>Loading...</p>;
+    if (!part) return <p>Part not found.</p>;
 
     return (
         <section className="part-section">

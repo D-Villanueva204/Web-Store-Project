@@ -5,6 +5,8 @@ const router: Router = express.Router();
 
 router.get("/products", productController.getAllParts);
 
+router.get("/products/search", productController.searchParts);
+
 router.get("/products/case", productController.getAllCases);
 router.get("/products/case/:id", productController.getCaseByID);
 

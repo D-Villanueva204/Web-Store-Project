@@ -16,6 +16,10 @@ export async function fetchAllParts(): Promise<Part[]> {
   return productRepository.fetchAllParts();
 }
 
+export async function searchParts(query: string): Promise<Part[]> {
+    return productRepository.searchParts(query);
+}
+
 export async function fetchAllCases(): Promise<Case[]> {
   return productRepository.fetchAllCases();
 }

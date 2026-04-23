@@ -8,13 +8,16 @@ import setupSwagger from "../config/swagger";
 import orderRoutes from "../src/api/v1/routes/orderRoutes"
 import productRoutes from "../src/api/v1/routes/productRoutes"
 import favouritesRoutes from "../src/api/v1/routes/favouritesRoutes"
-import cartRoutes from "../src/api/v1/routes/cartRoute";
+import cartRoutes from "../src/api/v1/routes/cartRoutes"
+import { clerkMiddleware } from "@clerk/express";
 
 import errorHandler from "./api/v1/middleware/errorHandler";
 
 const app: Express = express();
 
 dotenv.config();
+
+app.use(clerkMiddleware());
 
 app.use(morgan("combined"));
 

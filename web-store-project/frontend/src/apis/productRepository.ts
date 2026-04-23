@@ -13,6 +13,12 @@ export async function fetchAllParts(): Promise<Part[]> {
   const data = await res.json();
   return data.data;
 }
+
+export async function searchParts(query: string) {
+    const res = await fetch(`${BASE_URL}/api/v1/products/search?query=${query}`);
+    const data = await res.json();
+    return data.data;
+}
  
 export async function fetchAllCoolers(): Promise<Cooler[]> {
   const res = await fetch(`${BASE_URL}/api/v1/products/cooler`);
