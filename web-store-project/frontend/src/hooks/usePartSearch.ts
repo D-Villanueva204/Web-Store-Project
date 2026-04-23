@@ -1,17 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { searchParts } from "../apis/productRepository";
+import type { Part } from "../../../shared/types/PartTypes";
 
-export function usePartSearch(initialValue: string = "") {
-    const [searchValue, setSearchValue] = useState<string>(initialValue);
+export function usePartSearch() {
+    const [query, setQuery] = useState("");
+    const [results, setResults] = useState<Part[]>([]);
+    const [isOpen, setIsOpen] = useState(false);
 
     function trySearch(): { isValid: boolean, errors: string[] } {
-        if (!searchValue.trim()) {
+        if (!query.trim()) {
             return { isValid: false, errors: ["Please enter a part name"] };
         }
-        if (searchValue.trim().length < 2) {
+        if (query.trim().length < 2) {
             return { isValid: false, errors: ["Search must be at least 2 characters"] };
         }
         return { isValid: true, errors: [] };
     }
 
-    return { searchValue, setSearchValue, trySearch };
+    useEffect(() => {
+        if (query.trim().length < 2) {
+            setResults([]);
+            setIsOpen(false);
+            return;
+        }
+        const debounce = setTimeout(async () => {
+            const parts = await searchParts(query);
+            setResults(parts);
+            setIsOpen(true);
+        }, 300);
+
+        return () => clearTimeout(debounce);
+    }, [query]);
+
+    function closeDropdown() {
+        setIsOpen(false);
+        setQuery("");
+    }
+
+    return { query, setQuery, trySearch, results, isOpen, closeDropdown };
 }

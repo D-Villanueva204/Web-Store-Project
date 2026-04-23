@@ -17,8 +17,8 @@ function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
     const [submittedSearch, setSubmittedSearch] = useState("AMD Ryzen 7 7800X3D");
     const [searchMessages, setSearchMessages] = useState<string[]>([]);
     const [errorMessage, setErrorMessage] = useState("");
-    const { searchValue, setSearchValue, trySearch } = usePartSearch();
-        const partTypeOptions: (keyof typeof PartType)[] = ["CASE", "COOLER", "CPU", "GPU", "MOBO", "PSU", "RAM", "STORAGE", "OS"];
+    const { query: searchValue, setQuery: setSearchValue, trySearch } = usePartSearch();
+    const partTypeOptions: (keyof typeof PartType)[] = ["CASE", "COOLER", "CPU", "GPU", "MOBO", "PSU", "RAM", "STORAGE", "OS"];
     function addToCart(item: Part) {
         if (item.name != "Not Found") {
             setErrorMessage("");
