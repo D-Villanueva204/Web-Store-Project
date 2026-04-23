@@ -13,12 +13,12 @@ body {
 
 .app-wrapper {
     display: flex;
-    flex-direction: row; /* Sidebar on right, Content on left */
+    flex-direction: row;
     width: 100%;
 }
 
 .main-content {
-    flex: 1; /* This pushes the sidebar to the far right */
+    flex: 1;
     padding: 2rem;
     background-color: #0f1014;
 }

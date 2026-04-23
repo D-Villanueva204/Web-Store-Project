@@ -36,7 +36,7 @@ function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
             </div>
             <div className="main-page-section">
                 <p className="section-label">Search</p>
-                <h2 className="section-heading">Find a part</h2>
+                <h2 className="section-heading">Looking for something?</h2>
                 <hr className="section-divider" />
                 <div className="search-row">
                     <select value={selectedPartType} onChange={(e) => setSelectedPartType(e.target.value as keyof typeof PartType)}>
