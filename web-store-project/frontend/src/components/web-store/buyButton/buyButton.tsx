@@ -1,4 +1,6 @@
+import { SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react";
 import type { Part } from "../../../../../shared/types/PartTypes";
+
 
 /**
  * Dominique Villanueva:
@@ -15,10 +17,20 @@ function BuyButton({ part, addToCart }: { part: Part | null, addToCart: (item: P
     }
 
     return (
-        <div>
-            <button type="button" onClick={BuyItem}>Add to Cart</button>
-        </div>)
+        <>
+            <SignedIn>
+                <div>
+                    <button type="button" onClick={BuyItem}>Add to Cart</button>
+                </div>
+            </SignedIn>
+            <SignedOut>
+                <h3>
+                    You must be logged in to add items to cart.
+                </h3>
+                <SignInButton/>
+            </SignedOut>
+        </>
+    );
 };
-
 
 export default BuyButton;
