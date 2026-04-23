@@ -7,7 +7,7 @@ import corsOptions from "../config/cors";
 import setupSwagger from "../config/swagger";
 import productRoutes from "../src/api/v1/routes/productRoutes"
 import favouritesRoutes from "../src/api/v1/routes/favouritesRoutes"
-import cartRoutes from "../src/api/v1/routes/cartRoute";
+import cartRoutes from "../src/api/v1/routes/cartRoutes"
 
 import errorHandler from "./api/v1/middleware/errorHandler";
 
