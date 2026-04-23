@@ -5,6 +5,7 @@ import { getByType } from "../../../../services/productService";
 import AddFavouriteButton from "../../favourite-button/favourite-button";
 import type { Part } from "../../../../../../shared/types/PartTypes";
 import "./generalTypeGenerator.css"
+import { useAuth } from "@clerk/clerk-react";
 
 /**
  * This component now uses the getByType service, and the new BuyButton,
@@ -27,6 +28,7 @@ function GeneralTypeGenerator({ partType, handleAddFavourite, favourite, handleD
      */
     const [part, setPart] = useState<Part | null>(null);
     const [isFavourited, setIsFavourited] = useState(false);
+    const { isSignedIn } = useAuth();
 
     useEffect(() => {
         getByType(partType).then(partData => {
@@ -49,7 +51,7 @@ function GeneralTypeGenerator({ partType, handleAddFavourite, favourite, handleD
             <p>Price: ${part.price}</p>
             <p>In stock: {part.stock}</p>
             <BuyButton part={part} addToCart={addItemToCart} />
-            {favourite && (
+            {favourite && isSignedIn &&(
                 <AddFavouriteButton id={part.id} handleAdd={handleAddFavourite} handleDelete={handleDeleteFavourite} isFavourited={isFavourited} />
             )}
         </section>

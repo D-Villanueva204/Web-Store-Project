@@ -1,8 +1,11 @@
 import { Favourite } from "@prisma/client"
 import { prisma } from "../../../../lib/prisma"
 
-export const fetchAllFavourites = async (): Promise<Favourite[]> => {
+export const fetchAllFavourites = async (userId: string | null | undefined): Promise<Favourite[]> => {
     return prisma.favourite.findMany({
+        where: {
+            userId: userId
+        },
         include: { part: true }
     })
 }
