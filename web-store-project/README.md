@@ -32,3 +32,6 @@ useFavourites hook, favouritesRepo, favouritesService, refactor favouritesButton
 
 ## Sprint 4: 
 Favourites Backend, Monorepo creation, Favourites Frontend : Czedrick
+
+## Sprint 5:
+Favourites backend refactor with clerk, favourites front end refactor with clerk, added clerkMiddleWare to app.ts : Czedrick
