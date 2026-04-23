@@ -3,10 +3,10 @@ import { getCart, addToCart, updateCartItem, removeCartItem, clearCart } from ".
 
 const router = Router();
 
-router.get("/cart/:cartId", getCart);
-router.post("/cart/:cartId", addToCart);
-router.put("/cart/:cartId/:itemId", updateCartItem);
-router.delete("/cart/:cartId/:itemId", removeCartItem);
-router.delete("/cart/:cartId", clearCart);
+router.get("/cart", getCart);
+router.post("/cart", addToCart);
+router.put("/cart/:itemId", updateCartItem);
+router.delete("/cart/:itemId", removeCartItem);
+router.delete("/cart", clearCart);
 
 export default router;
