@@ -31,6 +31,7 @@ New Component (Order) with new architecture, Order Repository/Service/Hook with 
 useFavourites hook, favouritesRepo, favouritesService, refactor favouritesButton, refactor favouritesPage: Czedrick
 
 ## Sprint 4: 
+<<<<<<< HEAD
 Favourites Backend, Monorepo creation, Favourites Frontend : Czedrick <br>
 Products (Front End/Back End), Sidebar (Front End/ Back End), Vercel, Prisma Schema, Prisma Seed - Dominique
 
@@ -44,3 +45,7 @@ Dominique:
     - User Prisma integration
     - User Service, Controller.
 Favourites backend refactor with clerk, favourites front end refactor with clerk, added clerkMiddleWare to app.ts : Czedrick
+=======
+Favourites Backend, Monorepo creation, Favourites Frontend : Czedrick
+Products (Front End/Back End), Sidebar (Front End/ Back End), Vercel, Prisma Schema, Prisma Seed - Dominique
+>>>>>>> main
