@@ -5,6 +5,18 @@ export async function fetchAllParts(): Promise<Part[]> {
   return prisma.part.findMany();
 }
 
+export async function searchParts(query: string): Promise<Part[]> {
+    return prisma.part.findMany({
+        where: {
+            name: {
+                contains: query,
+                mode: "insensitive"
+            }
+        },
+        take: 10
+    });
+}
+
 export async function fetchAllCases(): Promise<Case[]> {
   const parts = await prisma.part.findMany({
     where: { partType: 'CASE' },
