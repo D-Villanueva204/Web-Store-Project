@@ -25,13 +25,22 @@ Parts: Dominique
 
 
 ## Sprint 3:
-Sidebar Component, Product Repository, Sidebar Repository, Sidebar Service, useCart, GeneralSelector refactor, GeneralGenerator refactor: Dominique
-Product Service: Czedrick
-New Component (Order) with new architecture, Order Repository/Service/Hook with Definitions, Order Test Data, Order Page: Joshua
+Sidebar Component, Product Repository, Sidebar Repository, Sidebar Service, useCart, GeneralSelector refactor, GeneralGenerator refactor: Dominique <br>
+Product Service: Czedrick <br>
+New Component (Order) with new architecture, Order Repository/Service/Hook with Definitions, Order Test Data, Order Page: Joshua <br>
 useFavourites hook, favouritesRepo, favouritesService, refactor favouritesButton, refactor favouritesPage: Czedrick
 
 ## Sprint 4: 
-Favourites Backend, Monorepo creation, Favourites Frontend : Czedrick
+Favourites Backend, Monorepo creation, Favourites Frontend : Czedrick <br>
+Products (Front End/Back End), Sidebar (Front End/ Back End), Vercel, Prisma Schema, Prisma Seed - Dominique
 
 ## Sprint 5:
+Dominique:
+    - SearchBar refactor
+    - CSS refactor for MainPage, SideBar
+    - CartItems session management
+    - New SearchParts Repo, Service, Controller
+    - Clerk Setup
+    - User Prisma integration
+    - User Service, Controller.
 Favourites backend refactor with clerk, favourites front end refactor with clerk, added clerkMiddleWare to app.ts : Czedrick

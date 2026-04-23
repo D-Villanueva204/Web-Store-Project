@@ -27,19 +27,19 @@ function App() {
     <div className="app-wrapper">
       <div className="main-content">
         <Routes>
-          <Route path='/' element={<Layout />}>
+          <Route path='/' element={<Layout addItemToCart={addItemsToCart} />}>
             <Route index element={<MainPage addItemToCart={addItemsToCart} />} />
           </Route>
-          <Route path='/cart' element={<Layout />}>
+          <Route path='/cart' element={<Layout addItemToCart={addItemsToCart}/>}>
             <Route index element={<CartPage items={items} total={total} removeItemFromCart={removeItemFromCart} clearCart={clearAllItems} />} />
           </Route>
-          <Route path='/product' element={<Layout />}>
+          <Route path='/product' element={<Layout addItemToCart={addItemsToCart}/>}>
             <Route index element={<ProductPage addItemToCart={addItemsToCart} handleAddFavourite={handleAddFavourite} />} />
           </Route>
-          <Route path='/favourites' element={<Layout />}>
+          <Route path='/favourites' element={<Layout addItemToCart={addItemsToCart}/>}>
             <Route index element={<FavouritesPage />} />
           </Route>
-          <Route path='/orders' element={<Layout />}>
+          <Route path='/orders' element={<Layout addItemToCart={addItemsToCart}/>}>
             <Route index element={<OrdersPage />} />
           </Route>
         </Routes>
