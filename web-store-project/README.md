@@ -43,3 +43,4 @@ Dominique:
     - Clerk Setup
     - User Prisma integration
     - User Service, Controller.
+Favourites backend refactor with clerk, favourites front end refactor with clerk, added clerkMiddleWare to app.ts : Czedrick

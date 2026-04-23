@@ -3,12 +3,12 @@ import * as favouriteService from "../services/favouritesService"
 import { successResponse } from "../models/responseModel";
 
 export const getAllFavourites = async(
-    _req: Request,
+    req: Request,
     res: Response,
     next: NextFunction
 ): Promise<void> => {
     try {
-        const favourites = await favouriteService.fetchAllFavourites();
+        const favourites = await favouriteService.fetchAllFavourites(req.userId);
         res.status(200).json(
             successResponse(favourites, "Favourites retrieved successfully")
         );
@@ -23,10 +23,10 @@ export const createFavourite = async(
     next: NextFunction
 ): Promise<void> => {
     try {
-        const newFavourite = await favouriteService.createFavourite(req.body)
+        const newFavourite = await favouriteService.createFavourite({ ...req.body, userId: req.userId });
         res.status(201).json(
-            successResponse(newFavourite, "Favourite created successfully")); 
-
+            successResponse(newFavourite, "Favourite created successfully")
+        );
     } catch (error) {
         next(error)
     }
