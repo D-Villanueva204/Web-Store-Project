@@ -3,6 +3,8 @@ import PartType from "../../../shared/types/PartTypes";
 import { useState } from "react";
 import type { Part } from "../../../shared/types/PartTypes";
 import "./main-page.css"
+import { usePartSearch } from "../hooks/usePartSearch";
+import { SearchBar } from "../components/web-store/searchbar/searchbar";
 
 /**
  * Dominique Villanueva
@@ -12,10 +14,11 @@ import "./main-page.css"
  */
 function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
     const [selectedPartType, setSelectedPartType] = useState<keyof typeof PartType>("CPU");
-    const [searchTerm, setSearchTerm] = useState("AMD Ryzen 7 7800X3D");
-    const partTypeOptions: (keyof typeof PartType)[] = ["CASE", "COOLER", "CPU", "GPU", "MOBO", "PSU", "RAM", "STORAGE", "OS"];
+    const [submittedSearch, setSubmittedSearch] = useState("AMD Ryzen 7 7800X3D");
+    const [searchMessages, setSearchMessages] = useState<string[]>([]);
     const [errorMessage, setErrorMessage] = useState("");
-
+    const { searchValue, setSearchValue, trySearch } = usePartSearch();
+        const partTypeOptions: (keyof typeof PartType)[] = ["CASE", "COOLER", "CPU", "GPU", "MOBO", "PSU", "RAM", "STORAGE", "OS"];
     function addToCart(item: Part) {
         if (item.name != "Not Found") {
             setErrorMessage("");
@@ -23,6 +26,17 @@ function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
         }
         else {
             setErrorMessage("Only valid items can be added to cart");
+        }
+    }
+
+
+    const doSearch = () => {
+        const validation = trySearch();
+        if (validation.isValid) {
+            setSubmittedSearch(searchValue);
+            setSearchMessages([]);
+        } else {
+            setSearchMessages(validation.errors);
         }
     }
 
@@ -39,14 +53,22 @@ function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
                 <h2 className="section-heading">Looking for something?</h2>
                 <hr className="section-divider" />
                 <div className="search-row">
-                    <select value={selectedPartType} onChange={(e) => setSelectedPartType(e.target.value as keyof typeof PartType)}>
+                    <select
+                        value={selectedPartType}
+                        onChange={(e) => setSelectedPartType(e.target.value as keyof typeof PartType)}
+                    >
                         {partTypeOptions.map(type => (
                             <option key={type} value={type}>{type}</option>
                         ))}
                     </select>
-                    <input type="text" placeholder="Search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+                    <SearchBar
+                        searchValue={searchValue}
+                        messages={searchMessages}
+                        handleSearchChange={setSearchValue}
+                        handleSubmit={doSearch}
+                    />
                 </div>
-                <PartSelector name={searchTerm} partType={PartType[selectedPartType]} addItemToCart={addToCart} />
+                <PartSelector name={submittedSearch} partType={PartType[selectedPartType]} addItemToCart={addToCart} />
                 <h3>{errorMessage}</h3>
             </div>
         </div>

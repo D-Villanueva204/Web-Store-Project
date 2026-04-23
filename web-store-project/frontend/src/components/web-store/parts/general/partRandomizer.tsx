@@ -41,7 +41,7 @@ function GeneralTypeGenerator({ partType, handleAddFavourite, favourite, handleD
         });
     }, [partType, favourite]);
 
-    if (!part) return <p>Loading...</p>;
+    if (!part) return <p>Part not found.</p>;
 
     return (
         <section className="random-part-section">
