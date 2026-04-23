@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 
 import corsOptions from "../config/cors";
 import setupSwagger from "../config/swagger";
+import orderRoutes from "../src/api/v1/routes/orderRoutes"
 import productRoutes from "../src/api/v1/routes/productRoutes"
 import favouritesRoutes from "../src/api/v1/routes/favouritesRoutes"
 import cartRoutes from "../src/api/v1/routes/cartRoutes"
@@ -30,10 +31,11 @@ app.get("/", (_req, res) => {
     res.send("Got response from backend!");
 });
 
+app.use("/api/v1", orderRoutes) 
 app.use("/api/v1", productRoutes);
-
 app.use("/api/v1", favouritesRoutes)
 app.use("/api/v1", cartRoutes);
+
 
 app.use(errorHandler);
 
