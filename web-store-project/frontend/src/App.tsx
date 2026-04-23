@@ -24,7 +24,7 @@ function App() {
 
 
   return (
-    <>
+    <div className="app-layout">
       <div className="main-content">
         <Routes>
           <Route path='/' element={<Layout />}>
@@ -45,8 +45,7 @@ function App() {
         </Routes>
       </div>
       <Sidebar items={items} total={total} clearAllItems={clearAllItems}/>
-
-    </>
-  )
+    </div>
+)
 }
 export default App;
