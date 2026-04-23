@@ -26,10 +26,6 @@ function MainPage({ addItemToCart }: { addItemToCart: (item: Part) => void }) {
         }
     }
 
-    function searchForPart(e: React.FormEvent) {
-        e.preventDefault();
-    }
-
     return (
         <div className="main-page">
             <div className="main-page-section">

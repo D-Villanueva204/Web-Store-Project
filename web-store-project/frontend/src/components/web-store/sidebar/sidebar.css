@@ -1,81 +1,61 @@
+/* sidebar.css */
 .sidebar-section {
-    flex: 0 0 16rem;
-    width: 16rem;
-    padding: 1rem;
-    background-color: #212227;
-    border-left: 3px solid #31555b;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    width: 320px;
+    min-width: 320px;
+    background-color: #1a1a1f;
+    border-left: 2px solid #31555b;
+    padding: 1.5rem;
     height: 100vh;
     position: sticky;
     top: 0;
-}
-
-.sidebar-section h3 {
-    font-family: "SF Pro Display", "Segoe UI", Arial, sans-serif;
-    font-size: 1.75rem;
-    color: #aab9cf;
-    margin: 0;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #31555b;
-}
-
-.sidebar-section button {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 1rem;
-    font-family: "SF Pro Display", "Segoe UI", Arial, sans-serif;
-    background-color: transparent;
-    color: #aab9cf;
-    border: 1px solid #31555b;
-    cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.sidebar-section button:hover {
-    background-color: #31555b;
-    color: #c4cdcf;
+    display: flex;
+    flex-direction: column;
 }
 
 .cart-items {
     width: 100%;
     border-collapse: collapse;
-    flex: 1;
+    table-layout: fixed; /* This is the most important line */
+    margin-top: 1rem;
 }
 
 .cart-items tr {
     border-bottom: 1px solid #31555b;
 }
 
-.cart-items tr:last-child {
-    border-bottom: none;
-    font-size: 1rem;
-    color: #aab9cf;
-}
-
-.cart-items td {
-    padding: 0.5rem 0.25rem;
-    font-size: 0.9rem;
-    color: #c4cdcf;
-    font-family: "SF Pro Display", "Segoe UI", Arial, sans-serif;
-}
-
 .item-name {
+    width: 55%; /* Give the name the majority of space */
+    padding: 12px 0;
+    font-size: 0.85rem;
+    line-height: 1.3;
+    white-space: normal; 
+    word-wrap: break-word;
+    color: #c4cdcf;
     text-align: left;
-    max-width: 8rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 .item-price {
+    width: 25%; /* Space for the dollar amount */
     text-align: right;
+    vertical-align: top;
+    padding-top: 12px;
     color: #aab9cf;
+    font-size: 0.85rem;
 }
 
 .item-quantity {
+    width: 20%; /* Enough room so "Qty: X" doesn't overlap */
     text-align: right;
+    vertical-align: top;
+    padding-top: 12px;
     color: #31555b;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+}
+
+/* Total Row Styling */
+.total-row td {
+    padding-top: 2rem;
+    font-weight: bold;
+    color: #aab9cf;
+    border: none;
 }

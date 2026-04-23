@@ -1,72 +1,45 @@
+/* main-page.css */
 .main-page {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
 }
 
 .main-page-section {
-    background: #1a1a1f;
-    border: 0.5px solid #31555b;
-    border-radius: 12px;
-    padding: 1.5rem;
+  background: #1a1a1f;
+  border: 1px solid #31555b;
+  border-radius: 12px;
+  padding: 1.5rem;
 }
 
 .section-label {
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    color: #31555b;
-    text-transform: uppercase;
-    margin: 0 0 6px;
+  color: #31555b;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.5rem;
 }
 
 .section-heading {
-    font-size: 1.75rem;
-    font-weight: 500;
-    color: #c4cdcf;
-    margin: 0 0 1rem;
-    line-height: 1.2;
-}
-
-.section-divider {
-    border: none;
-    border-top: 0.5px solid #31555b;
-    margin: 0 0 1.25rem;
-}
-
-.part-badge {
-    display: inline-block;
-    background: #31555b;
-    color: #aab9cf;
-    font-size: 11px;
-    padding: 3px 10px;
-    border-radius: 6px;
-    margin-bottom: 1rem;
-    letter-spacing: 0.05em;
+  font-size: 1.8rem;
+  color: #c4cdcf;
+  margin-bottom: 1.5rem;
 }
 
 .search-row {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.search-row select,
-.search-row input {
-    background: #212227;
-    border: 0.5px solid #31555b;
-    color: #c4cdcf;
-    border-radius: 8px;
-    padding: 0.5em 0.75em;
-    font-size: 0.9rem;
+.search-row select, .search-row input {
+  background: #212227;
+  border: 1px solid #31555b;
+  color: #c4cdcf;
+  padding: 0.6rem;
+  border-radius: 6px;
 }
 
 .search-row input {
-    flex: 1;
-}
-
-.search-btn {
-    background: #aab9cf !important;
-    color: #212227 !important;
-    font-weight: 500;
+  flex: 1;
 }

@@ -19,15 +19,18 @@ function Sidebar({ items, total, clearAllItems }: { items: CartItem[], total: nu
             <button type="button" onClick={clearAllItems}> Clear Cart </button>
             <table className="cart-items">
                 <tbody>
-                    {items.map((item, index) =>
+                    {items.map((item, index) => (
                         <tr key={index}>
-                            <td className="item-name"> {index + 1}. {item.name}</td>
-                            <td className="item-price"> ${item.price}</td>
-                            <td className="item-quantity"> Quantity: {item.quantity} </td>
+                            <td className="item-name">
+                                {index + 1}. {item.name}
+                            </td>
+                            <td className="item-price">${item.price.toFixed(2)}</td>
+                            <td className="item-quantity">Qty: {item.quantity}</td>
                         </tr>
-                    )}
-                    <tr>
-                        <td> Total: ${total.toFixed(2)}</td>
+                    ))}
+                    <tr className="total-row">
+                        <td colSpan={2} style={{ textAlign: 'left' }}>Total:</td>
+                        <td style={{ textAlign: 'right' }}>${total.toFixed(2)}</td>
                     </tr>
                 </tbody>
             </table>
