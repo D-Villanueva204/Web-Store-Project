@@ -1,20 +1,25 @@
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
+import { useAuth } from "@clerk/clerk-react"
 import * as orderRepository from "../apis/orderRepository"
-import * as orderService from "../services/orderService"  // ✅ Match team pattern
+import * as orderService from "../services/orderService"
 import type { Order } from "../../../shared/types/order"
 
 export function useOrders() {
   const [orders, setOrders] = useState<Order[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string>("")
+  const { userId, getToken, isSignedIn } = useAuth()  
 
-  /**
-   * Load all orders from backend
-   */
-  const loadOrders = async () => {
+  async function loadOrders() {
+    if (!isSignedIn || !userId) {  
+      setLoading(false)
+      return
+    }
+
     try {
       setLoading(true)
-      const result = await orderRepository.getAllOrders()
+      const sessionToken = await getToken()  
+      const result = await orderRepository.getAllOrders(sessionToken)  
       setOrders(result)
       setError("")
     } catch (errorObject) {
@@ -24,9 +29,6 @@ export function useOrders() {
     }
   }
 
-  /**
-   * Place a new order
-   */
   const placeOrder = async (
     items: Array<{
       id: string
@@ -46,14 +48,20 @@ export function useOrders() {
         return { success: false, message: "Total mismatch detected" }
       }
 
-      // Send to backend via repository
-      const newOrder = await orderRepository.createOrder({ items, total })
-      
-      // Update local state
-      setOrders([newOrder, ...orders])
+      if (!isSignedIn || !userId) {  
+        return { success: false, message: "Please sign in to place an order" }
+      }
 
+      const sessionToken = await getToken()  
+
+      const newOrder = await orderRepository.createOrder(
+        { items, total },
+        sessionToken 
+      )
+
+      setOrders([newOrder, ...orders])
       return { success: true, message: "Order placed successfully!" }
-      
+
     } catch (errorObject) {
       setError(`${errorObject}`)
       return { success: false, message: "Failed to place order. Please try again." }
@@ -62,7 +70,7 @@ export function useOrders() {
 
   useEffect(() => {
     loadOrders()
-  }, [])
+  }, [isSignedIn, userId])  
 
   return {
     orders,
