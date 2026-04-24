@@ -35,6 +35,7 @@ export async function addCartItem(userId: string, partId: string): Promise<CartI
         });
         return {
             id: updated.id,
+            partId: updated.partId,
             name: updated.part.name,
             price: updated.part.price,
             quantity: updated.quantity,
@@ -46,6 +47,7 @@ export async function addCartItem(userId: string, partId: string): Promise<CartI
     });
     return {
         id: newItem.id,
+        partId: newItem.partId,
         name: newItem.part.name,
         price: newItem.part.price,
         quantity: newItem.quantity,
@@ -64,6 +66,7 @@ export async function updateCartItem(itemId: string, quantity: number): Promise<
     });
     return {
         id: updated.id,
+        partId: updated.partId,
         name: updated.part.name,
         price: updated.part.price,
         quantity: updated.quantity,
