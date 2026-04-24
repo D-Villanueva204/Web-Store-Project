@@ -89,5 +89,5 @@ Dominique:
     - User Prisma integration
     - User Service, Controller.
 Favourites backend refactor with clerk, favourites front end refactor with clerk, added clerkMiddleWare to app.ts : Czedrick
-Favourites Backend, Monorepo creation, Favourites Frontend : Czedrick
 Products (Front End/Back End), Sidebar (Front End/ Back End), Vercel, Prisma Schema, Prisma Seed - Dominique
+Orders back-end refactor using Clerk, Orders front-end refactor using Clerk, added findOrCreateUser middleware to app.ts - Joshua Robleza

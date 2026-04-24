@@ -1,54 +1,74 @@
 import type { Order } from "../../../shared/types/order"
 
-const API_BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/api/v1`
+const BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/api/v1`
+const ORDER_ENDPOINT = '/orders'
 
+/**
+ * Get all orders from backend
+ */
+export async function getAllOrders(sessionToken?: string | null): Promise<Order[]> {
+  const response = await fetch(`${BASE_URL}${ORDER_ENDPOINT}`, {
+    headers: {
+      Authorization: `Bearer ${sessionToken}` 
+    }
+  })
 
-export async function getAllOrders(): Promise<Order[]> {
-  const response = await fetch(`${API_BASE_URL}/orders`)
-  
   if (!response.ok) {
     throw new Error('Failed to fetch orders')
   }
-  
-  const result = await response.json()
-  return result.data  // Extract data from ApiResponse
+
+  const json = await response.json()
+  return json.data  
 }
 
+/**
+ * Get order by ID from backend
+ */
+export async function getOrderById(id: number, sessionToken?: string | null): Promise<Order | undefined> {
+  const response = await fetch(`${BASE_URL}${ORDER_ENDPOINT}/${id}`, {
+    headers: {
+      Authorization: `Bearer ${sessionToken}`  
+    }
+  })
 
-export async function getOrderById(id: number): Promise<Order | undefined> {
-  const response = await fetch(`${API_BASE_URL}/orders/${id}`)
-  
   if (!response.ok) {
     if (response.status === 404) return undefined
     throw new Error('Failed to fetch order')
   }
-  
-  const result = await response.json()
-  return result.data
+
+  const json = await response.json()
+  return json.data
 }
 
-export async function createOrder(orderData: {
-  items: Array<{
-    id: string
-    name: string
-    price: number
-    quantity: number
-  }>
-  total: number
-}): Promise<Order> {
-  const response = await fetch(`${API_BASE_URL}/orders`, {
+/**
+ * Create new order in backend
+ */
+export async function createOrder(
+  orderData: {
+    items: Array<{
+      id: string
+      name: string
+      price: number
+      quantity: number
+    }>
+    total: number
+  },
+  sessionToken?: string | null  
+): Promise<Order> {
+  const response = await fetch(`${BASE_URL}${ORDER_ENDPOINT}`, {
     method: 'POST',
+    body: JSON.stringify(orderData),  
     headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(orderData)
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${sessionToken}`  
+    }
   })
-  
+
   if (!response.ok) {
     const error = await response.json()
     throw new Error(error.message || 'Failed to create order')
   }
-  
-  const result = await response.json()
-  return result.data
+
+  const json = await response.json()
+  return json.data
 }

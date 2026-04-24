@@ -1,3 +1,4 @@
+import { SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react"
 import { useState } from "react"
 import "../components/web-store/cart-section/cart-section.css"
 import { useOrders } from "../hooks/useOrders"
@@ -29,7 +30,6 @@ function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps
     setMessage("")
     
     try {
-      // Map CartItem to the format expected by placeOrder
       const orderItems = items.map(cartItem => ({
         id: cartItem.partId,           
         name: cartItem.name,
@@ -42,10 +42,7 @@ function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps
       setMessage(result.message)
       
       if (result.success) {
-        // Clear cart after successful order
         clearCart()
-        
-        // Clear message after 3 seconds
         setTimeout(() => setMessage(""), 3000)
       }
     } catch (err) {
@@ -114,14 +111,26 @@ function CartPage({ items, total, removeItemFromCart, clearCart }: CartPageProps
             </tr>
           </tfoot>
         </table>
+
         <div className="cart-actions">
-          <button 
-            onClick={handlePlaceOrder}
-            className="place-order-btn"
-            disabled={items.length === 0 || isPlacingOrder}
-          >
-            {isPlacingOrder ? "Placing Order..." : "Place Order"}
-          </button>
+
+          <SignedOut>
+            <div className="auth-message">
+              <p>Please sign in to place an order</p>
+              <SignInButton />
+            </div>
+          </SignedOut>
+
+          <SignedIn>
+            <button 
+              onClick={handlePlaceOrder}
+              className="place-order-btn"
+              disabled={items.length === 0 || isPlacingOrder}
+            >
+              {isPlacingOrder ? "Placing Order..." : "Place Order"}
+            </button>
+          </SignedIn>
+
         </div>
       </div>
     </div>

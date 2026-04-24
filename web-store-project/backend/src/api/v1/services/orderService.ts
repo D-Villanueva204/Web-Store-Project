@@ -1,9 +1,12 @@
 import { Order } from "@prisma/client"
-import { prisma } from "../../../../lib/prisma"  
+import { prisma } from "../../../../lib/prisma"
 
 
-export const fetchAllOrders = async (): Promise<Order[]> => {
+export const fetchAllOrders = async (
+  userId: string | null | undefined  
+): Promise<Order[]> => {
   return prisma.order.findMany({
+    where: { userId: userId ?? undefined },  
     include: {
       items: {
         include: {
@@ -18,9 +21,15 @@ export const fetchAllOrders = async (): Promise<Order[]> => {
 }
 
 
-export const fetchOrderById = async (id: number): Promise<Order | null> => {
-  return prisma.order.findUnique({
-    where: { id },
+export const fetchOrderById = async (
+  id: number,
+  userId: string | null | undefined  
+): Promise<Order | null> => {
+  return prisma.order.findFirst({
+    where: {
+      id,
+      userId: userId ?? undefined  
+    },
     include: {
       items: {
         include: {
@@ -32,19 +41,21 @@ export const fetchOrderById = async (id: number): Promise<Order | null> => {
 }
 
 
-export const createOrder = async (orderData: {
-  items: Array<{
-    id: string
-    name: string
-    price: number
-    quantity: number
-  }>
-  total: number
-}): Promise<Order> => {
-  console.log("Creating order with items:", JSON.stringify(orderData.items, null, 2))
-
+export const createOrder = async (
+  orderData: {
+    items: Array<{
+      id: string
+      name: string
+      price: number
+      quantity: number
+    }>
+    total: number
+  },
+  userId: string | null | undefined 
+): Promise<Order> => {
   const newOrder: Order = await prisma.order.create({
     data: {
+      userId: userId!,  
       total: orderData.total,
       items: {
         create: orderData.items.map(item => ({

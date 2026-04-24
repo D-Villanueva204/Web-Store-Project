@@ -1,3 +1,4 @@
+import { SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react"
 import { useOrders } from "../hooks/useOrders"
 import * as orderService from "../services/orderService"
 import "./orders-page.css"
@@ -21,49 +22,59 @@ function OrdersPage() {
 
   return (
     <div className="orders-page">
-      <header>
-        <h1>Orders Placed</h1>
-        <p>Total Orders: {orders.length}</p>
-      </header>
+      <SignedOut>
+        <div className="auth-message">
+          <h2>Please sign in to view your orders</h2>
+          <p>You need to be logged in to view your order history.</p>
+          <SignInButton />
+        </div>
+      </SignedOut>
 
-      <div className="orders-table">
-        <table>
-          <thead>
-            <tr>
-              <th>Order #</th>
-              <th>Date</th>
-              <th>Items</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.length === 0 ? (
+      <SignedIn>
+        <header>
+          <h1>Orders Placed</h1>
+          <p>Total Orders: {orders.length}</p>
+        </header>
+
+        <div className="orders-table">
+          <table>
+            <thead>
               <tr>
-                <td colSpan={4} className="empty-message">
-                  No orders yet. Start shopping!
-                </td>
+                <th>Order #</th>
+                <th>Date</th>
+                <th>Items</th>
+                <th>Total</th>
               </tr>
-            ) : (
-              orders.map((order) => (
-                <tr key={order.id}>
-                  <td>#{order.id}</td>
-                  <td>{orderService.formatOrderDate(order.date)}</td>
-                  <td>
-                    <ul className="order-items">
-                      {order.items.map((item, idx) => (
-                        <li key={idx}>
-                          {item.part.name} - ${Number(item.part.price).toFixed(2)} (x{item.quantity})
-                        </li>
-                      ))}
-                    </ul>
+            </thead>
+            <tbody>
+              {orders.length === 0 ? (
+                <tr>
+                  <td colSpan={4} className="empty-message">
+                    No orders yet. Start shopping!
                   </td>
-                  <td>${order.total.toFixed(2)}</td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
+              ) : (
+                orders.map((order) => (
+                  <tr key={order.id}>
+                    <td>#{order.id}</td>
+                    <td>{orderService.formatOrderDate(order.date)}</td>
+                    <td>
+                      <ul className="order-items">
+                        {order.items.map((item, idx) => (
+                          <li key={idx}>
+                            {item.part.name} - ${Number(item.part.price).toFixed(2)} (x{item.quantity})
+                          </li>
+                        ))}
+                      </ul>
+                    </td>
+                    <td>${order.total.toFixed(2)}</td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+      </SignedIn>
     </div>
   )
 }

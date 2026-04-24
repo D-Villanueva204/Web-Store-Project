@@ -7,12 +7,12 @@ import { successResponse } from "../models/responseModel"
  * Get all orders
  */
 export const getAllOrders = async (
-  _req: Request,
+  req: Request,
   res: Response,
   next: NextFunction
 ): Promise<void> => {
   try {
-    const orders = await orderService.fetchAllOrders()
+    const orders = await orderService.fetchAllOrders(req.userId)
     res.status(200).json(
       successResponse(orders, "Orders retrieved successfully")
     )
@@ -32,8 +32,8 @@ export const getOrderById = async (
 ): Promise<void> => {
   try {
     const id = parseInt(req.params.id as string)
-    const order = await orderService.fetchOrderById(id)
-    
+    const order = await orderService.fetchOrderById(id, req.userId)
+
     if (!order) {
       res.status(404).json({
         status: "error",
@@ -41,7 +41,7 @@ export const getOrderById = async (
       })
       return
     }
-    
+
     res.status(200).json(
       successResponse(order, "Order retrieved successfully")
     )
@@ -60,7 +60,7 @@ export const createOrder = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const newOrder = await orderService.createOrder(req.body)
+    const newOrder = await orderService.createOrder(req.body, req.userId)
     res.status(201).json(
       successResponse(newOrder, "Order created successfully")
     )
